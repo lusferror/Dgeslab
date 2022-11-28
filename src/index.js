@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 const App=()=>{
     return(
-        <h1>Bienvenidos Prueba</h1>
+        <h1>Bienvenidos a Dgeslab</h1>
     )
 }
 
