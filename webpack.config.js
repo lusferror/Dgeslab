@@ -21,24 +21,20 @@ module.exports = {
             {
                 test: /\.m?js$/,
                 exclude: /(node_modules|bower_components)/,
-                use: [{
+                use: {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env', '@babel/preset-react']
                     }
-                },"source-map-loader"]
-            }
+                },
+                
+            },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+              },
         ]
     },
-    // module: {
-    //     rules: [
-    //       {
-    //         test: /\.js$/,
-    //         enforce: "pre",
-    //         use: ["source-map-loader"],
-    //       },
-    //     ],
-    //   },
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, './src/index.html'),
