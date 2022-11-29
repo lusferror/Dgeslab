@@ -1,10 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import '../src/styles/index.css'
+import Layout from '../src/layout'
 
-const App=()=>{
-    return(
-        <h1>Bienvenidos a Dgeslab</h1>
-    )
-}
 
-ReactDOM.render(<App/>,document.getElementById('root'))
+ReactDOM.render(<Layout/>,document.getElementById('root'))
