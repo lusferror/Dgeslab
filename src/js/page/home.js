@@ -2,6 +2,7 @@ import React from "react";
 
 const Home = ()=>{
     return (
+
         <>
         <nav class="navbar bg-white bg-white fixed-top ">
   <div class="container-fluid bg-white">
@@ -42,6 +43,7 @@ const Home = ()=>{
 </nav>
         <div className="position-absolute top-50 start-50 translate-middle">
             <strong><h1 className=" display-1 text-center">DGESLAB</h1></strong>
+
         </div>
         </>
     )
