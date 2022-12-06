@@ -77,3 +77,7 @@ database.database
 database.db
 diagram.png
 __pycache__/
+
+#other folders
+sb-admin/
+material-dashboard-react-main/
