@@ -19,8 +19,17 @@ const injectContext = PassedComponent => {
 
 		useEffect(() => {
 			/**
-             * Aqui incluyen todo lo que comience con la app
-            **/
+			 * Aqui incluyen todo lo que comience con la app
+			**/
+			const sidebarToggle = document.body.querySelector('#sidebarToggle');
+			if (sidebarToggle) {
+
+				sidebarToggle.addEventListener('click', event => {
+					event.preventDefault();
+					document.body.classList.toggle('sb-sidenav-toggled');
+					localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+				})
+			}
 		}, []);
 
 		return (

@@ -19,7 +19,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.m?js$/,
+                test: /\.js$|jsx/,
                 exclude: /(node_modules|bower_components)/,
                 use: [{
                     loader: 'babel-loader',
@@ -27,7 +27,12 @@ module.exports = {
                         presets: ['@babel/preset-env', '@babel/preset-react']
                     }
                 },"source-map-loader"]
-            }
+            },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+              },
+
         ]
     },
     // module: {
