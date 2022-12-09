@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes,Link } from "react-router-dom";
 import injectContext from '../src/js/store/appContext';
 //----------------------------------- COMPONENTES--------------------------------
 import { Navbar } from "./js/components/navbar.jsx";
@@ -16,7 +16,7 @@ const Layout = () => {
     return (
         <div>
             <div className="sb-nav-fixed">
-                {/* en el visual code minimicen el nav */}
+                {/* en el visual code minimicen el nav ----------------------------------------------------------------------------------------------*/}
                 <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
                     <a className="navbar-brand ps-3 fs-3 " href="/">Dgeslab</a>
                     <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
@@ -35,7 +35,7 @@ const Layout = () => {
                     </ul>
                 </nav>
                 <div id="layoutSidenav">
-                {/* minicen  layoutSidenav_nav*/}
+                {/* minicen  layoutSidenav_nav*-------------------------------------------------------------------------------------------------------*/}
                     <div id="layoutSidenav_nav">
                         <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                             <div className="sb-sidenav-menu contenedor">
@@ -53,8 +53,8 @@ const Layout = () => {
                                     </a>
                                     <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" >
                                         <nav className="sb-sidenav-menu-nested nav">
-                                            <a className="nav-link" href="/">Aprobar Equipos</a>
-                                            <a className="nav-link" href="#">Móviles</a>
+                                                <span className="nav-link" >Aprobar Equipos</span>
+                                            <a className="nav-link" href="/Procesamiento">Móviles</a>
                                         </nav>
                                     </div>
                                     <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
