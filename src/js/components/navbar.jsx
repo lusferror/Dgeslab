@@ -3,7 +3,7 @@ import ScatterChart from "./graphs.jsx";
 
 export const Navbar = () => {
     return (
-        <div class="">
+        <div className="">
             <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
                 {/* <!-- Navbar Brand--> */}
                 <a className="navbar-brand ps-3 fs-3 " href="/">Dgeslab</a>
