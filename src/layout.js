@@ -15,20 +15,13 @@ const Layout = () => {
 
     return (
         <div>
-            <div className="">
+            <div className="sb-nav-fixed">
+                {/* en el visual code minimicen el nav */}
                 <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-                    {/* <!-- Navbar Brand--> */}
                     <a className="navbar-brand ps-3 fs-3 " href="/">Dgeslab</a>
-                    {/* <!-- Sidebar Toggle--> */}
                     <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
-                    {/* <!-- Navbar Search--> */}
                     <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                        {/* <div className="input-group">
-                        <input className="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                        <button className="btn btn-primary" id="btnNavbarSearch" type="button"><i className="fas fa-search"></i></button>
-                    </div> */}
                     </form>
-                    {/* <!-- Navbar--> */}
                     <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
@@ -42,6 +35,7 @@ const Layout = () => {
                     </ul>
                 </nav>
                 <div id="layoutSidenav">
+                {/* minicen  layoutSidenav_nav*/}
                     <div id="layoutSidenav_nav">
                         <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                             <div className="sb-sidenav-menu contenedor">
@@ -124,6 +118,7 @@ const Layout = () => {
                                 </Routes>
                             </BrowserRouter>
                         </main>
+                        {/* minimicen el footer */}
                         <footer className="py-4 bg-light mt-auto">
                             <div className="container-fluid px-4">
                                 <div className="d-flex align-items-center justify-content-between small">
