@@ -9,9 +9,7 @@ const Procesamiento = () => {
         <div class="container">
           <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <div class="col" style={{marginRight:"10%"}}>
-              <Link to="/Verificacion">
                 <h1 class="me-5">Procesamiento </h1>
-              </Link>
             </div>
             <div class="btn-group ms-5" role="group" aria-label="Basic example">
               <button type="button " class="border border-dark btn btn-primary" id="marcarTodo">Equipos Pendientes</button>
@@ -25,7 +23,7 @@ const Procesamiento = () => {
 
 
 
-        <div class="table-responsive container mt-5">
+        <div class="table-responsive container mt-5 contenedor">
           <table class="table table table-striped border bg-white">
             <thead>
               <tr className="bg-dark text-white">
