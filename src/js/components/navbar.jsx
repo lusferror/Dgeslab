@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ScatterChart from "./graphs.jsx";
 
 export const Navbar = ({contenido}) => {
     return (
@@ -8,7 +7,7 @@ export const Navbar = ({contenido}) => {
             <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark w-100">
                 <div className="col pt-2">
                     <a className="navbar-brand ps-3 fs-3 " href="/">Dgeslab</a>
-                    <button className="btn btn-link btn-sm order-1 order-lg-0 m-4 me-lg-0 mb-3" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
+                    <button className="btn btn-link btn-sm order-1 order-lg-0 mb-2 me-lg-0 ms-5 border border-secondary" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
                 </div>
                 <div className="col"></div>
                 <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -29,10 +28,10 @@ export const Navbar = ({contenido}) => {
                         <div className="sb-sidenav-menu contenedor">
                             <div className="nav">
                                 <div className="sb-sidenav-menu-heading text-warning fst-italic">Inicio</div>
-                                <a className="nav-link" href="index.html">
+                                <Link className="nav-link" to="/">
                                     <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                                     Dashboard
-                                </a>
+                                </Link>
                                 <div className="sb-sidenav-menu-heading text-warning fst-italic">Operaciones</div>
                                 <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="true" aria-controls="collapseLayouts">
                                     <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
@@ -58,9 +57,9 @@ export const Navbar = ({contenido}) => {
                                         </a>
                                         <div className="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                             <nav className="sb-sidenav-menu-nested nav">
-                                                <a className="nav-link" href="login.html">Registro</a>
-                                                <a className="nav-link" href="register.html">Tabla de Usuarios</a>
-                                                <a className="nav-link" href="password.html">Restablecer Contraseña</a>
+                                                <a className="nav-link" >Registro</a>
+                                                <a className="nav-link" >Tabla de Usuarios</a>
+                                                <a className="nav-link" >Restablecer Contraseña</a>
                                             </nav>
                                         </div>
                                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
@@ -69,9 +68,9 @@ export const Navbar = ({contenido}) => {
                                         </a>
                                         <div className="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                             <nav className="sb-sidenav-menu-nested nav">
-                                                <a className="nav-link" href="401.html">Recepcion</a>
-                                                <a className="nav-link" href="404.html">Despacho</a>
-                                                <a className="nav-link" href="500.html">Bodega</a>
+                                                <a className="nav-link" >Recepcion</a>
+                                                <a className="nav-link" >Despacho</a>
+                                                <a className="nav-link" >Bodega</a>
                                             </nav>
                                         </div>
                                     </nav>
