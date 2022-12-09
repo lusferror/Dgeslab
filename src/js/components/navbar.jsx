@@ -6,15 +6,10 @@ export const Navbar = ({contenido}) => {
     return (
         <div className="">
             <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark w-100">
-                {/* <!-- Navbar Brand--> */}
                 <div className="col pt-2">
                     <a className="navbar-brand ps-3 fs-3 " href="/">Dgeslab</a>
                     <button className="btn btn-link btn-sm order-1 order-lg-0 m-4 me-lg-0 mb-3" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
                 </div>
-                {/* <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                
-                </form> */}
-                {/* <!-- Navbar--> */}
                 <div className="col"></div>
                 <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                     <li className="nav-item dropdown">
@@ -100,8 +95,14 @@ export const Navbar = ({contenido}) => {
                 </div>
                 <div id="layoutSidenav_content">
                     <main className="p-3">
+{/* -------------------------- corresponde a  el contenido toda esta parte -------------------------------------------------------- */}
+
 
                         {contenido}
+
+
+
+{/* ----------------------------------------------------------------------------------------------------------------------------------- */}
                     </main>
                     <footer className="py-4 bg-light mt-auto">
                         <div className="container-fluid px-4">
