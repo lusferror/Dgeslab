@@ -72,9 +72,10 @@ export const Navbar = ({contenido}) => {
                                         </a>
                                         <div className="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                             <nav className="sb-sidenav-menu-nested nav">
-                                                <Link to='/recepcion' className="nav-link" >Recepcion</Link>
-                                                <a className="nav-link" >Despacho</a>
-                                                <a className="nav-link" >Bodega</a>
+                                                <a className="nav-link" href="401.html">Recepcion</a>
+                                                {/* <a className="nav-link" href="404.html">Despacho</a> */}
+                                                <Link to='/HomeSupervisor' className="nav-link" >Despacho</Link>
+                                                <a className="nav-link" href="500.html">Bodega</a>
                                             </nav>
                                         </div>
                                     </nav>
