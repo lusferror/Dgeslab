@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import Inicio from "../page/inicio";
+import { Context } from "../store/appContext";
 
 export const Navbar = ({contenido}) => {
+    const {actions} = useContext(Context);
+    const {logueado} = actions;
     return (
-        <div className="">
+        <div className="sb-nav-fixed">
             <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark w-100">
                 <div className="col pt-2">
                     <a className="navbar-brand ps-3 fs-3 " href="/">Dgeslab</a>
@@ -17,7 +21,7 @@ export const Navbar = ({contenido}) => {
                             <li><a className="dropdown-item" href="#!">Perfil</a></li>
                             <li><a className="dropdown-item" href="#!">Ajustes</a></li>
                             <li><hr className="dropdown-divider" /></li>
-                            <li><a className="dropdown-item" href="#!">Logout</a></li>
+                            <li><Link className="dropdown-item" onClick={logueado}>Logout</Link></li>
                         </ul>
                     </li>
                 </ul>
@@ -57,7 +61,7 @@ export const Navbar = ({contenido}) => {
                                         </a>
                                         <div className="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                             <nav className="sb-sidenav-menu-nested nav">
-                                                <a className="nav-link" >Registro</a>
+                                                <Link to='/registrar' className="nav-link" >Registro</Link>
                                                 <a className="nav-link" >Tabla de Usuarios</a>
                                                 <a className="nav-link" >Restablecer Contraseña</a>
                                             </nav>
@@ -68,7 +72,7 @@ export const Navbar = ({contenido}) => {
                                         </a>
                                         <div className="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                             <nav className="sb-sidenav-menu-nested nav">
-                                                <a className="nav-link" >Recepcion</a>
+                                                <Link to='/recepcion' className="nav-link" >Recepcion</Link>
                                                 <a className="nav-link" >Despacho</a>
                                                 <a className="nav-link" >Bodega</a>
                                             </nav>

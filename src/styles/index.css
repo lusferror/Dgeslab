@@ -10,3 +10,20 @@
     border-radius: 5px;
     height: 5px;
 }
+
+body {
+    background-color: #F3F9FF;    
+}
+
+.col1 {
+    margin-top: 150px;
+}
+
+.col2 {
+    margin-top: 250px;
+}
+
+.form {
+    width: 400px;
+}
+
