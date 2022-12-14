@@ -1,5 +1,5 @@
 import React ,{useContext}from "react";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import injectContext from '../src/js/store/appContext';
 //----------------------------------- COMPONENTES--------------------------------
 import { Navbar } from "./js/components/navbar.jsx";
@@ -13,20 +13,19 @@ import Inicio from "./js/page/inicio"
 import Recupera from "./js/page/recupera"
 import Registrar from "./js/page/registrar"
 import Recepcion from "./js/page/recepcion"
+import Asignar from "./js/page/asignar"
+// ---------------------------------- contexto ------------------------------------
 import { Context } from "../src/js/store/appContext";
 
 //create your first component
 const Layout = () => {  
     const {store} = useContext(Context)
-    const {navbar} = store;
-    if (navbar==true){
-
     return (
         <BrowserRouter >
 
             <Navbar contenido={
                 <Routes>
-                    <Route element={<Home />} path="/" />
+                    <Route element={<Home/>} path="/" />
                     <Route element={<HomeTecnico />} path="/HomeTecnico" />
                     <Route element={<Verificacion />} path="/Verificacion" />
                     <Route element={<Procesamiento />} path="/Procesamiento" />
@@ -35,16 +34,11 @@ const Layout = () => {
                     <Route element={<Recupera />} path="/recupera" />
                     <Route element={<Registrar />} path="/registrar" />
                     <Route element={<Recepcion />} path="/recepcion" />
+                    <Route element={<Asignar/>} path="/asignar" />
                 </Routes>
             }>
             </Navbar>
         </BrowserRouter>
     );
-}
-else{
-    return(
-        <Inicio/>
-    )
-}
 }
 export default injectContext(Layout);

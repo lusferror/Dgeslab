@@ -4,35 +4,53 @@ import Inicio from "../page/inicio";
 import { Context } from "../store/appContext";
 
 export const Navbar = ({contenido}) => {
-    const {actions} = useContext(Context);
-    const {logueado} = actions;
+    const {actions, store} = useContext(Context);
+    const {salida} = actions;
+    var visible={}
+    var clase=""
+    const session = sessionStorage.getItem("session")
+    if (session=="true"){
+        document.body.classList.remove('sb-sidenav-toggled');
+    }
+    else{
+        document.body.classList.toggle('sb-sidenav-toggled');
+    }
     return (
         <div className="sb-nav-fixed">
             <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark w-100">
-                <div className="col pt-2">
-                    <a className="navbar-brand ps-3 fs-3 " href="/">Dgeslab</a>
-                    <button className="btn btn-link btn-sm order-1 order-lg-0 mb-2 me-lg-0 ms-5 border border-secondary" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
+                <div className="col-1 me-5 pt-2">
+                    <Link to={session=="true"?"/":"/login"} className="navbar-brand ps-3 fs-3 ">Dgeslab</Link>
                 </div>
-                <div className="col"></div>
+                {session=="true"?
+                <div className="col ms-4">
+                    <button className="btn btn-link btn-sm order-1 order-lg-0 mt-2 mb-2 me-lg-0 ms-2 border border-secondary" onClick={()=>actions.barraLateral()} id="sidebarToggle"><i className="fas fa-bars"></i></button>
+                </div>:
+                <></>
+                }
                 <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                     <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
-                        <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a className="dropdown-item" href="#!">Perfil</a></li>
-                            <li><a className="dropdown-item" href="#!">Ajustes</a></li>
-                            <li><hr className="dropdown-divider" /></li>
-                            <li><Link className="dropdown-item" onClick={logueado}>Logout</Link></li>
-                        </ul>
+                            {session=="true"?
+                                <>
+                                    <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
+                                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <li><a className="dropdown-item" href="#!">Perfil</a></li>
+                                        <li><a className="dropdown-item" href="#!">Ajustes</a></li>
+                                        <li><hr className="dropdown-divider" /></li>
+                                        <li><Link to="/login" className="dropdown-item" onClick={salida}>Logout</Link></li>
+                                    </ul>
+                                </>
+                                :<></>
+                            }
                     </li>
                 </ul>
             </nav>
-            <div id="layoutSidenav">
-                <div id="layoutSidenav_nav">
+            <div id="layoutSidenav" >
+                <div id="layoutSidenav_nav" >
                     <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                         <div className="sb-sidenav-menu contenedor">
                             <div className="nav">
                                 <div className="sb-sidenav-menu-heading text-warning fst-italic">Inicio</div>
-                                <Link className="nav-link" to="/">
+                                <Link className="nav-link" to={session?"/":"/login"}>
                                     <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                                     Dashboard
                                 </Link>
@@ -78,6 +96,9 @@ export const Navbar = ({contenido}) => {
                                                 <a className="nav-link" href="500.html">Bodega</a>
                                             </nav>
                                         </div>
+                                        <Link to="/asignar" className="nav-link" href="#">
+                                                Asignar
+                                        </Link>
                                     </nav>
                                 </div>
                                 <div className="sb-sidenav-menu-heading text-warning fst-italic">Utilidad</div>
@@ -98,7 +119,7 @@ export const Navbar = ({contenido}) => {
                     </nav>
                 </div>
                 <div id="layoutSidenav_content">
-                    <main className="p-3">
+                    <main className=" h-100 p-2">
 {/* -------------------------- corresponde a  el contenido toda esta parte -------------------------------------------------------- */}
 
 
@@ -108,10 +129,10 @@ export const Navbar = ({contenido}) => {
 
 {/* ----------------------------------------------------------------------------------------------------------------------------------- */}
                     </main>
-                    <footer className="py-4 bg-light mt-auto">
+                    <footer className="py-4 bg-light mt-auto" >
                         <div className="container-fluid px-4">
                             <div className="d-flex align-items-center justify-content-between small">
-                                <div className="text-muted">Copyright &copy; Your Website 2022</div>
+                                <div className="text-muted">Sistema de Gestion de Laboratorio (Copyright &copy; Your Website 2022)</div>
                                 <div>
                                     <a href="#">Privacy Policy</a>
                                     &middot;

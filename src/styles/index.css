@@ -27,3 +27,6 @@ body {
     width: 400px;
 }
 
+.visible{
+    display: none;
+}

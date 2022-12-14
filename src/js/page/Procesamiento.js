@@ -1,6 +1,12 @@
-import React from "react";
+import React ,{useContext} from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
+
 const Procesamiento = () => {
+  const {actions,store} = useContext(Context)
+  // -------------------------validacion de sesion--------------------------------------
+  actions.inicio()
+  // -----------------------------------------------------------------------------------
   return (
     <>
       <div >

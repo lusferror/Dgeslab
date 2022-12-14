@@ -1,7 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext.js";
 
 const HomeTecnico = ()=>{
+
+    const {actions,store} = useContext(Context)
+    // -------------------------validacion de sesion--------------------------------------
+    actions.inicio()
+    // -----------------------------------------------------------------------------------
   return (
 
         <div className="position-absolute top-50 start-50 translate-middle">
@@ -10,5 +15,4 @@ const HomeTecnico = ()=>{
     
     )
 }
-
 export default HomeTecnico;
