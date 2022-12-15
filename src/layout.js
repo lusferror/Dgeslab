@@ -16,7 +16,7 @@ import Recepcion from "./js/page/recepcion"
 import Asignar from "./js/page/asignar"
 import Empacado from "./js/page/Empacado";
 import Embalaje from "./js/page/Embalaje";
-import { Empacado } from "./js/page/empacado";
+
 // ---------------------------------- contexto ------------------------------------
 
 //create your first component

@@ -8,11 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			navbar: true,
 			modal: false,
 			sesion: false,
-			asignarTecnico: "",//id del tenico
-			asignado: false, // estado de la asignacion
-			listaAsignacion: [], // lista de asignacion
-			listaAsignacionFinal: [], // lista de asignacion
-			asignarImei: ""
+			listaAsignacionFinal: [], // lista de asignacion			
 			asignarTecnico:"",//id del tenico
 			asignado:false, // estado de la asignacion
 			listaAsignacion:[], // lista de asignacion
@@ -86,7 +82,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(response => response.json())				
 				.then(result => {
 					setStore({token: result.token})
-					sessionStorage.setItem("token", result.token)})
+					sessionStorage.setItem("token", result.token)
+					if (result.token != undefined && result.token != null){
+						sessionStorage.setItem("session", true)
+						setStore({sesion: true})
+					}
+				})
 				.catch(err => console.log(err));
 								
 			},
@@ -96,26 +97,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const history = useNavigate()
 				const session = sessionStorage.getItem("session")
 				useEffect(() => {
-					if (session !== "true") {
+					console.log("Puta:", session)
+					if (session !== "true" || sesion != true) {
 						history('/login')
 						console.log("entro")
 					}
+					fetch('http://127.0.0.1:3100/private',{
+						method: 'GET',
+						headers: {
+							"Authorization": `Bearer ${getStore().token}`
+						},
+						redirect: "follow"
+					})
+					.then(response => response.json())				
+					.then(result => {
+						if (result.role_id != undefined && result.role_id != null){
+						setStore({sesion: true, role_id: result.role_id})
+						// setStore({role_id: result.role_id})
+						sessionStorage.setItem("session", true)}
+						console.log("role_id_back:", result.role_id)
+					})
+					.catch(err => console.log(err));				
 				}, [])
-				fetch('http://127.0.0.1:3100/private',{
-					method: 'GET',
-					headers: {
-						"Authorization": `Bearer ${getStore().token}`
-					},
-					redirect: "follow"
-				})
-				.then(response => response.json())				
-				.then(result => {
-					setStore({sesion: true, role_id: result.role_id})
-					// setStore({role_id: result.role_id})
-					sessionStorage.setItem("session", true)
-					console.log("role_id_back:", result.role_id)
-				})
-				.catch(err => console.log(err));				
 				// .then((res) => res.ok ? setStore({sesion: true}):"Something went wrong")
 				// // const session = sessionStorage.setItem("session", true)
 				

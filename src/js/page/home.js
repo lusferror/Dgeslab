@@ -9,7 +9,7 @@ import Pie from "../components/simplePieChart.jsx";
 
 const Home = ()=>{
     const {store, actions} = useContext(Context)
-    // actions.inicio()    
+    actions.inicio()    
     return (
         <div className="ps-3 overflow-auto contenedor">
             <div className="mb-0 mt-5">

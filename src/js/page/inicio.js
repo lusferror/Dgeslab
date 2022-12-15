@@ -12,17 +12,17 @@ const Inicio = () => {
 
     console.log("This is your token", store.token)
 
-    if (store.token != null){
-		// useEffect(() => {
-			actions.inicio();
-		// },[store.token])
-	}
+    // actions.inicio();
+    // if (store.token != null){
+	// 	// useEffect(() => {
+	// 	// },[store.token])
+	// }
 
-	useEffect(() => {
-		if(store.sesion){
-			history("/")
-		}				
-	},[store.sesion])
+	// useEffect(() => {
+	// 	if(store.sesion){
+	// 		history("/")
+	// 	}				
+	// },[store.sesion])
 
 	console.log("Sesion:", store.sesion)
     console.log("role_id:", store.role_id)
@@ -30,7 +30,9 @@ const Inicio = () => {
 
     const haddleClick=(e)=>{
         e.preventDefault();
-        actions.ingreso(email, password);                     
+        actions.ingreso(email, password);
+        console.log("history")                     
+        history("/")
     }
 
 
@@ -61,7 +63,7 @@ const Inicio = () => {
                                     <Link to="/recupera" className="text-primary float-end m-1" style={{ fontSize: "60%" }} >Recuperar Contraseña?</Link>
                                 </div>
                                 <div className="text-center mb-3 mt-5">
-                                    <button className="btn btn-primary w-100" onClick={haddleClick}>Ingresar</button>
+                                    <button className="btn btn-primary w-100" onClick={(e) => haddleClick(e)}>Ingresar</button>
                                 </div>
                             {/* </form> */}
                         </div>
