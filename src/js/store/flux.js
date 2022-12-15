@@ -11,14 +11,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			asignarTecnico:"",//id del tenico
 			asignado:false, // estado de la asignacion
 			listaAsignacion:[], // lista de asignacion
-			asignarImei:""
+			asignarImei:"",
+			token: null,
+			role_id: null
 		},
 		actions: {
 			// En esta seccion se colocan todas las acciones o funciones
 			salida: () => {
-				const { navbar } = getStore();
-				const { sesion } = getStore();
-				setStore({ sesion: false })
+				sessionStorage.removeItem("token");
+				console.log("Login out")
+				setStore({ token: null});
+				setStore({sesion: false})
+				// const { navbar } = getStore();
+				// const { sesion } = getStore();
+				// setStore({ sesion: false })
 				sessionStorage.setItem("session", false)
 				console.log(sesion)
 				document.body.classList.remove('sb-sidenav-toggled')
@@ -59,23 +65,88 @@ const getState = ({ getStore, getActions, setStore }) => {
 			barraLateral: () => {
 				document.body.classList.toggle('sb-sidenav-toggled');
 			},
-			ingreso: () => {
-				const { sesion } = getStore();
-				sessionStorage.setItem("session", true)
-				setStore({ sesion: true })
-				console.log(sesion)
+			//-------------------funcion para iniciar sesión------------------------------
+			ingreso: (email, password) => {
+				fetch('http://127.0.0.1:3100/login',{
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password
+					}),
+					redirect: "follow"
+				})
+				.then(response => response.json())				
+				.then(result => {
+					setStore({token: result.token})
+					sessionStorage.setItem("token", result.token)})
+				.catch(err => console.log(err));
+								
 			},
 			//-------------------funcion que valida el inicio de sesion------------------------------
 			inicio: () => {
-				const { sesion } = getStore()
-				const history = useNavigate()
-				const session = sessionStorage.getItem("session")
-				useEffect(() => {
-					if (session == "false") {
-						history('/login')
-						console.log("entro")
-					}
-				}, [])
+				fetch('http://127.0.0.1:3100/private',{
+					method: 'GET',
+					headers: {
+						"Authorization": `Bearer ${getStore().token}`
+					},
+					redirect: "follow"
+				})
+				.then(response => response.json())				
+				.then(result => {
+					setStore({sesion: true, role_id: result.role_id})
+					// setStore({role_id: result.role_id})
+					sessionStorage.setItem("session", true)
+					console.log("role_id_back:", result.role_id)
+				})
+				.catch(err => console.log(err));				
+				// .then((res) => res.ok ? setStore({sesion: true}):"Something went wrong")
+				// // const session = sessionStorage.setItem("session", true)
+				
+				// // useEffect(() => {
+				// // 	if (session == "false") {
+				// // 		history('/login')
+				// // 		console.log("entro")
+				// // 	}
+				// // },[])
+			
+				// // console.log("tokenverified:", getStore.token)
+				// .catch((err) => console.log(err));
+
+				// const { sesion } = getStore()
+				// const history = useNavigate()
+				// const session = sessionStorage.getItem("session")
+				// useEffect(() => {
+				// 	if (session == "false") {
+				// 		history('/login')
+				// 		console.log("entro")
+				// 	}
+				// }, [])
+			},
+			//-------------------funcion para crear usuario------------------------------
+			crearUsuario: (name, second_name, last_name, second_last_name, email, rut, password, role_id) => {
+				fetch('http://127.0.0.1:3100/register',{
+					method: 'POST',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						name: name,
+						second_name: second_name,
+						last_name: last_name,
+						second_last_name: second_last_name,
+						email: email,
+						rut: rut,
+						password: password,
+						role_id: role_id
+					}),
+					redirect: "follow"
+				})
+				.then(response => response.json())				
+				.then(data=>{console.log('User added: ',data)})					
+				.catch(err => console.log(err));								
 			},
 			// ------------------------ funcion de fecha actual --------------------------------------
 			fecha: () => {

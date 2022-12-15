@@ -4,8 +4,8 @@ import { useContext } from "react";
 import { Context } from "../store/appContext.js";
 
 const Home = ()=>{
-    const {actions} = useContext(Context)
-    actions.inicio()
+    const {store, actions} = useContext(Context)
+    // actions.inicio()    
     return (
         <div>
 

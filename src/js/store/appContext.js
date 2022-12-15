@@ -28,6 +28,7 @@ const injectContext = PassedComponent => {
 				document.body.classList.toggle('sb-sidenav-toggled');
 			}
 		}, []);
+		
 
 		return (
 			<Context.Provider value={state}>
