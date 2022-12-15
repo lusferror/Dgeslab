@@ -11,7 +11,7 @@ const Empacado = ()=>{
         <div className="container">
           <div className=" row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <div className="col me-5 mb-5">
-              <h1 className="">Empacado </h1>
+              <h1 className="">Empacad </h1>
             </div>
           </div>
           
