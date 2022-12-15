@@ -22,7 +22,7 @@ const Inicio = () => {
                     </div>
                     <p className="text-center text-uppercase fw-bold fs-3 fst-italic">BIENVENIDOS</p>
                     <div className="d-flex justify-content-center">
-                        <div className="form bg-white rounded-4 p-5 border border-1 border-warning shadow w-100">
+                        <div className="form bg-white p-5 border border-1 border-warning shadow w-100" style={{borderRadius:"20px"}}>
                             {/* <form className="needs-validation fs-4" nov1alidate> */}
                                 <div className="mb-3">
                                     <label htmlFor="exampleInputEmail1" className="form-label">Usuario</label>

@@ -30,3 +30,16 @@ body {
 .visible{
     display: none;
 }
+
+.mColumnaG{
+    min-width: 300px;
+}
+.mColumnaM{
+    min-width: 200px;
+}
+.mColumnaP{
+    min-width: 100px;
+}
+.maxTabla{
+    max-height: 70vh;
+}

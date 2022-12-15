@@ -15,7 +15,7 @@ const Recupera = ()=>{
                     </div>
                     <p className="text-center text-uppercase fw-bold fs-3 fst-italic">Recuperar Contraseña</p>
                     <div className="d-flex justify-content-center">
-                        <div className="form bg-white rounded-4 p-5 border border-1 border-warning shadow w-100">
+                        <div className="form bg-white rounded-4 p-5 border border-1 border-warning shadow w-100" style={{borderRadius:"20px"}}>
                             <form className="needs-validation fs-4" novalidate>
                                 <div className="mb-3">
                                     <label for="exampleInputEmail1" className="form-label mb-4">Ingrese Correo Electrónico:</label>
@@ -24,14 +24,7 @@ const Recupera = ()=>{
                                         <input type="email" className="form-control border-end-0 border-top-0 border-bottom-0 h-100 m-0 p-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo" required />
                                     </div>
                                 </div>
-                                {/* <div className="mb-4">
-                                    <label for="exampleInputPassword1" className="form-label">Contraseña</label>
-                                    <div className="d-flex border rounded-3 bg-light">
-                                        <i className="bi bi-lock-fill mx-2 mt-1 fs-5"></i>
-                                        <input type="password" className="form-control border-end-0 border-top-0 border-bottom-0 h-100 m-0 p-2" id="exampleInputPassword1" placeholder="Contraseña" />
-                                    </div>
-                                </div> */}
-                                <div className="text-center mb-3 mt-5 d-flex border">
+                                <div className="text-center mb-3 mt-5 d-flex ">
                                     <button className="btn btn-success w-50 me-3">Recuperar Contraseña</button>
                                     <Link to="/login" className="w-50"><button className="col btn btn-primary w-100">Volver a Inicio</button></Link>
                                 </div>

@@ -14,27 +14,27 @@ import Recupera from "./js/page/recupera"
 import Registrar from "./js/page/registrar"
 import Recepcion from "./js/page/recepcion"
 import Asignar from "./js/page/asignar"
+import { Empacado } from "./js/page/empacado";
 // ---------------------------------- contexto ------------------------------------
-import { Context } from "../src/js/store/appContext";
 
 //create your first component
 const Layout = () => {  
-    const {store} = useContext(Context)
     return (
         <BrowserRouter >
 
             <Navbar contenido={
                 <Routes>
+                    <Route element={<Inicio />} path="/login" />
                     <Route element={<Home/>} path="/" />
                     <Route element={<HomeTecnico />} path="/HomeTecnico" />
                     <Route element={<Verificacion />} path="/Verificacion" />
                     <Route element={<Procesamiento />} path="/Procesamiento" />
                     <Route element={<HomeSupervisor />} path="/HomeSupervisor" />
-                    <Route element={<Inicio />} path="/login" />
                     <Route element={<Recupera />} path="/recupera" />
                     <Route element={<Registrar />} path="/registrar" />
                     <Route element={<Recepcion />} path="/recepcion" />
                     <Route element={<Asignar/>} path="/asignar" />
+                    <Route element={<Empacado/>} path="/empacado"/>
                 </Routes>
             }>
             </Navbar>
