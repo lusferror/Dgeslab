@@ -14,6 +14,8 @@ import Recupera from "./js/page/recupera"
 import Registrar from "./js/page/registrar"
 import Recepcion from "./js/page/recepcion"
 import Asignar from "./js/page/asignar"
+import Empacado from "./js/page/Empacado";
+import Embalaje from "./js/page/Embalaje";
 // ---------------------------------- contexto ------------------------------------
 import { Context } from "../src/js/store/appContext";
 
@@ -35,6 +37,8 @@ const Layout = () => {
                     <Route element={<Registrar />} path="/registrar" />
                     <Route element={<Recepcion />} path="/recepcion" />
                     <Route element={<Asignar/>} path="/asignar" />
+                    <Route element={<Empacado/>} path="/Empacado" />
+                    <Route element={<Embalaje/>} path="/Embalaje" />
                 </Routes>
             }>
             </Navbar>
