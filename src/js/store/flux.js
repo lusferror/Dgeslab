@@ -67,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				document.body.classList.toggle('sb-sidenav-toggled');
 			},
 			//-------------------funcion para iniciar sesión------------------------------
-			ingreso: (email, password) => {
+			ingreso: (email, password,history) => {
 				fetch('http://127.0.0.1:3100/login',{
 					method: 'POST',
 					headers: {
@@ -86,6 +86,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (result.token != undefined && result.token != null){
 						sessionStorage.setItem("session", true)
 						setStore({sesion: true})
+						console.log("esta es la session: ",sessionStorage.getItem("session"))
+						history("/")
+
 					}
 				})
 				.catch(err => console.log(err));
@@ -118,29 +121,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("role_id_back:", result.role_id)
 					})
 					.catch(err => console.log(err));				
-				}, [])
-				// .then((res) => res.ok ? setStore({sesion: true}):"Something went wrong")
-				// // const session = sessionStorage.setItem("session", true)
-				
-				// // useEffect(() => {
-				// // 	if (session == "false") {
-				// // 		history('/login')
-				// // 		console.log("entro")
-				// // 	}
-				// // },[])
-			
-				// // console.log("tokenverified:", getStore.token)
-				// .catch((err) => console.log(err));
-
-				// const { sesion } = getStore()
-				// const history = useNavigate()
-				// const session = sessionStorage.getItem("session")
-				// useEffect(() => {
-				// 	if (session == "false") {
-				// 		history('/login')
-				// 		console.log("entro")
-				// 	}
-				// }, [])
+				}, [sesion])
 			},
 			//-------------------funcion para crear usuario------------------------------
 			crearUsuario: (name, second_name, last_name, second_last_name, email, rut, password, role_id) => {
