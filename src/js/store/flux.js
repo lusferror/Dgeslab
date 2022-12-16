@@ -1,6 +1,7 @@
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
+import { modalRecepcionEstado } from './fRecepcion';
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -15,10 +16,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			listaAsignacion:[], // lista de asignacion
 			asignarImei:"",
 			token: null,
-			role_id: null,
+			usuario: {},
+			usuarios: [],
 			usuarioCreado:null,
 			empacado:empacado, // importado de la hoja empacado
-			empacadoLista
+			empacadoLista,
+			modalRecepcion:true,
+			spinnerRecepcion:false
 		},
 		actions: {
 			// En esta seccion se colocan todas las acciones o funciones
@@ -93,12 +97,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 						history("/")
 
 					}
+					// if (result.token != undefined && result.token != null){
+					// 	sessionStorage.setItem("session", true)
+					// 	setStore({sesion: true})
+					// }
 				})
 				.catch(err => console.log(err));
 								
 			},
 			//-------------------funcion que valida el inicio de sesion------------------------------
 			inicio: () => {
+				// const { sesion } = getStore()
+				// const history = useNavigate()
+				// const session = sessionStorage.getItem("session")
+				// useEffect(() => {
+				// 	console.log("Puta:", session)
+				// 	if (session !== "true" || sesion != true) {
+				// 		history('/login')
+				// 		console.log("entro")
+				// 	}
 				const { sesion } = getStore()
 				const history = useNavigate()
 				const session = sessionStorage.getItem("session")
@@ -115,13 +132,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(response => response.json())				
 					.then(result => {
-						if (result.role_id != undefined && result.role_id != null){
-						setStore({sesion: true, role_id: result.role_id})
+						// if (result.role_id != undefined && result.role_id != null){
+						setStore({usuario: {
+							sesion: true, 
+							role_id: result.role_id,
+						    user_name: result.user_name}})
 						// setStore({role_id: result.role_id})
+						sessionStorage.setItem("session", true)
+						console.log("resultado: ",result)
+						console.log("role_id_back:", result.role_id)
+						console.log("user_name:", result.user_name)
 						sessionStorage.setItem("session", true)}
-					})
+					)
 					.catch(err => console.log(err));				
-				}, [sesion])
+				},
+				// }, [])
+				// .then((res) => res.ok ? setStore({sesion: true}):"Something went wrong")
+				// // const session = sessionStorage.setItem("session", true)
+				
+				// // useEffect(() => {
+				// // 	if (session == "false") {
+				// // 		history('/login')
+				// // 		console.log("entro")
+				// // 	}
+				// // },[])
+			
+				// // console.log("tokenverified:", getStore.token)
+				// .catch((err) => console.log(err));
+
+				// const { sesion } = getStore()
+				// const history = useNavigate()
+				// const session = sessionStorage.getItem("session")
+				// useEffect(() => {
+				// 	if (session == "false") {
+				// 		history('/login')
+				// 		console.log("entro")
+				// 	}
+				// }, [])
+			
+				 [sesion])
 			},
 			// ------------------------ funcion que valida si la session esta activa no muestra pantalla login ------------------------
 			inicioLogin:()=>{
@@ -171,7 +220,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(data=>{console.log('User added: ',data)
 							})					
 				.catch(err => console.log(err));								
-		},
+			},
+			usuario: () => {
+				fetch('http://127.0.0.1:3100/user', {
+					method: 'GET',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					redirect: "follow"
+				})
+				.then(response => response.json())
+				.then(data => {
+					setStore({usuarios: data})						
+					console.log("usuarios:", data)
+				})
+				.catch((error) => console.log(error))                 
+			},
+		
 			// ------------------------ funcion de fecha actual --------------------------------------
 			fecha: () => {
 				const hoy = Date.now()
@@ -294,7 +359,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			agregarSerieEmpacado:(value)=>agregarSerieEmpacado(setStore,getStore,value),
 			agregarEmpacadoEmpacado:(value)=>agregarEmpacadoEmpacado(setStore,getStore,value),
-			obtenerDatosSerieEmpacado:(key)=>obtenerDatosSerieEmpacado(setStore,getStore,key)
+			obtenerDatosSerieEmpacado:(key)=>obtenerDatosSerieEmpacado(setStore,getStore,key),
+			//-------------------------------- funciones de recepcion ----------------------------------
+			modalRecepcionEstado:(len,lista)=>modalRecepcionEstado(setStore,getStore,len,lista)
 		}
 	};
 };

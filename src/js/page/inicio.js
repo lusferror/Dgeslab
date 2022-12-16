@@ -14,7 +14,7 @@ const Inicio = () => {
     //------------------------------------------------------------------------------------------ 
     const haddleClick=(e)=>{
         e.preventDefault();
-        actions.ingreso(email, password,history);
+        actions.ingreso(email, password,history);        
     }
 
 
