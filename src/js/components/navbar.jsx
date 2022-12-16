@@ -10,6 +10,7 @@ export const Navbar = ({contenido}) => {
     var visible={}
     var clase=""
     const session = sessionStorage.getItem("session")
+    console.log(store.usuario.role_id)
     if (session=="true"){
         document.body.classList.remove('sb-sidenav-toggled');
     }

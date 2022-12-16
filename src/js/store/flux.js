@@ -68,7 +68,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				document.body.classList.toggle('sb-sidenav-toggled');
 			},
 			//-------------------funcion para iniciar sesión------------------------------
-			ingreso: (email, password) => {
+			ingreso: (email, password,history) => {
 				fetch('http://127.0.0.1:3100/login',{
 					method: 'POST',
 					headers: {
@@ -84,6 +84,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(result => {
 					setStore({token: result.token})
 					sessionStorage.setItem("token", result.token)
+					if (result.token != undefined && result.token != null){
+						sessionStorage.setItem("session", true)
+						setStore({sesion: true})
+						console.log("esta es la session: ",sessionStorage.getItem("session"))
+						history("/")
+
+					}
 					// if (result.token != undefined && result.token != null){
 					// 	sessionStorage.setItem("session", true)
 					// 	setStore({sesion: true})
@@ -123,6 +130,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log("user_name:", result.user_name)
 					})
 					.catch(err => console.log(err));				
+				},
 				// }, [])
 				// .then((res) => res.ok ? setStore({sesion: true}):"Something went wrong")
 				// // const session = sessionStorage.setItem("session", true)
@@ -146,7 +154,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// 		console.log("entro")
 				// 	}
 				// }, [])
-			},
+			
 			//-------------------funcion para crear usuario------------------------------
 			crearUsuario: (name, second_name, last_name, second_last_name, email, rut, password, role_id) => {
 				fetch('http://127.0.0.1:3100/register',{

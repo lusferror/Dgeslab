@@ -10,29 +10,9 @@ const Inicio = () => {
 	const [password, setPassword] = useState("");
     const history = useNavigate()
 
-    console.log("This is your token", store.token)
-
-    if (store.token != null){
-        // useEffect(() => {
-            actions.inicio();
-		// },[store.token])
-	}
-
-	useEffect(() => {
-		if(store.sesion === true){
-			navigate("/")
-		}				
-	},[store.sesion])
-
-	console.log("Sesion:", store.sesion)
-    console.log("role_id:", store.usuario.role_id)
-
-
     const haddleClick=(e)=>{
         e.preventDefault();
-        actions.ingreso(email, password);
-        // console.log("history")                     
-        // history("/")
+        actions.ingreso(email, password,history);        
     }
 
 
@@ -46,7 +26,6 @@ const Inicio = () => {
                     <p className="text-center text-uppercase fw-bold fs-3 fst-italic">BIENVENIDOS</p>
                     <div className="d-flex justify-content-center">
                         <div className="form bg-white p-5 border border-1 border-warning shadow w-100" style={{borderRadius:"20px"}}>
-                            {/* <form className="needs-validation fs-4" nov1alidate> */}
                                 <div className="mb-3">
                                     <label htmlFor="exampleInputEmail1" className="form-label">Usuario</label>
                                     <div className="d-flex border rounded-3 bg-light">
@@ -65,7 +44,6 @@ const Inicio = () => {
                                 <div className="text-center mb-3 mt-5">
                                     <button className="btn btn-primary w-100" onClick={(e) => haddleClick(e)}>Ingresar</button>
                                 </div>
-                            {/* </form> */}
                         </div>
                     </div>
                 </div>
