@@ -19,6 +19,8 @@ export const modalRecepcionEstado=(set,get,len,lista)=>{
 
         .then(result=>{console.log(result)
             set({spinnerRecepcion:false})
+            if (result.msg=="nok") set({recepcionRespusta:result.lista})
+
         })
         .catch(err=>console.error(err))
     }
