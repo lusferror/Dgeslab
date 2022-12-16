@@ -224,6 +224,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch('http://127.0.0.1:3100/user', {
 					method: 'GET',
 					headers: {
+						"Authorization": `Bearer ${getStore().token}`,												
 						"Content-Type": "application/json"
 					},
 					redirect: "follow"
