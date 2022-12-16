@@ -6,6 +6,7 @@ import { Context } from "../store/appContext";
 export const Navbar = ({contenido}) => {
     const {actions, store} = useContext(Context);
     const {salida} = actions;
+    const {usuario} = actions;
     var visible={}
     var clase=""
     const session = sessionStorage.getItem("session")
@@ -66,11 +67,14 @@ export const Navbar = ({contenido}) => {
                                         <Link to='/Procesamiento' className="nav-link" >Móviles</Link>
                                     </nav>
                                 </div>
+                                {store.usuario.role_id == 1 ? 
                                 <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                                     <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
                                     Supervisor
                                     <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                                </a>
+                                </a>:
+                                 <></>                                
+                                }
                                 <div className="collapse" id="collapsePages" aria-labelledby="headingTwo" >
                                     <nav className="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="true" aria-controls="pagesCollapseAuth">
@@ -80,7 +84,7 @@ export const Navbar = ({contenido}) => {
                                         <div className="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                             <nav className="sb-sidenav-menu-nested nav">
                                                 <Link to='/registrar' className="nav-link" >Registro</Link>
-                                                <a className="nav-link" >Tabla de Usuarios</a>
+                                                <Link to='/usuarios' className="nav-link" onClick={usuario} >Tabla de Usuarios</Link>
                                                 <a className="nav-link" >Restablecer Contraseña</a>
                                             </nav>
                                         </div>
@@ -114,7 +118,7 @@ export const Navbar = ({contenido}) => {
                         </div>
                         <div className="sb-sidenav-footer">
                             <div className="small">Usuario:</div>
-                            Supervisor
+                            {store.usuario.user_name}
                         </div>
                     </nav>
                 </div>

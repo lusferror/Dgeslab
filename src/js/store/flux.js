@@ -14,7 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			listaAsignacion:[], // lista de asignacion
 			asignarImei:"",
 			token: null,
-			role_id: null
+			usuario: {},
+			usuarios: []
 		},
 		actions: {
 			// En esta seccion se colocan todas las acciones o funciones
@@ -83,25 +84,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(result => {
 					setStore({token: result.token})
 					sessionStorage.setItem("token", result.token)
-					if (result.token != undefined && result.token != null){
-						sessionStorage.setItem("session", true)
-						setStore({sesion: true})
-					}
+					// if (result.token != undefined && result.token != null){
+					// 	sessionStorage.setItem("session", true)
+					// 	setStore({sesion: true})
+					// }
 				})
 				.catch(err => console.log(err));
 								
 			},
 			//-------------------funcion que valida el inicio de sesion------------------------------
 			inicio: () => {
-				const { sesion } = getStore()
-				const history = useNavigate()
-				const session = sessionStorage.getItem("session")
-				useEffect(() => {
-					console.log("Puta:", session)
-					if (session !== "true" || sesion != true) {
-						history('/login')
-						console.log("entro")
-					}
+				// const { sesion } = getStore()
+				// const history = useNavigate()
+				// const session = sessionStorage.getItem("session")
+				// useEffect(() => {
+				// 	console.log("Puta:", session)
+				// 	if (session !== "true" || sesion != true) {
+				// 		history('/login')
+				// 		console.log("entro")
+				// 	}
 					fetch('http://127.0.0.1:3100/private',{
 						method: 'GET',
 						headers: {
@@ -111,14 +112,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(response => response.json())				
 					.then(result => {
-						if (result.role_id != undefined && result.role_id != null){
-						setStore({sesion: true, role_id: result.role_id})
+						// if (result.role_id != undefined && result.role_id != null){
+						setStore({usuario: {
+							sesion: true, 
+							role_id: result.role_id,
+						    user_name: result.user_name}})
 						// setStore({role_id: result.role_id})
-						sessionStorage.setItem("session", true)}
+						sessionStorage.setItem("session", true)
 						console.log("role_id_back:", result.role_id)
+						console.log("user_name:", result.user_name)
 					})
 					.catch(err => console.log(err));				
-				}, [])
+				// }, [])
 				// .then((res) => res.ok ? setStore({sesion: true}):"Something went wrong")
 				// // const session = sessionStorage.setItem("session", true)
 				
@@ -164,6 +169,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then(response => response.json())				
 				.then(data=>{console.log('User added: ',data)})					
 				.catch(err => console.log(err));								
+			},
+			usuario: () => {
+				fetch('http://127.0.0.1:3100/user', {
+					method: 'GET',
+					headers: {
+						"Content-Type": "application/json"
+					},
+					redirect: "follow"
+				})
+				.then(response => response.json())
+				.then(data => {
+					setStore({usuarios: data})						
+					console.log("usuarios:", data)
+				})
+				.catch((error) => console.log(error))                 
 			},
 			// ------------------------ funcion de fecha actual --------------------------------------
 			fecha: () => {

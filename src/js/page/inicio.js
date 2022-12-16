@@ -12,27 +12,27 @@ const Inicio = () => {
 
     console.log("This is your token", store.token)
 
-    // actions.inicio();
-    // if (store.token != null){
-	// 	// useEffect(() => {
-	// 	// },[store.token])
-	// }
+    if (store.token != null){
+        // useEffect(() => {
+            actions.inicio();
+		// },[store.token])
+	}
 
-	// useEffect(() => {
-	// 	if(store.sesion){
-	// 		history("/")
-	// 	}				
-	// },[store.sesion])
+	useEffect(() => {
+		if(store.sesion === true){
+			navigate("/")
+		}				
+	},[store.sesion])
 
 	console.log("Sesion:", store.sesion)
-    console.log("role_id:", store.role_id)
+    console.log("role_id:", store.usuario.role_id)
 
 
     const haddleClick=(e)=>{
         e.preventDefault();
         actions.ingreso(email, password);
-        console.log("history")                     
-        history("/")
+        // console.log("history")                     
+        // history("/")
     }
 
 
