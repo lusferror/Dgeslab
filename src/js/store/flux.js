@@ -22,7 +22,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			empacado:empacado, // importado de la hoja empacado
 			empacadoLista,
 			modalRecepcion:true,
-			spinnerRecepcion:false
+			spinnerRecepcion:false,
+			recepcionRespusta:[]
 		},
 		actions: {
 			// En esta seccion se colocan todas las acciones o funciones
