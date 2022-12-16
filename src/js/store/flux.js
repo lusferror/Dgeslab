@@ -1,5 +1,6 @@
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
+import { agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -14,7 +15,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			listaAsignacion:[], // lista de asignacion
 			asignarImei:"",
 			token: null,
-			role_id: null
+			role_id: null,
+			usuarioCreado:null,
+			empacado:empacado, // importado de la hoja empacado
+			empacadoLista
 		},
 		actions: {
 			// En esta seccion se colocan todas las acciones o funciones
@@ -86,7 +90,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (result.token != undefined && result.token != null){
 						sessionStorage.setItem("session", true)
 						setStore({sesion: true})
-						console.log("esta es la session: ",sessionStorage.getItem("session"))
 						history("/")
 
 					}
@@ -100,10 +103,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const history = useNavigate()
 				const session = sessionStorage.getItem("session")
 				useEffect(() => {
-					console.log("Puta:", session)
-					if (session !== "true" || sesion != true) {
+					if (session !== "true") {
 						history('/login')
-						console.log("entro")
 					}
 					fetch('http://127.0.0.1:3100/private',{
 						method: 'GET',
@@ -118,13 +119,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({sesion: true, role_id: result.role_id})
 						// setStore({role_id: result.role_id})
 						sessionStorage.setItem("session", true)}
-						console.log("role_id_back:", result.role_id)
 					})
 					.catch(err => console.log(err));				
 				}, [sesion])
 			},
+			// ------------------------ funcion que valida si la session esta activa no muestra pantalla login ------------------------
+			inicioLogin:()=>{
+				const history = useNavigate()
+				useEffect(()=>{
+					const session= sessionStorage.getItem("session")
+					if (session=="true"){
+						console.log("Validacion login correcta")
+						history("/")
+					}
+				},[])
+			},
 			//-------------------funcion para crear usuario------------------------------
-			crearUsuario: (name, second_name, last_name, second_last_name, email, rut, password, role_id) => {
+			crearUsuario: (name, second_name, last_name, second_last_name, email, rut, password, role_id,history) => {
 				fetch('http://127.0.0.1:3100/register',{
 					method: 'POST',
 					headers: {
@@ -142,10 +153,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}),
 					redirect: "follow"
 				})
-				.then(response => response.json())				
-				.then(data=>{console.log('User added: ',data)})					
+				.then(response => {response.json()
+					console.log((response.status))
+					if(response.status==200){
+						setStore({usuarioCreado:true})
+						setTimeout(() => {
+							location.reload()
+						}, 4000);
+							
+					}
+					else{
+						setStore({usuarioCreado:false})
+					}
+
+				}
+				)				
+				.then(data=>{console.log('User added: ',data)
+							})					
 				.catch(err => console.log(err));								
-			},
+		},
 			// ------------------------ funcion de fecha actual --------------------------------------
 			fecha: () => {
 				const hoy = Date.now()
@@ -265,10 +291,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			guardarRevisionTecnica:()=>{
 				setStore({modal:true})
-			}
-
-
-
+			},
+			agregarSerieEmpacado:(value)=>agregarSerieEmpacado(setStore,getStore,value),
+			agregarEmpacadoEmpacado:(value)=>agregarEmpacadoEmpacado(setStore,getStore,value),
+			obtenerDatosSerieEmpacado:(key)=>obtenerDatosSerieEmpacado(setStore,getStore,key)
 		}
 	};
 };

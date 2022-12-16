@@ -64,6 +64,8 @@ export const Navbar = ({contenido}) => {
                                     <nav className="sb-sidenav-menu-nested nav">
                                         <Link to='/Verificacion' className="nav-link" href="/">Aprobar Equipos</Link>
                                         <Link to='/Procesamiento' className="nav-link" >Móviles</Link>
+                                        <Link to='/empacado' className="nav-link" >Empacado</Link>
+                                        <Link to='/embalaje' className="nav-link" >Embalado</Link>
                                     </nav>
                                 </div>
                                 <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
@@ -106,10 +108,20 @@ export const Navbar = ({contenido}) => {
                                     <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
                                     Rendimiento
                                 </a>
-                                <a className="nav-link" href="#">
+                                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#Registros" aria-expanded="true" aria-controls="collapseLayouts">
                                     <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
-                                    Reportes
+                                    Registros
+                                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                                 </a>
+                                <div className="collapse" id="Registros" aria-labelledby="headingOne" >
+                                    <nav className="sb-sidenav-menu-nested nav">
+                                        <Link to='/Verificacion' className="nav-link" href="/">Aprobar Equipos</Link>
+                                        <Link to='/Procesamiento' className="nav-link" >Móviles</Link>
+                                        <Link to="/empacadoTabla" className="nav-link" >Empacado</Link>
+                                        <Link to='/embalaje' className="nav-link" >Embalado</Link>
+                                    </nav>
+                                </div>
+                                
                             </div>
                         </div>
                         <div className="sb-sidenav-footer">

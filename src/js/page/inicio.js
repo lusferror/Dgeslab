@@ -9,7 +9,9 @@ const Inicio = () => {
     const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
     const history = useNavigate()
-
+    // -------------------------- validacion de sesión-------------------------------------------
+    actions.inicioLogin()
+    //------------------------------------------------------------------------------------------ 
     const haddleClick=(e)=>{
         e.preventDefault();
         actions.ingreso(email, password,history);

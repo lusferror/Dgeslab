@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Modal } from "../components/modal.jsx";
@@ -9,6 +9,7 @@ const Asignar = () => {
   // ----------------------------------------------validacion de usuario----------------------
   actions.inicio()
   // -----------------------------------------------------------------------------------------
+ 
   const { listaAsignacion } = store
   const id = store.listaAsignacion.length + 1
   var tecnico = ""

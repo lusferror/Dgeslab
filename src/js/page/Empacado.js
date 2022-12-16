@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import InputMask from "react-input-mask"
 import ScatterChart from "../components/graphs.jsx";
 import { useContext } from "react";
 import { Context } from "../store/appContext.js";
+import ReactInputMask from "react-input-mask";
+import { cambioSerie } from "../store/empacado.js";
 
-const Empacado = ()=>{
-   
-    return (
-        <>
+const Empacado = () => {
+  const { store, actions } = useContext(Context)
+  const { empacado } = store
+  const { hola } = actions
+  const [checked, setChecked] = useState(true)
+  const check = () => {
+    checked ? setChecked(false) : setChecked(true)
+    hola.Prueba.setSerie()
+  }
+  return (
+    <>
       <div >
         <div className="container">
           <div className=" row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <div className="col me-5 mb-5">
-              <h1 className="">Empacad </h1>
+              <h1 className="">Empacado </h1>
+              <h1>{empacado.serie}</h1>
             </div>
           </div>
-          
+
         </div>
 
         <div className="table-responsive container mt-1">
@@ -26,65 +37,47 @@ const Empacado = ()=>{
                 <th>MATERIAL</th>
                 <th>DENOMINACION</th>
                 <th>EMPACADO</th>
-                <th>TIPO_EMPAQUE</th>
-                <th>FECHA_EMPACADO</th>
+                <th>TIPO EMPAQUE</th>
+                <th>FECHA EMPACADO</th>
                 <th>RESPONSABLE</th>
 
               </tr>
             </thead>
             <tbody>
+              {store.empacadoLista.map((item, index) => {
+                return (
+                  <tr>
+                    <td>{index+1}</td>
+                    <td>{item.serie}</td>
+                    <td>{item.material}</td>
+                    <td>{item.denominacion}</td>
+                    <td>{item.empacado?<input className="form-check-input" type="checkbox" id="flexCheckChecked" checked disabled/>:
+                        <input className="form-check-input" type="checkbox" id="flexCheckChecked" checked={false} disabled/>}
+                    </td>
+                    <td>{item.tipoEmpaque}</td>
+                    <td><span>{item.fechaEmpacado}</span></td>
+                    <td><span>tecnico</span></td>
+                  </tr>)
+                }
+                )
+              }
               <tr>
                 <td>1</td>
-                <td><input  class="form-control style-none" id="inputPassword2" placeholder="1234"/></td>
+                <td><InputMask mask={"999999999999999"} maskChar="" size={15} className="form-control style-none" id="inputPassword2" placeholder="1234" value={empacado.serie} onChange={e => actions.agregarSerieEmpacado(e.target.value)}
+                  onKeyDown={(e) => { actions.obtenerDatosSerieEmpacado(e.key) }} />
+                </td>
                 <td>1234</td>
-                <td>Celda de tabla</td>
-                <td> <form name="f1" id="formElement"><input type="checkbox" name="ch1" /> </form></td>
-                <td><select class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select></td>
+                <td>{empacado.denominacion}</td>
+                <td><input className="form-check-input" type="checkbox" value={empacado.empacado} id="flexCheckChecked" onClick={e => actions.agregarEmpacadoEmpacado(e.target.value)} defaultChecked /></td>
+                <td><select className="form-select" aria-label="Default select example" defaultValue={"Caja Seminuevo"}>
+                  <option >Seleccione el tipo de empaque</option>
+                  <option value="Caja Seminuevo" >Caja Seminuevo</option>
+                  <option value="Caja seguro">Caja seguro</option>
+                  <option value="Bolsa Burbuja">Bolsa Burbuja</option>
+                </select></td>
                 <td><span>12/12/2022</span></td>
                 <td><span>tecnico</span></td>
-
-
               </tr>
-              <tr>
-                <td>2</td>
-                <td><input  class="form-control style-none" id="inputPassword2" placeholder="1234"/></td>
-                <td>1234</td>
-                <td>Celda de tabla</td>
-                <td> <form name="f1" id="formElement"><input type="checkbox" name="ch1" /> </form></td>
-                <td><select class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select></td>
-                <td><span>12/12/2022</span></td>
-                <td><span>tecnico</span></td>
-
-              </tr>
-              <tr>
-                <td>3</td>
-                <td><input  class="form-control style-none" id="inputPassword2" placeholder="1234"/></td>
-                <td>1234</td>
-                <td>Celda de tabla</td>
-                <td> <form name="f1" id="formElement"><input type="checkbox" name="ch1" /> </form></td>
-                <td><select class="form-select" aria-label="Default select example">
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select></td>
-                <td><span>12/12/2022</span></td>
-                <td><span>tecnico</span></td>
-
-              </tr>
-
-           
-
             </tbody>
           </table>
         </div>
@@ -93,7 +86,7 @@ const Empacado = ()=>{
     </>
 
 
-    )
+  )
 }
 
 export default Empacado;
