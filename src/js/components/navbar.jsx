@@ -38,7 +38,7 @@ export const Navbar = ({contenido}) => {
                                         <li><a className="dropdown-item" href="#!">Perfil</a></li>
                                         <li><a className="dropdown-item" href="#!">Ajustes</a></li>
                                         <li><hr className="dropdown-divider" /></li>
-                                        <li><Link to="/login" className="dropdown-item" onClick={salida}>Logout</Link></li>
+                                        <li><Link to="/login" className="dropdown-item" onClick={()=>salida()}>Logout</Link></li>
                                     </ul>
                                 </>
                                 :<></>
@@ -66,6 +66,8 @@ export const Navbar = ({contenido}) => {
                                     <nav className="sb-sidenav-menu-nested nav">
                                         <Link to='/Verificacion' className="nav-link" href="/">Aprobar Equipos</Link>
                                         <Link to='/Procesamiento' className="nav-link" >Móviles</Link>
+                                        <Link to='/empacado' className="nav-link" >Empacado</Link>
+                                        <Link to='/embalaje' className="nav-link" >Embalado</Link>
                                     </nav>
                                 </div>
                                 {store.usuario.role_id == 1 ? 
@@ -95,7 +97,7 @@ export const Navbar = ({contenido}) => {
                                         </a>
                                         <div className="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                             <nav className="sb-sidenav-menu-nested nav">
-                                                <a className="nav-link" href="401.html">Recepcion</a>
+                                                <Link to="/recepcion" className="nav-link" >Recepcion</Link>
                                                 {/* <a className="nav-link" href="404.html">Despacho</a> */}
                                                 <Link to='/HomeSupervisor' className="nav-link" >Despacho</Link>
                                                 <a className="nav-link" href="500.html">Bodega</a>
@@ -111,10 +113,20 @@ export const Navbar = ({contenido}) => {
                                     <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
                                     Rendimiento
                                 </a>
-                                <a className="nav-link" href="#">
+                                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#Registros" aria-expanded="true" aria-controls="collapseLayouts">
                                     <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
-                                    Reportes
+                                    Registros
+                                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                                 </a>
+                                <div className="collapse" id="Registros" aria-labelledby="headingOne" >
+                                    <nav className="sb-sidenav-menu-nested nav">
+                                        <Link to='/Verificacion' className="nav-link" href="/">Aprobar Equipos</Link>
+                                        <Link to='/Procesamiento' className="nav-link" >Móviles</Link>
+                                        <Link to="/empacadoTabla" className="nav-link" >Empacado</Link>
+                                        <Link to='/embalaje' className="nav-link" >Embalado</Link>
+                                    </nav>
+                                </div>
+                                
                             </div>
                         </div>
                         <div className="sb-sidenav-footer">

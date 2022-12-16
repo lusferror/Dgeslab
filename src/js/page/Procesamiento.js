@@ -20,9 +20,9 @@ const Procesamiento = () => {
       </div>
       <div className="mt-5">
         <div className="btn-group mb-3 col-xxl-4 col-lg-8 shadow-lg" role="group" aria-label="Basic example">
-          <button type="button" className="border-0 col-4 btn btn-warning" id="marcarTodo" data-bs-toggle="modal" data-bs-target="#equiposPendientesModal">Equipos Pendientes</button>
+          <button type="button" className="border-0 col-4 btn btn-primary" id="marcarTodo" data-bs-toggle="modal" data-bs-target="#equiposPendientesModal">Equipos Pendientes</button>
           <button type="button" className="mx-1 border-0 col-4 btn btn-success" id="Guardar">Guardar</button>
-          <button type="button" className="border-0 col-4  btn btn-info" data-bs-toggle="modal" data-bs-target="#reporte">Reporte</button>
+          <button type="button" className="border-0 col-4  btn btn-primary" data-bs-toggle="modal" data-bs-target="#reporte">Reporte</button>
         </div>
       </div>
       <ModalEquiposPendientes/>

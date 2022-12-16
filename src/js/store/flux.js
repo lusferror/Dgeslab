@@ -1,5 +1,7 @@
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
+import { agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
+import { modalRecepcionEstado } from './fRecepcion';
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -16,9 +18,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			usuario: {},
 			usuarios: [],
-			uf: [],
-			dolar: {},
-			utm: {}			
+			usuarioCreado:null,
+			empacado:empacado, // importado de la hoja empacado
+			empacadoLista,
+			modalRecepcion:true,
+			spinnerRecepcion:false
 		},
 		actions: {
 			// En esta seccion se colocan todas las acciones o funciones
@@ -90,7 +94,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (result.token != undefined && result.token != null){
 						sessionStorage.setItem("session", true)
 						setStore({sesion: true})
-						console.log("esta es la session: ",sessionStorage.getItem("session"))
 						history("/")
 
 					}
@@ -112,6 +115,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// 		history('/login')
 				// 		console.log("entro")
 				// 	}
+				const { sesion } = getStore()
+				const history = useNavigate()
+				const session = sessionStorage.getItem("session")
+				useEffect(() => {
+					if (session !== "true") {
+						history('/login')
+					}
 					fetch('http://127.0.0.1:3100/private',{
 						method: 'GET',
 						headers: {
@@ -128,9 +138,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						    user_name: result.user_name}})
 						// setStore({role_id: result.role_id})
 						sessionStorage.setItem("session", true)
+						console.log("resultado: ",result)
 						console.log("role_id_back:", result.role_id)
 						console.log("user_name:", result.user_name)
-					})
+						sessionStorage.setItem("session", true)}
+					)
 					.catch(err => console.log(err));				
 				},
 				// }, [])
@@ -157,8 +169,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// 	}
 				// }, [])
 			
+				 [sesion])
+			},
+			// ------------------------ funcion que valida si la session esta activa no muestra pantalla login ------------------------
+			inicioLogin:()=>{
+				const history = useNavigate()
+				useEffect(()=>{
+					const session= sessionStorage.getItem("session")
+					if (session=="true"){
+						console.log("Validacion login correcta")
+						history("/")
+					}
+				},[])
+			},
 			//-------------------funcion para crear usuario------------------------------
-			crearUsuario: (name, second_name, last_name, second_last_name, email, rut, password, role_id) => {
+			crearUsuario: (name, second_name, last_name, second_last_name, email, rut, password, role_id,history) => {
 				fetch('http://127.0.0.1:3100/register',{
 					method: 'POST',
 					headers: {
@@ -176,8 +201,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}),
 					redirect: "follow"
 				})
-				.then(response => response.json())				
-				.then(data=>{console.log('User added: ',data)})					
+				.then(response => {response.json()
+					console.log((response.status))
+					if(response.status==200){
+						setStore({usuarioCreado:true})
+						setTimeout(() => {
+							location.reload()
+						}, 4000);
+							
+					}
+					else{
+						setStore({usuarioCreado:false})
+					}
+
+				}
+				)				
+				.then(data=>{console.log('User added: ',data)
+							})					
 				.catch(err => console.log(err));								
 			},
 			usuario: () => {
@@ -195,6 +235,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.catch((error) => console.log(error))                 
 			},
+		
 			// ------------------------ funcion de fecha actual --------------------------------------
 			fecha: () => {
 				const hoy = Date.now()
@@ -332,11 +373,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  console.log('Requestfailed', error);
 				  });
 				},[])
-			}
+			},
+			agregarSerieEmpacado:(value)=>agregarSerieEmpacado(setStore,getStore,value),
+			agregarEmpacadoEmpacado:(value)=>agregarEmpacadoEmpacado(setStore,getStore,value),
+			obtenerDatosSerieEmpacado:(key)=>obtenerDatosSerieEmpacado(setStore,getStore,key),
 
-
-
-
+			//-------------------------------- funciones de recepcion ----------------------------------
+			modalRecepcionEstado:(len,lista)=>modalRecepcionEstado(setStore,getStore,len,lista)
 		}
 	};
 };
