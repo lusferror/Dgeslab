@@ -9,6 +9,7 @@ const Usuarios = () => {
   actions.usuario()
   // ----------------------------------------------------------------------------------
   console.log(store.usuarios)
+  const {usuarios} = store
   const [des, setDes] = useState(false)
   function deshabilitar() {
     setDes(true)
@@ -38,7 +39,7 @@ const Usuarios = () => {
           </thead>
           <tbody>
           {
-              store.usuarios.map((usuarios, index) => {
+              usuarios.map((usuarios, index) => {
                 return (<tr>
                   <td className="">{usuarios.id}</td>
                   <td className="">{usuarios.name}</td>
@@ -50,7 +51,7 @@ const Usuarios = () => {
                   <td className=""><span>{usuarios.create_at}</span></td>
                   <td className="">{usuarios.role_id}</td>                  
                 </tr>)
-              })
+              }) 
             }
           </tbody>
         </table>

@@ -222,19 +222,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.catch(err => console.log(err));								
 			},
 			usuario: () => {
-				fetch('http://127.0.0.1:3100/user', {
-					method: 'GET',
-					headers: {
-						"Content-Type": "application/json"
-					},
-					redirect: "follow"
-				})
-				.then(response => response.json())
-				.then(data => {
-					setStore({usuarios: data})						
-					console.log("usuarios:", data)
-				})
-				.catch((error) => console.log(error))                 
+				useEffect(()=>{
+
+					fetch('http://127.0.0.1:3100/user', {
+						method: 'GET',
+						headers: {
+							// "Authorization": `Bearer ${getStore().token}`,
+							"Content-Type": "application/json"
+						},
+						redirect: "follow"
+					})
+					.then(response => response.json())
+					.then(data => {
+						setStore({usuarios: data})						
+						console.log("usuarios:", data)
+					})
+					.catch((error) => console.log(error))                 
+				},[])
 			},
 		
 			// ------------------------ funcion de fecha actual --------------------------------------
