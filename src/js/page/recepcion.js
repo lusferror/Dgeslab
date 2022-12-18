@@ -92,6 +92,7 @@ const Recepcion = () => {
                 <span className="col-2 float-end"><button className="btn btn-success w-100" onClick={()=>{actions.modalRecepcionEstado(series.length,series,setSeries)}} data-bs-toggle="modal" data-bs-target="#exampleModal">Guardar</button></span>
             </div>
             {/* ---------------------------------------------------------------------------------------------- */}
+            <p>Cantidad de registros: <strong>{series.length}</strong></p>
             <div className="maxTabla contenedor overflow-auto">
                 <table className="table table-striped">
                     <thead>

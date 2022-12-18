@@ -3,16 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import dgeslab from "../../img/dgeslab.png";
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { Spinner } from "../components/sppiner.jsx";
 
 const Inicio = () => {
     const {store, actions} = useContext(Context)
     const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+    const [spinner,setSpinner] = useState(false)
     const history = useNavigate()
     // -------------------------- validacion de sesión-------------------------------------------
     actions.inicioLogin()
     //------------------------------------------------------------------------------------------ 
     const haddleClick=(e)=>{
+        
         e.preventDefault();
         actions.ingreso(email, password,history);        
     }
@@ -52,7 +55,10 @@ const Inicio = () => {
                                         Usuario o Contraseña incorrectos
                                     </div>:
                                     <></>}
-                                    
+                                    {spinner?
+                                    <Spinner/>:
+                                    <></>
+                                    }
                                 </div>
                             </form>
                         </div>

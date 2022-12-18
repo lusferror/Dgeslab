@@ -24,6 +24,12 @@ export const modalRecepcionEstado=(set,get,len,lista,setSeries)=>{
                 }
             else if(result.msg=="error")
                 set({modalRecepcion:false})
+            else if (result.msg=="ok"){
+                set({modalRecepcion:true})
+            }
+            else{
+                set({modalRecepcion:false})
+            }
 
         })
         .catch(err=>{console.error(err)
