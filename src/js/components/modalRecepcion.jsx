@@ -17,8 +17,8 @@ export const ModalRecepcion = () => {
                                 </div>
                                 <div className="modal-body d-flex justify-content-center">
 
-                                    <div class="spinner-border text-warning" role="status">
-                                        <span class="visually-hidden">Loading...</span>
+                                    <div className="spinner-border text-warning" role="status">
+                                        <span className="visually-hidden">Loading...</span>
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@ export const ModalRecepcion = () => {
                                                     {store.recepcionRespusta.map((i)=>{
                                                         return(
                                                     <tr>
-                                                        <td>{i}</td>
+                                                        <td>{i.serie}</td>
                                                     </tr>
                                                     )
                                                     })
@@ -67,7 +67,8 @@ export const ModalRecepcion = () => {
                             </div>
                             <div className="modal-body">
                                     <div className="alert alert-danger" role="alert">
-                                        No se han podido guardar los datos
+                                        <p>No se han podido guardar los datos</p>
+                                        <p>Esto puede deberse a que no se ingresado un formato correcto en los datos o se han repetido.</p>
                                     </div>
                             </div>
                         </div>

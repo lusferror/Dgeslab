@@ -35,10 +35,23 @@ module.exports = {
             {
               test: /\.png/,
               type: 'asset/resource'
-            }
-
-        ]
-    },
+            },
+            {
+                test: /\.(xls|xlsx|XLS|XLSX)$/i,
+                use: [
+                  {
+                    loader: 'file-loader',
+                  },
+                ],
+              },
+              
+            ]
+        },
+        output: {
+          filename: 'bundle.js',
+          filename: '[name].bundle.js',
+           path: path.resolve(__dirname, 'dist'),
+         },
     // module: {
     //     rules: [
     //       {
