@@ -24,9 +24,9 @@ const injectContext = PassedComponent => {
 
 				sessionStorage.setItem("session",false)
 			}
-			if(state.store.sesion){
-				document.body.classList.toggle('sb-sidenav-toggled');
-			}
+			// if(state.store.sesion){
+			// 	document.body.classList.toggle('sb-sidenav-toggled');
+			// }
 		}, []);
 		
 

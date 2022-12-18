@@ -29,8 +29,8 @@ const Layout = () => {
             <Navbar contenido={
                 <Routes>
                     <Route element={<Inicio />} path="/login" />
-                    <Route element={<Home/>} path="/" />
                     <Route element={<HomeTecnico />} path="/HomeTecnico" />
+                    <Route element={<Home/>} path="/" />
                     <Route element={<Verificacion />} path="/Verificacion" />
                     <Route element={<Procesamiento />} path="/Procesamiento" />
                     <Route element={<HomeSupervisor />} path="/HomeSupervisor" />
