@@ -18,6 +18,7 @@ import Asignar from "./js/page/asignar"
 import Empacado from "./js/page/Empacado";
 import Embalaje from "./js/page/Embalaje";
 import EmpacadoTabla from "./js/page/EmpacadoTabla";
+import Verificacionn from "./js/page/Verificacionn";
 
 // ---------------------------------- contexto ------------------------------------
 
@@ -44,6 +45,7 @@ const Layout = () => {
                     <Route element={<Empacado/>} path="/empacado"/>
                     <Route element={<EmpacadoTabla/>} path="/empacadoTabla"/>
                     <Route element={<Recepcion/>} path="/recepcion"/>
+                    <Route element={<Verificacionn/>} path="/Verificacionn"/>
                 </Routes>
             }>
             </Navbar>
