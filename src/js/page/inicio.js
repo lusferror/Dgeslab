@@ -9,13 +9,12 @@ const Inicio = () => {
     const {store, actions} = useContext(Context)
     const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-    const [spinner,setSpinner] = useState(false)
+    // const [spinner,setSpinner] = useState(false)
     const history = useNavigate()
     // -------------------------- validacion de sesión-------------------------------------------
     actions.inicioLogin()
     //------------------------------------------------------------------------------------------ 
     const haddleClick=(e)=>{
-        
         e.preventDefault();
         actions.ingreso(email, password,history);        
     }
@@ -49,13 +48,13 @@ const Inicio = () => {
                                     <Link to="/recupera" className="text-primary float-end m-1" style={{ fontSize: "60%" }} >Recuperar Contraseña?</Link>
                                 </div>
                                 <div className="text-center mb-3 mt-5">
-                                    <button type="submit" className="btn btn-primary w-100 mb-4">Ingresar</button>
+                                    <button type="submit" className="btn btn-primary w-100 mb-4" >Ingresar</button>
                                     {store.alertLogin?
                                     <div className="alert alert-danger " role="alert">
                                         Usuario o Contraseña incorrectos
                                     </div>:
                                     <></>}
-                                    {spinner?
+                                    {store.spinnerLogin?
                                     <Spinner/>:
                                     <></>
                                     }

@@ -1,7 +1,7 @@
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
-import { modalRecepcionEstado } from './fRecepcion';
+import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion } from './fRecepcion';
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -23,8 +23,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			empacadoLista,
 			modalRecepcion: true,
 			spinnerRecepcion: false,
+			spinnerLogin: false,
 			recepcionRespusta: [],
-			alerLogin: false // indica la alerta de login incorrecto
+			alerLogin: false, // indica la alerta de login incorrecto
+			registrosRecepcion: [],
+			listaTecnicosAsigacion: [],
+			asignacionSerieValida: true
 		},
 		actions: {
 			// En esta seccion se colocan todas las acciones o funciones
@@ -34,8 +38,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				sessionStorage.removeItem("session")
 				sessionStorage.removeItem("user")
 				sessionStorage.removeItem("rol")
-				setStore({ token: null });
-				setStore({ sesion: false })
+				sessionStorage.removeItem("id")
+				sessionStorage.removeItem("rol_name")
+				setStore({
+					// en esta seccion se colocan todos los estados
+					navbar: true,
+					modal: false,
+					sesion: false,
+					listaAsignacionFinal: [], // lista de asignacion			
+					asignarTecnico: "",//id del tenico
+					asignado: false, // estado de la asignacion
+					listaAsignacion: [], // lista de asignacion
+					asignarImei: "",
+					token: null,
+					usuario: {},
+					usuarios: [],
+					usuarioCreado: null,
+					empacado: empacado, // importado de la hoja empacado
+					empacadoLista,
+					modalRecepcion: true,
+					spinnerRecepcion: false,
+					spinnerLogin: false,
+					recepcionRespusta: [],
+					alerLogin: false, // indica la alerta de login incorrecto
+					registrosRecepcion: [],
+					listaTecnicosAsigacion: [],
+					asignacionSerieValida: true
+				});
 				document.body.classList.remove('sb-sidenav-toggled')
 			},
 			// Funcion que guarda los elementos cargados del excel a un json
@@ -69,6 +98,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			//-------------------funcion para iniciar sesión------------------------------
 			ingreso: (email, password, history) => {
+				setStore({ spinnerLogin: true })
 				fetch('http://127.0.0.1:3100/login', {
 					method: 'POST',
 					headers: {
@@ -83,12 +113,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(result => {
 						if (result.status == "ok") {
-							setStore({ token: result.token, role_id: result.rol,alertLogin:false })
+							setStore({ token: result.token, role_id: result.rol, alertLogin: false })
 							sessionStorage.setItem("token", result.token)
 							if (result.token != undefined && result.token != null) {
 								sessionStorage.setItem("session", true)
 								sessionStorage.setItem("rol", result.rol)
 								sessionStorage.setItem("user", result.user)
+								sessionStorage.setItem("id",result.id_user)
+								sessionStorage.setItem("rol_name",result.rol_name)
 								setStore({ sesion: true })
 								history("/")
 
@@ -97,6 +129,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						else {
 							setStore({ alertLogin: true })
 						}
+						setStore({ spinnerLogin: false })
 
 					})
 					.catch(err => console.log(err));
@@ -221,11 +254,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const fechaCompleta = dia + "/" + mes + "/" + anyo
 				return fechaCompleta;
 			},
+			//------------------------ lista de tecnicos ----------------------------------------------------------------
+			listaTecnicosAsignacion: () => {
+				useEffect(() => {
+					fetch('http://127.0.0.1:3100/asignacionUsers', {
+						method: 'GET',
+						headers: {
+							"Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+						},
+					})
+						.then(response => response.json())
+						.then(data => {
+							if (data.msg == "ok") {
+								setStore({ listaTecnicosAsigacion: data.list_users })
+							}
+
+						})
+						.catch(error => console.log(error))
+				}, [])
+			},
 			//--------------------- funcion valor de lista de asignacion de tecncio ------------------------------------------------
 			asignarValor: (e) => {
-				const { asignarTecnico } = getStore()
 				setStore({ asignarTecnico: e })
-				console.log(asignarTecnico)
+			}
+			,
+			// ---------------------------------- limpia pantalla asignacion ----------------------------------------------
+			limpiarAsignacion: () => {
+				setStore({ asignado: false, listaAsignacion: [], asignarImei: "" })
 			},
 			//------------------------- funcion asignar tecnico -------------------------------------------
 			asignar: () => {
@@ -240,20 +295,59 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			//----------------------------------- funcion que guarda el item de la asignacion ------------------
 			itemAsignacion: (fecha, imei, tecnico, tecla) => {
-				let item = {}
-				const { listaAsignacion } = getStore()
+				const fecha_hoy=new Date(Date.now())
 				if (tecla == "Enter" && imei != "") {
-					item = {
-						fecha: fecha,
-						imei: imei,
-						tecnico: tecnico,
-						check: false,
-						estado: "Pendiente"
+					const { listaAsignacion } = getStore()
+					let duplicado=false
+					if (listaAsignacion.length > 0) {
+						for (let i of listaAsignacion) {
+							if (imei == i.serie) {
+								console.log("duplicado")
+								duplicado=true
+								setStore({asignacionSerieValida:false})
+							}
+						}
 					}
-					const lista = listaAsignacion.concat([item])
-					setStore({ listaAsignacion: lista, modal: true })
-					setStore({ asignarImei: "" })
-					console.log(getStore().listaAsignacion)
+					if(duplicado==false){
+					fetch('http://127.0.0.1:3100/serieAsignacion', {
+						method: 'POST',
+						headers: {
+							"Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							serie: imei
+						})
+					})
+						.then(response => response.json())
+						.then(data => {
+							console.log(data)
+							if (data.msg == "ok") {
+								let item = {}
+								const { listaAsignacion } = getStore()
+								item = {
+									fecha_asignacion: fecha_hoy.toLocaleString("en-GB"),
+									serie: parseInt(imei),
+									tecnico_id: parseInt(tecnico),
+									check: false,
+									estado: "Pendiente"
+								}
+								const lista = listaAsignacion.concat([item])
+								setStore({ listaAsignacion: lista, modal: true, })
+								setStore({ asignarImei: "" })
+								setStore({ asignacionSerieValida: true })
+							}
+							else {
+								setStore({ asignacionSerieValida: false })
+								console.log("asignacion errada")
+							}
+						})
+						.catch(err => console.log(err))
+					}
+					else{
+						setStore({ asignacionSerieValida: false })
+						console.log("asignacion errada")
+					}
 				}
 			},
 			// ----------------------------------- funcion guarda valor input para imei asignado-----------------------
@@ -275,6 +369,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const { listaAsignacion } = getStore()
 				setStore({ listaAsignacionFinal: [...listaAsignacion] })
 				setStore({ listaAsignacion: [], asignado: false })
+				fetch('http://127.0.0.1:3100/asignacionGuardar',{
+					method:'POST',
+					headers:{
+						"Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+						"Content-Type":"application/json"
+
+					},
+					body:JSON.stringify({
+						lista:listaAsignacion
+					})
+				})
+				.then(response=>response.json())
+				.then(data=>console.log(data))
+				.catch(error=>console.log(error))
+			},
+			// ----------------------------------- listado de arobacion --------------------------------------
+			registrosAprobacion:()=>{
+				useEffect(()=>{
+					fetch('http://127.0.0.1:3100/listaAprobacion',{
+						method:'POST',
+						headers:{
+							'Authorization': `Bearer ${sessionStorage.getItem("token")}`,
+							'Content-Type':'application/json'
+						},
+						body:JSON.stringify({
+							rol:sessionStorage.getItem("rol"),
+							id:sessionStorage.getItem("id")
+						})
+					})
+					.then(response=>response.json())
+					.then(data=>{console.log(data)
+						if(data.msg=="ok"){
+							setStore({listaAsignacionFinal:data.lista})
+						}
+					})
+					.catch(error=>console.log(error))
+				},[])
 			},
 			// ---------------------------------- selecionar todo en aprobacion ----------------------------
 			checkAll: () => {
@@ -286,35 +417,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 						item.check = true;
 						lista.push(item)
 					})
-					console.log(lista)
 					setStore({ listaAsignacionFinal: [...lista] })
 				});
 			},
 			uncheckAll: () => {
-				document.querySelectorAll('#formElement input[type=checkbox]').forEach(function (checkElement) {
-					if (checkElement.disabled !== true) {
-						console.log("si lo leyo")
-						checkElement.checked = false;
-						const { listaAsignacionFinal } = getStore()
+						const {listaAsignacionFinal}=getStore()
 						var lista = []
 						listaAsignacionFinal.forEach(item => {
 							item.check = false;
 							lista.push(item)
 						})
 						setStore({ listaAsignacionFinal: [...lista] })
-					}
-				});
+				
+				
 			},
 			//--------------------- funcion aprobar ---------------------------------------------------------
 			aprobarAsignacion: () => {
 				const { listaAsignacionFinal } = getStore()
 				let lista = []
+				let listaUpdate=[]
 				listaAsignacionFinal.forEach((item) => {
-					if (item.check == true)
+					if (item.check == true && item.estado=="Pendiente"){
 						item.estado = "Aprobado"
+						item["b_id"]=item.id
+						listaUpdate.push(item)
+					}
 					lista.push(item)
 				})
 				setStore({ listaAsignacionFinal: [...lista] })
+				// console.log("lista aprobada: ",listaUpdate)
+				fetch('http://127.0.0.1:3100/aprobarAsignacion',{
+					method:'PUT',
+					headers:{
+						"Authorization":`Bearer ${sessionStorage.getItem("token")}`,
+						'Content-Type':'application/json'
+					},
+					body:JSON.stringify({
+						lista:listaUpdate
+					})
+				})
+				.then(response=>response.json())
+				.then(data=>console.log(data))
+				.catch(error=>console.log(error))
 			},
 			check: (index) => {
 				const { listaAsignacionFinal } = getStore()
@@ -326,7 +470,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					listaAsignacionFinal[index].check = true
 					setStore({ listaAsignacionFinal: [...listaAsignacionFinal] })
 				}
-				console.log(getStore().listaAsignacionFinal)
 			},
 			guardarRevisionTecnica: () => {
 				setStore({ modal: true })
@@ -353,7 +496,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			obtenerDatosSerieEmpacado: (key) => obtenerDatosSerieEmpacado(setStore, getStore, key),
 
 			//-------------------------------- funciones de recepcion ----------------------------------
-			modalRecepcionEstado: (len, lista, set) => modalRecepcionEstado(setStore, getStore, len, lista, set)
+			modalRecepcionEstado: (len, lista, set) => modalRecepcionEstado(setStore, getStore, len, lista, set),
+			registrosRecepcion: () => registrosRecepcion(setStore, getStore),
+			borrarRegistroRecepcion: (id) => borrarRegistroRecepcion(setStore, getStore, id)
 		}
 	};
 };
