@@ -62,7 +62,8 @@ export const Navbar = ({contenido}) => {
                                 </a>
                                 <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" >
                                     <nav className="sb-sidenav-menu-nested nav">
-                                        <Link to='/Verificacion' className="nav-link" href="/">Aprobar Equipos</Link>
+                                        <Link to='/verificacion' className="nav-link" >Verificacion</Link>
+                                        <Link to='/aprobacion' className="nav-link" >Aprobar Equipos</Link>
                                         <Link to='/Procesamiento' className="nav-link" >Móviles</Link>
                                         <Link to='/empacado' className="nav-link" >Empacado</Link>
                                         <Link to='/embalaje' className="nav-link" >Embalado</Link>

@@ -34,7 +34,7 @@ const Layout = () => {
                     <Route element={<Inicio />} path="/login" />
                     <Route element={<HomeTecnico />} path="/HomeTecnico" />
                     <Route element={<Home/>} path="/" />
-                    <Route element={<Verificacion />} path="/Verificacion" />
+                    <Route element={<Verificacion />} path="/aprobacion" />
                     <Route element={<Procesamiento />} path="/Procesamiento" />
                     <Route element={<HomeSupervisor />} path="/HomeSupervisor" />
                     <Route element={<Recupera />} path="/recupera" />
@@ -47,7 +47,7 @@ const Layout = () => {
                     <Route element={<Empacado/>} path="/empacado"/>
                     <Route element={<EmpacadoTabla/>} path="/empacadoTabla"/>
                     <Route element={<Recepcion/>} path="/recepcion"/>
-                    <Route element={<Verificacionn/>} path="/Verificacionn"/>
+                    <Route element={<Verificacionn/>} path="/verificacion"/>
                     <Route element={<TablaRecepcion/>} path="/tablaRecepcion"/>
                     <Route element={<TablaAsignacion></TablaAsignacion>} path="/tablaAsignacion"></Route>
                 </Routes>

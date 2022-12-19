@@ -2,7 +2,7 @@ import { Navigate, Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
 import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion } from './fRecepcion';
-
+import { nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion} from './fverificacion'
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -28,7 +28,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			alerLogin: false, // indica la alerta de login incorrecto
 			registrosRecepcion: [],
 			listaTecnicosAsigacion: [],
-			asignacionSerieValida: true
+			asignacionSerieValida: true,
+			nroCaja:"",
+			registrarDocumentoVerificacion:"",
+			documentoRegistrado:false
+
 		},
 		actions: {
 			// En esta seccion se colocan todas las acciones o funciones
@@ -247,12 +251,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// ------------------------ funcion de fecha actual --------------------------------------
 			fecha: () => {
 				const hoy = Date.now()
-				const fecha = new Date(hoy)
-				const dia = fecha.getDate()
-				const mes = fecha.getMonth()
-				const anyo = fecha.getFullYear()
-				const fechaCompleta = dia + "/" + mes + "/" + anyo
-				return fechaCompleta;
+				const fecha = new Date(hoy).toLocaleString("en-GB")
+				// const dia = fecha.getDate()
+				// const mes = fecha.getMonth()
+				// const anyo = fecha.getFullYear()
+				// const fechaCompleta = dia + "/" + mes + "/" + anyo
+				return fecha;
 			},
 			//------------------------ lista de tecnicos ----------------------------------------------------------------
 			listaTecnicosAsignacion: () => {
@@ -498,7 +502,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//-------------------------------- funciones de recepcion ----------------------------------
 			modalRecepcionEstado: (len, lista, set) => modalRecepcionEstado(setStore, getStore, len, lista, set),
 			registrosRecepcion: () => registrosRecepcion(setStore, getStore),
-			borrarRegistroRecepcion: (id) => borrarRegistroRecepcion(setStore, getStore, id)
+			borrarRegistroRecepcion: (id) => borrarRegistroRecepcion(setStore, getStore, id),
+			// --------------------------------- funciones de verificacion -------------------------------
+			nroCajaVerificacion:()=>nroCajaVerificacion(setStore,getStore),
+			registrarDocumentoVerificacion:()=>registrarDocumentoVerificacion(setStore,getStore),
+			onChangeDocumentoVerificacion:(e)=>onChangeDocumentoVerificacion(setStore,getStore,e),
+			registrarDocumentoVerificacion:()=>registrarDocumentoVerificacion(setStore,getStore)
+
 		}
 	};
 };
