@@ -9,14 +9,22 @@ const Asignar = () => {
   // ----------------------------------------------validacion de usuario----------------------
   actions.inicio()
   // -----------------------------------------------------------------------------------------
- 
+ actions.listaTecnicosAsignacion()
   const { listaAsignacion } = store
   const id = store.listaAsignacion.length + 1
   var tecnico = ""
   if (store.asignado == true) {
     tecnico = store.asignarTecnico
   }
-
+  function nombre(){
+  var nombreTecnico=""
+  for(let i of store.listaTecnicosAsigacion){
+    if (parseInt(store.asignarTecnico)==i.id){
+      nombreTecnico=i.name+" "+i.last_name
+    }
+  }
+  return nombreTecnico.toUpperCase()
+}
   return (
     <div className="p-xxl-5 ">
       <div className="row-cols-2 row-cols-lg-5 mb-5 ">
@@ -26,16 +34,19 @@ const Asignar = () => {
         <div className="my-2 border col-xxl-3 col-md-4 col-sm-9">
           {store.asignado ?
             <select className="form-select" disabled>
-              <option selected>Selecciona el Técnico</option>
+              <option selected>{nombre()}</option>
             </select>
 
             :
             <select className="form-select col-xxl-3 col-lg-4 col-xl-6 " aria-label="Default select example" onChange={e => { actions.asignarValor(e.target.value) }}>
               <option defaultValue>Selecciona el Técnico</option>
-              <option value="1">Luis</option>
-              <option value="2">Joel</option>
-              <option value="3">Guilermo</option>
-              <option value="4">Martin</option>
+              {store.listaTecnicosAsigacion.map((item,index)=>{
+                return(
+                  <option value={item.id} key={index}>{(item.name+" "+item.last_name).toUpperCase()}</option>
+                )
+              })
+
+              }
             </select>
           }
         </div>
@@ -45,6 +56,9 @@ const Asignar = () => {
         <div className="mt-2 ms-1 col-xxl-1 ">
           <button type="button" className="btn btn-success w-100" id="Guardar" data-bs-toggle="modal" data-bs-target="#exampleModal"
           onClick={()=>actions.asignacionGuaradar()}>Guardar</button>
+        </div>
+        <div className="mt-2 ms-1 col-xxl-1">
+          <button type="button" className="btn btn-primary w-100" onClick={()=>actions.limpiarAsignacion()}>Limpiar</button>
         </div>
         <Modal />
       </div>
@@ -67,9 +81,9 @@ const Asignar = () => {
                 return (
                 <tr className="p-0 fw-bold" style={{maxHeight:"10px", fontSize:"0.8em"}}>
                   <td className="text-center">{index + 1}</td>
-                  <td className="text-center"><span>{item.fecha}</span></td>
-                  <td className="p-2">{item.imei}</td>
-                  <td className="text-center">{item.tecnico}</td>
+                  <td className="text-center"><span>{item.fecha_asignacion.toLocaleString("en-GB")}</span></td>
+                  <td className="p-2">{item.serie}</td>
+                  <td className="text-center">{item.tecnico_id.toString()}</td>
                   <td className="text-center p-1"><span className="badge bg-warning fs-6 ">{item.estado}</span></td>
                   <td className="text-center"><button type="button" className="btn-close btn-sm" aria-label="Close" onClick={() => actions.asignacionEliminar(index)}></button></td>
                 </tr>)
@@ -79,7 +93,9 @@ const Asignar = () => {
               <td className="text-center">{id}</td>
               <td className="text-center"><span>{actions.fecha()}</span></td>
               {store.asignado ?
-                <td className="p-1"><InputMask  mask="99999999999999999999999" maskChar={""} className="form-control form-control-sm m-0"  value={store.asignarImei} onChange={e => actions.asignarImei(e.target.value)} onKeyDown={e => actions.itemAsignacion(actions.fecha(), e.target.value, tecnico, e.key)}></InputMask></td> :
+                <td className="p-1"><InputMask  mask="99999999999999999999999" maskChar={""} className="form-control form-control-sm m-0"  value={store.asignarImei} onChange={e => actions.asignarImei(e.target.value)} onKeyDown={e => actions.itemAsignacion(actions.fecha(), e.target.value, tecnico, e.key)}></InputMask>
+                {store.asignacionSerieValida?<></>:<span className="text-danger">Ingresar una serie valida o valide que no este duplicada</span>}
+                </td> :
                 <td className="p-1 "><input className="form-control form-control-sm m-0 " disabled ></input></td>
               }
               <td className="text-center">{tecnico}</td>

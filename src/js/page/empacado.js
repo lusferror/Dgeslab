@@ -13,7 +13,7 @@ const Empacado = () => {
   const [checked, setChecked] = useState(true)
   const check = () => {
     checked ? setChecked(false) : setChecked(true)
-    hola.Prueba.setSerie()
+    hola.Prueba.setSerie()  
   }
   return (
     <>
@@ -21,8 +21,7 @@ const Empacado = () => {
         <div className="container">
           <div className=" row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <div className="col me-5 mb-5">
-              <h1 className="">Empacado </h1>
-              <h1>{empacado.serie}</h1>
+              <h1 className="">Empacado </h1>              
             </div>
           </div>
 
@@ -56,27 +55,27 @@ const Empacado = () => {
                     </td>
                     <td>{item.tipoEmpaque}</td>
                     <td><span>{item.fechaEmpacado}</span></td>
-                    <td><span>tecnico</span></td>
+                    <td><span>{sessionStorage.getItem("id")}</span></td>
                   </tr>)
                 }
                 )
               }
               <tr>
-                <td>1</td>
-                <td><InputMask mask={"999999999999999"} maskChar="" size={15} className="form-control style-none" id="inputPassword2" placeholder="1234" value={empacado.serie} onChange={e => actions.agregarSerieEmpacado(e.target.value)}
+                <td></td>
+                <td><InputMask mask={"999999999999999"} maskChar="" size={15} className="form-control style-none" id="inputPassword2" placeholder="N° de serie" value={empacado.serie} onChange={e => actions.agregarSerieEmpacado(e.target.value)}
                   onKeyDown={(e) => { actions.obtenerDatosSerieEmpacado(e.key) }} />
                 </td>
-                <td>1234</td>
+                <td></td>
                 <td>{empacado.denominacion}</td>
-                <td><input className="form-check-input" type="checkbox" value={empacado.empacado} id="flexCheckChecked" onClick={e => actions.agregarEmpacadoEmpacado(e.target.value)} defaultChecked /></td>
-                <td><select className="form-select" aria-label="Default select example" defaultValue={"Caja Seminuevo"}>
+                <td><input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={e => actions.agregarEmpacadoEmpacado(e.target.value)} defaultChecked /></td>
+                <td><select className="form-select" aria-label="Default select example" defaultValue={"Seleccione el tipo de empaque"}>
                   <option >Seleccione el tipo de empaque</option>
                   <option value="Caja Seminuevo" >Caja Seminuevo</option>
                   <option value="Caja seguro">Caja seguro</option>
                   <option value="Bolsa Burbuja">Bolsa Burbuja</option>
                 </select></td>
-                <td><span>12/12/2022</span></td>
-                <td><span>tecnico</span></td>
+                <td><span></span></td>
+                <td><span>{sessionStorage.getItem("id")}</span></td>
               </tr>
             </tbody>
           </table>

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link , useNavigate} from "react-router-dom";
-import Inicio from "../page/inicio";
 import { Context } from "../store/appContext";
+import logo from "../../img/logo.png"
 
 export const Navbar = ({contenido}) => {
     const {actions, store} = useContext(Context);
@@ -18,11 +18,11 @@ export const Navbar = ({contenido}) => {
         <div className="sb-nav-fixed">
             <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark w-100">
                 <div className="col-1 me-5 pt-2">
-                    <Link to={session=="true"?"/":"/login"} className="navbar-brand ps-3 fs-3 ">Dgeslab</Link>
+                    <Link to={session=="true"?"/":"/login"} className="navbar-brand ps-3 fs-3 "><img className="rounded-circle w-25 mb-1 me-3" src={logo}></img>Dgeslab</Link>
                 </div>
                 {session=="true"?
                 <div className="col ms-4">
-                    <button className="btn btn-link btn-sm order-1 order-lg-0 mt-2 mb-2 me-lg-0 ms-2 border border-secondary" onClick={()=>actions.barraLateral()} id="sidebarToggle"><i className="fas fa-bars"></i></button>
+                    <button className="btn btn-link btn-sm order-1 order-lg-0 mt-2 mb-2 me-lg-0 ms-2 border-0 border-secondary" onClick={()=>actions.barraLateral()} id="sidebarToggle"><i className="fas fa-bars"></i></button>
                 </div>:
                 <></>
                 }
@@ -33,8 +33,9 @@ export const Navbar = ({contenido}) => {
                                     <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
                                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         {/* <li><a className="dropdown-item" href="#!">Perfil</a></li>
-                                        <li><a className="dropdown-item" href="#!">Ajustes</a></li>
-                                        <li><hr className="dropdown-divider" /></li> */}
+                                        <li><a className="dropdown-item" href="#!">Ajustes</a></li>*/}
+                                        <li><a className="dropdown-item">{sessionStorage.getItem("user")}</a></li>
+                                        <li><hr className="dropdown-divider" /></li> 
                                         <li><Link to="/login" className="dropdown-item" onClick={()=>salida()}>Logout</Link></li>
                                     </ul>
                                 </>
@@ -61,20 +62,20 @@ export const Navbar = ({contenido}) => {
                                 </a>
                                 <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" >
                                     <nav className="sb-sidenav-menu-nested nav">
-                                        <Link to='/Verificacion' className="nav-link" href="/">Aprobar Equipos</Link>
+                                        <Link to='/verificacion' className="nav-link" >Verificacion</Link>
+                                        <Link to='/aprobacion' className="nav-link" >Aprobar Equipos</Link>
                                         <Link to='/Procesamiento' className="nav-link" >Móviles</Link>
                                         <Link to='/empacado' className="nav-link" >Empacado</Link>
                                         <Link to='/embalaje' className="nav-link" >Embalado</Link>
                                     </nav>
                                 </div>
-                                {parseInt(sessionStorage.getItem("rol")) == 1 ? 
+                                {parseInt(sessionStorage.getItem("rol")) == 1 ?<>
                                 <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                                     <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
                                     Supervisor
                                     <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                                </a>:
-                                 <></>                                
-                                }
+                                </a>
+                                
                                 <div className="collapse" id="collapsePages" aria-labelledby="headingTwo" >
                                     <nav className="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                         
@@ -106,6 +107,9 @@ export const Navbar = ({contenido}) => {
                                         </Link>
                                     </nav>
                                 </div>
+                                </>:
+                                 <></>                                
+                                }
                                 <div className="sb-sidenav-menu-heading text-warning fst-italic">Utilidad</div>
                                 <a className="nav-link" href="#">
                                     <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
@@ -118,7 +122,8 @@ export const Navbar = ({contenido}) => {
                                 </a>
                                 <div className="collapse" id="Registros" aria-labelledby="headingOne" >
                                     <nav className="sb-sidenav-menu-nested nav">
-                                        <Link to='/Verificacion' className="nav-link" href="/">Aprobar Equipos</Link>
+                                        <Link to="/tablaRecepcion" className="nav-link">Recepcion</Link>
+                                        <Link to='/tablaAsignacion' className="nav-link" >Asignaciones</Link>
                                         <Link to='/Procesamiento' className="nav-link" >Móviles</Link>
                                         <Link to="/empacadoTabla" className="nav-link" >Empacado</Link>
                                         <Link to='/embalaje' className="nav-link" >Embalado</Link>
@@ -128,8 +133,8 @@ export const Navbar = ({contenido}) => {
                             </div>
                         </div>
                         <div className="sb-sidenav-footer">
-                            <div className="small">Usuario:</div>
-                            {sessionStorage.getItem("user")}
+                            <div className="small">Peril Trabajador:</div>
+                            {sessionStorage.getItem("rol_name")}
                         </div>
                     </nav>
                 </div>

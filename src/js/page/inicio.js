@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import dgeslab from "../../img/dgeslab.png";
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { Spinner } from "../components/sppiner.jsx";
 
 const Inicio = () => {
     const {store, actions} = useContext(Context)
     const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+    // const [spinner,setSpinner] = useState(false)
     const history = useNavigate()
     // -------------------------- validacion de sesión-------------------------------------------
     actions.inicioLogin()
@@ -46,13 +48,16 @@ const Inicio = () => {
                                     <Link to="/recupera" className="text-primary float-end m-1" style={{ fontSize: "60%" }} >Recuperar Contraseña?</Link>
                                 </div>
                                 <div className="text-center mb-3 mt-5">
-                                    <button type="submit" className="btn btn-primary w-100 mb-4">Ingresar</button>
+                                    <button type="submit" className="btn btn-primary w-100 mb-4" >Ingresar</button>
                                     {store.alertLogin?
                                     <div className="alert alert-danger " role="alert">
                                         Usuario o Contraseña incorrectos
                                     </div>:
                                     <></>}
-                                    
+                                    {store.spinnerLogin?
+                                    <Spinner/>:
+                                    <></>
+                                    }
                                 </div>
                             </form>
                         </div>
