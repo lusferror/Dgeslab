@@ -74,7 +74,8 @@ const Empacado = () => {
                   <option value="Caja seguro">Caja seguro</option>
                   <option value="Bolsa Burbuja">Bolsa Burbuja</option>
                 </select></td>
-                <td><span></span></td>
+                {/* Borrar Prueba */}
+                <td>Prueba<span></span></td> 
                 <td><span>{sessionStorage.getItem("id")}</span></td>
               </tr>
             </tbody>
