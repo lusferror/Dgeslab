@@ -5,6 +5,7 @@ import { Context } from "../store/appContext.js";
 import Barra from "../components/simpleBarChart.jsx";
 import BarResponsive from "../components/simpleBarResponsive.jsx";
 import {PieExample} from "../components/simplePieChart.jsx";
+import {Torta} from "../components/simpleRadialBarChart.jsx";
 
 const Home = ()=>{
     const {store, actions} = useContext(Context)
@@ -30,7 +31,7 @@ const Home = ()=>{
                             </div>
                         </div>
                     </div>
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center mx-auto" style={{maxHeight:"50vh", maxWidth:"85vw"}}>
                 <div className="row col border border-2 border-info d-flex justify-content-center p-3 me-2" style={{borderRadius:"10px"}}>
                     <Barra className="" />
                     <div className="text-secondary row"><strong> Grafica Mensual</strong></div>
@@ -38,8 +39,9 @@ const Home = ()=>{
                 <div className="row-sm col border border-2 border-info d-flex justify-content-center p-3" style={{borderRadius:"10px"}}>
                     <PieExample/>
                 </div>
-                <div className="row-sm col border border-2 border-info d-flex justify-content-center p-3 ms-2" style={{borderRadius:"10px"}}>
-                    <BarResponsive/>
+                <div className="row-sm col border border-2 border-info   ms-2" style={{borderRadius:"10px"}}>
+                    <Torta className="row"/>
+                    <div className="row ms-3 text-secondary fw-bold">Estado de los Equipos</div>
                 </div>
             </div>
         </div>
