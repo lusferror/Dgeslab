@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -6,7 +6,9 @@ import { Context } from "../store/appContext";
 const Usuarios = () => {
   const { store, actions } = useContext(Context)
   //-----------------------funcion de autenticacion-----------------------------------
-  actions.usuario()
+  useEffect(() => {
+    actions.usuario()
+  },[])
   // ----------------------------------------------------------------------------------
   console.log(store.usuarios)
   const {usuarios} = store
