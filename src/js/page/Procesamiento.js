@@ -104,6 +104,66 @@ const Procesamiento = () => {
           <tbody>
                 {store.registrosRevisionMovil.map((item,index)=>{
                   // console.log('Entro a registrosRevisionMovil')
+                          if(sessionStorage.getItem("rol")=="1"){
+                            return(
+                              <tr key={index}>
+                                          <td>{index+1}</td>
+                                          <td>{item.serie}</td>
+                                          <td>{item.denominacion}</td>
+                                          <td>{item.material}</td>
+                                          <td>{item.nom_tecnico}</td>
+                                          <td>{item.fecha_asignacion}</td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.encendido} onChange={()=>actions.check(index)} checked={item.encendido} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.frontal} onChange={()=>actions.check(index)} checked={item.frontal} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.frontal_r} onChange={()=>actions.check(index)} checked={item.frontal_r} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.trasera} onChange={()=>actions.check(index)} checked={item.trasera} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.trasera_r} onChange={()=>actions.check(index)} checked={item.trasera_r} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.superior} onChange={()=>actions.check(index)} checked={item.superior} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.superior_r} onChange={()=>actions.check(index)} checked={item.superior_r} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.inferior} onChange={()=>actions.check(index)} checked={item.inferior} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.inferior_r} onChange={()=>actions.check(index)} checked={item.inferior_r} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.izquierdo} onChange={()=>actions.check(index)} checked={item.izquierdo} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.izquierdo_r} onChange={()=>actions.check(index)} checked={item.izquierdo_r} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.derecho} onChange={()=>actions.check(index)} checked={item.derecho} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.derecho_r} onChange={()=>actions.check(index)} checked={item.derecho_r} disabled/> </form></td>
+                                          <td>{item.puntaje_cos}</td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.pantalla} onChange={()=>actions.check(index)} checked={item.pantalla} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.tactil} onChange={()=>actions.check(index)} checked={item.tactil} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.botones} onChange={()=>actions.check(index)} checked={item.botones} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.mic} onChange={()=>actions.check(index)} checked={item.mic} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.audio} onChange={()=>actions.check(index)} checked={item.audio} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.bateria} onChange={()=>actions.check(index)} checked={item.bateria} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.conector_c} onChange={()=>actions.check(index)} checked={item.conector_c} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.bluetooth} onChange={()=>actions.check(index)} checked={item.bluetooth} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.wifi} onChange={()=>actions.check(index)} checked={item.wifi} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.zona_w} onChange={()=>actions.check(index)} checked={item.zona_w} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.nfc} onChange={()=>actions.check(index)} checked={item.nfc} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.conector_a} onChange={()=>actions.check(index)} checked={item.conector_a} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.porta_sim} onChange={()=>actions.check(index)} checked={item.porta_sim} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.filtracion} onChange={()=>actions.check(index)} checked={item.filtracion} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.llamadas_e} onChange={()=>actions.check(index)} checked={item.llamadas_e} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.llamadas_r} onChange={()=>actions.check(index)} checked={item.llamadas_r} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.msj_e} onChange={()=>actions.check(index)} checked={item.msj_e} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.msj_r} onChange={()=>actions.check(index)} checked={item.msj_r} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.foto_f} onChange={()=>actions.check(index)} checked={item.foto_f} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.foto_t} onChange={()=>actions.check(index)} checked={item.foto_t} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.video_f} onChange={()=>actions.check(index)} checked={item.video_f} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.video_t} onChange={()=>actions.check(index)} checked={item.video_t} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.sen_proximidad} onChange={()=>actions.check(index)} checked={item.sen_proximidad} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.vibrador} onChange={()=>actions.check(index)} checked={item.vibrador} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.puntaje_tec} onChange={()=>actions.check(index)} checked={item.puntaje_tec} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.bloqueo} onChange={()=>actions.check(index)} checked={item.bloqueo} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.act_sw} onChange={()=>actions.check(index)} checked={item.act_sw} disabled/> </form></td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.restauracion} onChange={()=>actions.check(index)} checked={item.restauracion} disabled/> </form></td>
+                                          <td>{item.fecha_rev}</td>
+                                          <td>{item.clasificacion}</td>
+                                          <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.ert} onChange={()=>actions.check(index)} checked={item.ert} disabled/> </form></td>
+                                          <td>{item.observaciones}</td>
+                                      </tr>
+                            )
+                          }
+                          else{
+                            if(item.nom_tecnico==sessionStorage.getItem("user")){
                               return( <tr key={index}>
                                           <td>{index+1}</td>
                                           <td>{item.serie}</td>
@@ -158,7 +218,9 @@ const Procesamiento = () => {
                                           <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={item.ert} onChange={()=>actions.check(index)} checked={item.ert} disabled/> </form></td>
                                           <td>{item.observaciones}</td>
                                       </tr>
-                                    )
+                                    )}
+                          }
+                              
                               }
                               )
                 }
