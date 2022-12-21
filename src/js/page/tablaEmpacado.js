@@ -1,6 +1,7 @@
 import { Action } from "@remix-run/router";
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 export const TablaEmpacado = () => {
     const {store,actions} = useContext(Context)
@@ -11,11 +12,14 @@ export const TablaEmpacado = () => {
     // -------------------------------------------------------------------------------------------------------------
     return (
         <div className="p-xxl-5">
-            <div>
+            <div className="mb-5">
                 <h1>SALIDA</h1>
             </div>
+            <div>
+                <ReactHTMLTableToExcel id="botonExportarExcel" className="btn btn-primary" table="salida" filename="salida" sheet="salida" buttonText="Exportar"/>
+            </div>
             <div className="table-responsive  mt-1">
-                <table className="table table-striped border bg-white">
+                <table className="table table-striped border bg-white" id="salida">
                     <thead>
                         <tr className="bg-dark text-white">
                             <th>#</th>

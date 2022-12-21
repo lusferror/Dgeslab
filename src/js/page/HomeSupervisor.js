@@ -94,7 +94,7 @@ const HomeSupervisor = () => {
                   onChange={(e) => setGuia_desp(e.target.value)}
                 />
                 <span className="input-group-text" id="addon-wrapping">Fecha de Despacho</span>
-                <InputMask mask="99/99/9999" type="text" id="fec_desp" className="form-control" placeholder="Fecha de Despacho" aria-label="Username" aria-describedby="addon-wrapping"
+                <InputMask mask="99/99/9999" value={actions.fecha()} type="text" id="fec_desp" className="form-control" placeholder="Fecha de Despacho" aria-label="Username" aria-describedby="addon-wrapping"
                   onChange={(e) => {setFec_desp(e.target.value);
                   console.log(e.target.value)
                   }} />
@@ -102,7 +102,7 @@ const HomeSupervisor = () => {
             </div>
 
             <div className="col p-0 m-0 ">
-              <button type="button" className="float-end btn btn-primary m-2" onClick={()=>actions.grabarDatos(series,fec_desp,guia_desp)} data-bs-toggle="modal" data-bs-target="#exampleModal">Grabar Datos</button>
+              <button type="button" className="float-end btn btn-primary m-2" onClick={()=>actions.grabarDatos(series,fec_desp,guia_desp,setSeries,setFiltrados)} data-bs-toggle="modal" data-bs-target="#exampleModal">Grabar Datos</button>
             </div>
             <Modal/>
           </div>
@@ -136,7 +136,7 @@ const HomeSupervisor = () => {
                 return (
                   <tr key={index}>
                     <th >{index}</th>
-                    <td>{item.Imei}</td>
+                    <td>{item.serie}</td>
                   </tr>)
               })
             }
