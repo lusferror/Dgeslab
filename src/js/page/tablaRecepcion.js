@@ -20,20 +20,26 @@ const TablaRecepcion = () => {
             </div>
                 
             {/* ---------------------------------------------------------------------------------------------- */}
-            <div className="maxTabla contenedor overflow-auto">
-                <table className="table table-striped">
-                    <thead>
+            <div className="maxTabla contenedor overflow-auto" >
+                <table className="table table-striped table-bordered" >
+                    <thead >
                         <tr className="table-dark">
-                            <th scope="col">#</th>
-                            <th scope="col">DOCUMENTO</th>
-                            <th scope="col">FOLIO</th>
-                            <th scope="col">FECHA DE FOLIO</th>
-                            <th scope="col">MATERIAL</th>
-                            <th scope="col">DENOMINACION</th>
-                            <th scope="col">SERIE</th>
-                            <th scope="col">RUT</th>
-                            <th scope="col">BODEGA DE ORIGEN</th>
-                            <th scope="col">BODEGA DESTINO</th>
+                            <th scope="">#</th>
+                            <th scope="">DOCUMENTO</th>
+                            <th scope="">FOLIO</th>
+                            <th scope="" className="mColumnaG">FECHA DE FOLIO</th>
+                            <th scope="">MATERIAL</th>
+                            <th scope="" className="mColumnaG">DENOMINACION</th>
+                            <th scope="">SERIE</th>
+                            <th scope="">RUT</th>
+                            <th scope="">B. ORIGEN</th>
+                            <th scope="">B. DESTINO</th>
+                            <th scope="" className="mColumnaM">FECHA DE VERIFICACION</th>
+                            <th scope="">RESPONSABLE</th>
+                            <th scope="">TIPO CAJA</th>
+                            <th scope="">NRO CAJA</th>
+                            <th scope="">ESTADO</th>
+                            <th scope="">OBSERVACIONES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,6 +55,17 @@ const TablaRecepcion = () => {
                                     <td>{item.rut}</td>
                                     <td>{item.b_origen}</td>
                                     <td>{item.b_destino}</td>
+                                    <td>{item.f_verificacion}</td>
+                                    <td>{item.responsable_ver}</td>
+                                    <td>{item.tipo_caja}</td>
+                                    <td>{item.nro_caja}</td>
+                                    <td>
+                                    {item.estado=="Pendiente"?
+                                        <span class="badge bg-warning">{item.estado}</span>:
+                                        <span class="badge bg-success">{item.estado}</span>
+                                    }
+                                    </td>
+                                    <td>{item.observaciones}</td>
                                 </tr>
                                 ) 
                                 }

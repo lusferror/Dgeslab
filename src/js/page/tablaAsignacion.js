@@ -29,7 +29,7 @@ const TablaAsignacion = () => {
               <th>#</th>
               <th>FECHA</th>
               <th>IMEI</th>
-              <th>ENTIDAD</th>
+              <th>TECNICO</th>
               <th>CHEQUEO</th>
               <th>APROBACION</th>
 

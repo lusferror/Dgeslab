@@ -125,7 +125,7 @@ export const Navbar = ({contenido}) => {
                                         <Link to="/tablaRecepcion" className="nav-link">Recepcion</Link>
                                         <Link to='/tablaAsignacion' className="nav-link" >Asignaciones</Link>
                                         <Link to='/Procesamiento' className="nav-link" >Móviles</Link>
-                                        <Link to="/empacadoTabla" className="nav-link" >Empacado</Link>
+                                        <Link to="/tablaEmpacado" className="nav-link" >Empacado</Link>
                                         <Link to='/embalaje' className="nav-link" >Embalado</Link>
                                     </nav>
                                 </div>

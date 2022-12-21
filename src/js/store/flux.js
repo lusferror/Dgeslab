@@ -1,14 +1,15 @@
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
-import { agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
+import { cargarTablaEmpacados, guardarEmpacados,limpiarPantallEmpacado, agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
 import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion } from './fRecepcion';
-import { nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion} from './fverificacion'
+import { verificacionGuardar, agregarRegistroVerificacion, onChangeverificacionObservaciones,onChangeVerificacionImei,nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion, limpiarregistrarDocumentoVerificacion} from './fverificacion'
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			// en esta seccion se colocan todos los estados
 			navbar: true,
 			modal: false,
+			modalCargando:"cargando",
 			sesion: false,
 			listaAsignacionFinal: [], // lista de asignacion			
 			asignarTecnico: "",//id del tenico
@@ -19,8 +20,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			usuario: {},
 			usuarios: [],
 			usuarioCreado: null,
+			// ----------------------------------------------------- estados de empacado ------------------------------------
 			empacado: empacado, // importado de la hoja empacado
 			empacadoLista,
+			empacadoSerieValida:true,
+			empacadoRegistros:[],
+			// ------------------------------------------------------ estados recepcion -----------------------------------------
 			modalRecepcion: true,
 			spinnerRecepcion: false,
 			spinnerLogin: false,
@@ -29,9 +34,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			registrosRecepcion: [],
 			listaTecnicosAsigacion: [],
 			asignacionSerieValida: true,
+			// ---------------------------------------------- estados de Modulo Verificacion de Equipos --------------
 			nroCaja:"",
 			registrarDocumentoVerificacion:"",
-			documentoRegistrado:false
+			documentoRegistrado:false,
+			verificacionDocumento:true,
+			verificacionImei:"",
+			verificacionObservaciones:"",
+			varificacionLista:[],
+			verificacionSerieValida:true,
+			verificacionListaSeries:[],
 
 		},
 		actions: {
@@ -71,6 +83,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 				document.body.classList.remove('sb-sidenav-toggled')
 			},
+			// ----------------------------------- Reiniciar Modal Cargando ------------------------------------------------
+			reiniciarModal:()=>setStore({modalCargando:"cargando"}),
+
+			cambiarEstadoModalCargado:(cargando)=>setStore({modalCargando:cargando}),
 			// Funcion que guarda los elementos cargados del excel a un json
 			grabarDatos: (series, fec_desp, guia_desp) => {
 				const { modal } = getStore()
@@ -496,8 +512,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 			agregarSerieEmpacado: (value) => agregarSerieEmpacado(setStore, getStore, value),
-			agregarEmpacadoEmpacado: (value) => agregarEmpacadoEmpacado(setStore, getStore, value),
-			obtenerDatosSerieEmpacado: (key) => obtenerDatosSerieEmpacado(setStore, getStore, key),
+			agregarEmpacadoEmpacado: (value) => agregarEmpacadoEmpacado(setStore, getStore, value,),
+			obtenerDatosSerieEmpacado: (key,empaque,empacado) => obtenerDatosSerieEmpacado(setStore, getStore, key,empaque,empacado),
+			limpiarPantallEmpacado:(setEmpacadoAsignado)=>limpiarPantallEmpacado(setStore,setEmpacadoAsignado),
+			guardarEmpacados:(setEmpacadoAsignado)=>guardarEmpacados(setStore,getStore,setEmpacadoAsignado),
+			cargarTablaEmpacados:()=>cargarTablaEmpacados(setStore),
 
 			//-------------------------------- funciones de recepcion ----------------------------------
 			modalRecepcionEstado: (len, lista, set) => modalRecepcionEstado(setStore, getStore, len, lista, set),
@@ -505,9 +524,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			borrarRegistroRecepcion: (id) => borrarRegistroRecepcion(setStore, getStore, id),
 			// --------------------------------- funciones de verificacion -------------------------------
 			nroCajaVerificacion:()=>nroCajaVerificacion(setStore,getStore),
-			registrarDocumentoVerificacion:()=>registrarDocumentoVerificacion(setStore,getStore),
+			registrarDocumentoVerificacion:(e)=>registrarDocumentoVerificacion(setStore,getStore,e),
 			onChangeDocumentoVerificacion:(e)=>onChangeDocumentoVerificacion(setStore,getStore,e),
-			registrarDocumentoVerificacion:()=>registrarDocumentoVerificacion(setStore,getStore)
+			limpiarregistrarDocumentoVerificacion:()=>limpiarregistrarDocumentoVerificacion(setStore,getStore),
+			onChangeVerificacionImei:(e)=>onChangeVerificacionImei(setStore,getStore,e),
+			onChangeverificacionObservaciones:(e)=>onChangeverificacionObservaciones(setStore,getStore,e),
+			agregarRegistroVerificacion:(imei, tecnico, documento, nro_caja,observaciones, tecla)=>agregarRegistroVerificacion(setStore,getStore,imei, tecnico, documento, nro_caja, observaciones,tecla),
+			verificacionGuardar:()=>verificacionGuardar(setStore,getStore)
 
 		}
 	};
