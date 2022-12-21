@@ -4,49 +4,44 @@ import { useContext } from "react";
 import { Context } from "../store/appContext.js";
 import Barra from "../components/simpleBarChart.jsx";
 import BarResponsive from "../components/simpleBarResponsive.jsx";
-import Pie from "../components/simplePieChart.jsx";
+import {PieExample} from "../components/simplePieChart.jsx";
 
 const Home = ()=>{
     const {store, actions} = useContext(Context)
     actions.inicio()    
     return (
         <div className="ps-3 overflow-auto contenedor">
-            <div className="mb-0 mt-5">
+            <div className="mb-5 mt-4">
                 <h1>Inicio</h1>
             </div>
-            <div className="container d-flex mb-3">
-                <div className="col-6 border border-2 border-info d-flex justify-content-center p-5 me-5 " style={{borderRadius:"10px"}}>
-                    <Barra className="col" />
-                </div>
-                <div className="col-6 border border-2 border-info d-flex justify-content-center p-5" style={{borderRadius:"10px"}}>
-                    <Pie/>
-                </div>
-            </div>
-            <div className="container d-flex">
-                <div className="col-6 border border-2 border-info d-flex justify-content-center p-5 me-5 " style={{borderRadius:"10px"}}>
-                    <BarResponsive/>
-                </div>
-                <div className="col-6 border border-2 border-info d-flex justify-content-center p-5 me-5 " style={{borderRadius:"10px"}}>
-                    <div className="container mt-5">
-                        <div className="row g-2">
-                            <div className="col-6">                            
-                                <div className="p-3" id="UF"></div>
+            <div className=" my-5 border border-2 shadow border-warning p-4 rounded-pill">
+                        <div className="row ">
+                            <div className="col ">                            
+                                <div className="alert alert-primary" id="UF"></div>
                             </div>
-                            <div className="col-6">
-                                <div className="p-3" id="DolarO"></div>
+                            <div className="col">
+                                <div className="alert alert-success" id="DolarO"></div>
                             </div>
-                            <div className="col-6">
-                                <div className="p-3" id="Euro"></div>
+                            <div className="col">
+                                <div className="alert alert-danger" id="Euro"></div>
                             </div>
-                            <div className="col-6">
-                                <div className="p-3" id="UTM"></div>
+                            <div className="col">
+                                <div className="alert alert-warning" id="UTM"></div>
                             </div>
                         </div>
                     </div>
+            <div className="d-flex justify-content-center">
+                <div className="row col border border-2 border-info d-flex justify-content-center p-3 me-2" style={{borderRadius:"10px"}}>
+                    <Barra className="" />
+                    <div className="text-secondary row"><strong> Grafica Mensual</strong></div>
                 </div>
-            <div>
-            </div>        
-        </div>
+                <div className="row-sm col border border-2 border-info d-flex justify-content-center p-3" style={{borderRadius:"10px"}}>
+                    <PieExample/>
+                </div>
+                <div className="row-sm col border border-2 border-info d-flex justify-content-center p-3 ms-2" style={{borderRadius:"10px"}}>
+                    <BarResponsive/>
+                </div>
+            </div>
         </div>
     )
 }

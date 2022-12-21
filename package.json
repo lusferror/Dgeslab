@@ -18,14 +18,17 @@
   },
   "homepage": "https://github.com/lusferror/Degeslab#readme",
   "dependencies": {
+    "chart.js": "^4.1.1",
+    "echarts": "^5.4.1",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.1.0",
     "react-context": "^0.0.3",
     "react-dom": "^18.2.0",
     "react-google-charts": "^4.0.0",
     "react-input-mask": "^2.0.4",
     "react-router": "^6.4.5",
     "react-router-dom": "^6.4.3",
-    "recharts": "^0.22.5",
+    "recharts": "^2.2.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

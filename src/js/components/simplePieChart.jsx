@@ -1,47 +1,89 @@
-import React from "react";
-import { PieChart, Pie, Legend, Tooltip } from "recharts";
+import React, { PureComponent } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const data01 = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-  { name: "Group E", value: 278 },
-  { name: "Group F", value: 189 }
+const data = [
+  {
+    name: 'Tecnico 1',
+    S1: 120,
+    S2: 60,
+    S3: 90,
+    amt: 2400,
+  },
+  {
+    name: 'Tecnico 2',
+    S1: 302,
+    S2: 160,
+    S3: 120,
+    amt: 2210,
+  },
+  {
+    name: 'Tecnico 3',
+    S1: 260,
+    S2: 134,
+    S3: 194,
+    amt: 2290,
+  },
+
 ];
 
-const data02 = [
-  { name: "Group A", value: 2400 },
-  { name: "Group B", value: 4567 },
-  { name: "Group C", value: 1398 },
-  { name: "Group D", value: 9800 },
-  { name: "Group E", value: 3908 },
-  { name: "Group F", value: 4800 }
-];
+export  class PieExample extends PureComponent {
+  static demoUrl = 'https://codesandbox.io/s/customized-legend-event-l19fo';
 
-export default function PieExample() {
-  return (
-    <PieChart width={700} height={400}>
-      <Pie
-        dataKey="value"
-        isAnimationActive={false}
-        data={data01}
-        cx={200}
-        cy={200}
-        outerRadius={80}
-        fill="#8884d8"
-        label
-      />
-      <Pie
-        dataKey="value"
-        data={data02}
-        cx={500}
-        cy={200}
-        innerRadius={40}
-        outerRadius={80}
-        fill="#82ca9d"
-      />
-      <Tooltip />
-    </PieChart>
-  );
+  state = {
+    opacity: {
+      S1: 1,
+      S2: 1,
+      S3: 1
+    },
+  };
+
+  handleMouseEnter = (o) => {
+    const { dataKey } = o;
+    const { opacity } = this.state;
+
+    this.setState({
+      opacity: { ...opacity, [dataKey]: 0.5 },
+    });
+  };
+
+  handleMouseLeave = (o) => {
+    const { dataKey } = o;
+    const { opacity } = this.state;
+
+    this.setState({
+      opacity: { ...opacity, [dataKey]: 1 },
+    });
+  };
+
+  render() {
+    const { opacity } = this.state;
+
+    return (
+      <div style={{ width: '100%' }}>
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} />
+            <Line type="monotone" dataKey="S2" strokeOpacity={opacity.S2} stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Line type="monotone" dataKey="S1" strokeOpacity={opacity.S1} stroke="#82ca9d" />
+            <Line type="monotone" dataKey="S3" strokeOpacity={opacity.S3} stroke="#DB300A" />
+          </LineChart>
+        </ResponsiveContainer>
+        <p className="notes text-secondary fw-bold">Produccion Semanal por Tecnico mes actual</p>
+      </div>
+    );
+  }
 }
