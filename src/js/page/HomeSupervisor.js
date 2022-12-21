@@ -102,7 +102,7 @@ const HomeSupervisor = () => {
             </div>
 
             <div className="col p-0 m-0 ">
-              <button type="button" className="float-end btn btn-primary m-2" onClick={()=>actions.grabarDatos(series,fec_desp,guia_desp)} data-bs-toggle="modal" data-bs-target="#exampleModal">Grabar Datos</button>
+              <button type="button" className="float-end btn btn-primary m-2" onClick={()=>actions.grabarDatos(series,fec_desp,guia_desp,setSeries,setFiltrados)} data-bs-toggle="modal" data-bs-target="#exampleModal">Grabar Datos</button>
             </div>
             <Modal/>
           </div>

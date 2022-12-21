@@ -96,7 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			cambiarEstadoModalCargado:(cargando)=>setStore({modalCargando:cargando}),
 			// Funcion que guarda los elementos cargados del excel a un json
-			grabarDatos: (series, fec_desp, guia_desp) => {
+			grabarDatos: (series, fec_desp, guia_desp,setSeries,setFiltrados) => {
 				const { modal } = getStore()
 				let jsonData = [];
 				let largo = series.length;
@@ -118,6 +118,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (jsonData.length > 0) {
 					setStore({ modal: true });
 					console.log(getStore().modal)
+					setSeries([])
+					setFiltrados([])
+				}
+				else{
+					setStore({ modal: false });
 				}
 
 			},
