@@ -107,14 +107,8 @@ export const Navbar = ({contenido}) => {
                                         </Link>
                                     </nav>
                                 </div>
-                                </>:
-                                 <></>                                
-                                }
+                                
                                 <div className="sb-sidenav-menu-heading text-warning fst-italic">Utilidad</div>
-                                <a className="nav-link" href="#">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
-                                    Rendimiento
-                                </a>
                                 <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#Registros" aria-expanded="true" aria-controls="collapseLayouts">
                                     <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
                                     Registros
@@ -124,12 +118,13 @@ export const Navbar = ({contenido}) => {
                                     <nav className="sb-sidenav-menu-nested nav">
                                         <Link to="/tablaRecepcion" className="nav-link">Recepcion</Link>
                                         <Link to='/tablaAsignacion' className="nav-link" >Asignaciones</Link>
-                                        <Link to='/Procesamiento' className="nav-link" >Móviles</Link>
-                                        <Link to="/tablaEmpacado" className="nav-link" >Empacado</Link>
-                                        <Link to='/embalaje' className="nav-link" >Embalado</Link>
+                                        <Link to='/tablaMoviles' className="nav-link" >Móviles</Link>
+                                        <Link to="/tablaEmpacado" className="nav-link" >Salida</Link>
                                     </nav>
                                 </div>
-                                
+                                </>:
+                                 <></>                                
+                                }   
                             </div>
                         </div>
                         <div className="sb-sidenav-footer">

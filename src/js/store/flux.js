@@ -1,7 +1,10 @@
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
+// import { agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
+import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion, registrosRevisionMovil, revisionMovil, obtenerDatosSerieRevisionMovil, agregarSerieRevisionMovil } from './fRecepcion';
+// import { nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion} from './fverificacion'
 import { cargarTablaEmpacados, guardarEmpacados,limpiarPantallEmpacado, agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
-import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion } from './fRecepcion';
+// import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion } from './fRecepcion';
 import { verificacionGuardar, agregarRegistroVerificacion, onChangeverificacionObservaciones,onChangeVerificacionImei,nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion, limpiarregistrarDocumentoVerificacion} from './fverificacion'
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -37,6 +40,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// ---------------------------------------------- estados de Modulo Verificacion de Equipos --------------
 			nroCaja:"",
 			registrarDocumentoVerificacion:"",
+			documentoRegistrado:false,
+			registrosRevisionMovil:[],
+			revisionMovil:revisionMovil,
 			documentoRegistrado:false,
 			verificacionDocumento:true,
 			verificacionImei:"",
@@ -79,7 +85,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					alerLogin: false, // indica la alerta de login incorrecto
 					registrosRecepcion: [],
 					listaTecnicosAsigacion: [],
-					asignacionSerieValida: true
+					asignacionSerieValida: true,
+					registrosRevisionMovil:[],
+					revisionMovil:revisionMovil
 				});
 				document.body.classList.remove('sb-sidenav-toggled')
 			},
@@ -512,6 +520,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 			agregarSerieEmpacado: (value) => agregarSerieEmpacado(setStore, getStore, value),
+			agregarEmpacadoEmpacado: (value) => agregarEmpacadoEmpacado(setStore, getStore, value),
+			obtenerDatosSerieEmpacado: (key) => obtenerDatosSerieEmpacado(setStore, getStore, key),
+			obtenerDatosSerieRevisionMovil: (key) => obtenerDatosSerieRevisionMovil(setStore, getStore, key),
+			agregarSerieRevisionMovil: (value) => agregarSerieRevisionMovil(setStore, getStore, value),
 			agregarEmpacadoEmpacado: (value) => agregarEmpacadoEmpacado(setStore, getStore, value,),
 			obtenerDatosSerieEmpacado: (key,empaque,empacado) => obtenerDatosSerieEmpacado(setStore, getStore, key,empaque,empacado),
 			limpiarPantallEmpacado:(setEmpacadoAsignado)=>limpiarPantallEmpacado(setStore,setEmpacadoAsignado),
@@ -526,6 +538,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			nroCajaVerificacion:()=>nroCajaVerificacion(setStore,getStore),
 			registrarDocumentoVerificacion:(e)=>registrarDocumentoVerificacion(setStore,getStore,e),
 			onChangeDocumentoVerificacion:(e)=>onChangeDocumentoVerificacion(setStore,getStore,e),
+			registrarDocumentoVerificacion:()=>registrarDocumentoVerificacion(setStore,getStore),
+			//registrosRevisionMovil
+			registrosRevisionMovil:()=>registrosRevisionMovil(setStore,getStore),
 			limpiarregistrarDocumentoVerificacion:()=>limpiarregistrarDocumentoVerificacion(setStore,getStore),
 			onChangeVerificacionImei:(e)=>onChangeVerificacionImei(setStore,getStore,e),
 			onChangeverificacionObservaciones:(e)=>onChangeverificacionObservaciones(setStore,getStore,e),

@@ -22,7 +22,7 @@ const TablaAsignacion = () => {
         </div>
       </div>
       
-      <div className="table-responsive">
+      <div className="table-responsive maxTabla overflow-auto contenedor">
         <table className="table table-striped border bg-white">
           <thead>
             <tr className="bg-dark text-white">

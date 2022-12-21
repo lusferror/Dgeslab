@@ -7,11 +7,12 @@ export const TablaEmpacado = () => {
     // ---------------------------------------- Autenticacion ------------------------------------------------------
     actions.inicio()
     actions.cargarTablaEmpacados()
+    console.log(store.empacadoRegistros)
     // -------------------------------------------------------------------------------------------------------------
     return (
         <div className="p-xxl-5">
             <div>
-                <h1>Empacado</h1>
+                <h1>SALIDA</h1>
             </div>
             <div className="table-responsive  mt-1">
                 <table className="table table-striped border bg-white">
@@ -25,6 +26,13 @@ export const TablaEmpacado = () => {
                             <th>TIPO EMPAQUE</th>
                             <th>FECHA EMPACADO</th>
                             <th>RESPONSABLE</th>
+                            <th>FECHA EMBALAJE</th>
+                            <th>TIPO CAJA</th>
+                            <th>NRO CAJA</th>
+                            <th>DOCUMENTO</th>
+                            <th>FECHA DOCUMENTO</th>
+                            <th>GUIA DESPACHO</th>
+                            <th>FECHA DESPACHO</th>
 
                         </tr>
                     </thead>
@@ -42,6 +50,14 @@ export const TablaEmpacado = () => {
                                     <td>{item.tipoEmpaque}</td>
                                     <td><span>{item.fechaEmpacado}</span></td>
                                     <td><span>{item.responsable}</span></td>
+                                    <td>{item.fecha_embalaje}</td>
+                                    <td>{item.tipo_caja}</td>
+                                    <td>{item.nro_caja}</td>
+                                    <td>{item.documento}</td>
+                                    <td>{item.fecha_documento}</td>
+                                    <td>{item.guia_despacho}</td>
+                                    <td>{item.echa_despacho_fisico}</td>
+                                    
                                 </tr>)
                         }
                         )

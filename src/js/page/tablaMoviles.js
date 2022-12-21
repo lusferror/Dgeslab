@@ -1,11 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { ModalEquiposPendientes } from "../components/modalEquiposPendientes.jsx";
-import { ModalReporteRevision } from "../components/modalReporteRevision.jsx";
 import { Context } from "../store/appContext";
-import InputMask from "react-input-mask"
 
-const Procesamiento = () => {
+const TablaMoviles = () => {
   const { actions, store } = useContext(Context)
   const { revisionMovil } = store
   // -------------------------validacion de sesion--------------------------------------
@@ -22,15 +18,7 @@ const Procesamiento = () => {
           </div>
         </div>
       </div>
-      <div className="mt-5">
-        <div className="btn-group mb-3 col-xxl-4 col-lg-8 shadow-lg" role="group" aria-label="Basic example">
-          <button type="button" className="border-0 col-4 btn btn-primary" id="marcarTodo" data-bs-toggle="modal" data-bs-target="#equiposPendientesModal">Equipos Pendientes</button>
-          <button type="button" className="mx-1 border-0 col-4 btn btn-success" id="Guardar">Guardar</button>
-          <button type="button" className="border-0 col-4  btn btn-primary" data-bs-toggle="modal" data-bs-target="#reporte">Reporte</button>
-        </div>
-      </div>
-      <ModalEquiposPendientes/>
-      <ModalReporteRevision/>
+     
       <div className="table-responsive  contenedor overflow-auto maxTabla">
         <table className="table table-striped table-bordered bg-white ">
           <thead>
@@ -162,64 +150,7 @@ const Procesamiento = () => {
                               }
                               )
                 }
-              <tr>
-                <td>{store.registrosRevisionMovil.length + 1}</td>
-                <td><InputMask mask={"999999999999999"} maskChar="" size={15} className="form-control style-none" id="inputPassword2" placeholder="Serie" value={revisionMovil.serie}  onChange={e => actions.agregarSerieRevisionMovil(e.target.value)}
-                  onKeyDown={(e) => { actions.obtenerDatosSerieRevisionMovil(e.key) }} />
-                </td>
-                <td>{revisionMovil.denominacion}</td>
-                <td>{revisionMovil.material}</td>
-                <td>{revisionMovil.nom_tecnico}</td>
-                <td>{revisionMovil.fecha_asignacion}</td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.encendido} onChange={()=>actions.check(index)} checked={revisionMovil.encendido}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.frontal} onChange={()=>actions.check(index)} checked={revisionMovil.frontal}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.frontal_r} onChange={()=>actions.check(index)} checked={revisionMovil.frontal_r}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.trasera} onChange={()=>actions.check(index)} checked={revisionMovil.trasera}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.trasera_r} onChange={()=>actions.check(index)} checked={revisionMovil.trasera_r}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.superior} onChange={()=>actions.check(index)} checked={revisionMovil.superior}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.superior_r} onChange={()=>actions.check(index)} checked={revisionMovil.superior_r}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.inferior} onChange={()=>actions.check(index)} checked={revisionMovil.inferior}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.inferior_r} onChange={()=>actions.check(index)} checked={revisionMovil.inferior_r}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.izquierdo} onChange={()=>actions.check(index)} checked={revisionMovil.izquierdo}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.izquierdo_r} onChange={()=>actions.check(index)} checked={revisionMovil.izquierdo_r}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.derecho} onChange={()=>actions.check(index)} checked={revisionMovil.derecho}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.derecho_r} onChange={()=>actions.check(index)} checked={revisionMovil.derecho_r}/> </form></td>
-                <td>{revisionMovil.puntaje_cos}</td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.pantalla} onChange={()=>actions.check(index)} checked={revisionMovil.pantalla}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.tactil} onChange={()=>actions.check(index)} checked={revisionMovil.tactil}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.botones} onChange={()=>actions.check(index)} checked={revisionMovil.botones}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.mic} onChange={()=>actions.check(index)} checked={revisionMovil.mic}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.audio} onChange={()=>actions.check(index)} checked={revisionMovil.audio}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.bateria} onChange={()=>actions.check(index)} checked={revisionMovil.bateria}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.conector_c} onChange={()=>actions.check(index)} checked={revisionMovil.conector_c}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.bluetooth} onChange={()=>actions.check(index)} checked={revisionMovil.bluetooth}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.wifi} onChange={()=>actions.check(index)} checked={revisionMovil.wifi}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.zona_w} onChange={()=>actions.check(index)} checked={revisionMovil.zona_w}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.nfc} onChange={()=>actions.check(index)} checked={revisionMovil.nfc}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.conector_a} onChange={()=>actions.check(index)} checked={revisionMovil.conector_a} disabled/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.porta_sim} onChange={()=>actions.check(index)} checked={revisionMovil.porta_sim}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.filtracion} onChange={()=>actions.check(index)} checked={revisionMovil.filtracion}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.llamadas_e} onChange={()=>actions.check(index)} checked={revisionMovil.llamadas_e}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.llamadas_r} onChange={()=>actions.check(index)} checked={revisionMovil.llamadas_r}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.msj_e} onChange={()=>actions.check(index)} checked={revisionMovil.msj_e}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.msj_r} onChange={()=>actions.check(index)} checked={revisionMovil.msj_r}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.foto_f} onChange={()=>actions.check(index)} checked={revisionMovil.foto_f}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.foto_t} onChange={()=>actions.check(index)} checked={revisionMovil.foto_t}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.video_f} onChange={()=>actions.check(index)} checked={revisionMovil.video_f}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.video_t} onChange={()=>actions.check(index)} checked={revisionMovil.video_t}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.sen_proximidad} onChange={()=>actions.check(index)} checked={revisionMovil.sen_proximidad}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.vibrador} onChange={()=>actions.check(index)} checked={revisionMovil.vibrador}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.puntaje_tec} onChange={()=>actions.check(index)} checked={revisionMovil.puntaje_tec}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.bloqueo} onChange={()=>actions.check(index)} checked={revisionMovil.bloqueo}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.act_sw} onChange={()=>actions.check(index)} checked={revisionMovil.act_sw}/> </form></td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.restauracion} onChange={()=>actions.check(index)} checked={revisionMovil.restauracion}/> </form></td>
-                <td>{revisionMovil.fecha_rev}</td>
-                <td>{revisionMovil.clasificacion}</td>
-                <td><form name="f1" id="formElement"><input type="checkbox" name="ch1" value={revisionMovil.ert} onChange={()=>actions.check(index)} checked={revisionMovil.ert}/> </form></td>
-                <td></td>
-              </tr>
-
-
+            
           </tbody>
         </table>
       </div>
@@ -228,4 +159,4 @@ const Procesamiento = () => {
   )
 }
 
-export default Procesamiento;
+export default TablaMoviles;
