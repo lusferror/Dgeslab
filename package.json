@@ -25,6 +25,7 @@
     "react-context": "^0.0.3",
     "react-dom": "^18.2.0",
     "react-google-charts": "^4.0.0",
+    "react-html-table-to-excel": "^2.0.0",
     "react-input-mask": "^2.0.4",
     "react-router": "^6.4.5",
     "react-router-dom": "^6.4.3",
