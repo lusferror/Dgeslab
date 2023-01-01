@@ -9,6 +9,8 @@ import { verificacionGuardar, agregarRegistroVerificacion, onChangeverificacionO
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			// direccion ip
+			ip:'http://127.0.0.1:3100',
 			// en esta seccion se colocan todos los estados
 			navbar: true,
 			modal: false,
@@ -132,7 +134,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//-------------------funcion para iniciar sesión------------------------------
 			ingreso: (email, password, history) => {
 				setStore({ spinnerLogin: true })
-				fetch('http://127.0.0.1:3100/login', {
+				fetch(getStore().ip+'/login', {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
