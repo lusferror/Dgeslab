@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export function nroCajaVerificacion(set, get) {
     useEffect(() => {
-        fetch(getStore().ip+'/nroCajaVerificacion', {
+        fetch(get().ip+'/nroCajaVerificacion', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem("token")}`,
