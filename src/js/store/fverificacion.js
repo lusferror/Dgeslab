@@ -25,7 +25,7 @@ export function nroCajaVerificacion(set, get) {
 
 export function registrarDocumentoVerificacion(set, get, e) {
     e.preventDefault()
-    fetch(getStore().ip+'/nroDocumento', {
+    fetch(get().ip+'/nroDocumento', {
         method: 'POST',
         headers: {
             "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -118,7 +118,7 @@ export function agregarRegistroVerificacion(setStore,getStore,imei, tecnico, doc
 }
 
 export const verificacionGuardar=(set,get)=>{
-    fetch(getStore().ip+'/guardarVerficacionRecepcion',{
+    fetch(get().ip+'/guardarVerficacionRecepcion',{
         method:'PUT',
         headers:{
             'Authorization':`Bearer ${sessionStorage.getItem("token")}`,
