@@ -77,7 +77,6 @@ module.exports = {
         stats: 'errors-only',
         https: true,
         key: './path_to_pemfile.pem',
-        cert: './path_to_pemfile.pem',
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
