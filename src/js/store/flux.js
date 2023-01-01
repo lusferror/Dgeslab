@@ -10,7 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			// direccion ip
-			ip:'http://127.0.0.1:3100',
+			ip:'http://34.136.77.203:3100',
 			// en esta seccion se colocan todos los estados
 			navbar: true,
 			modal: false,
@@ -178,7 +178,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						history('/login')
 					}
 					else {
-						fetch('http://127.0.0.1:3100/private', {
+						fetch(getStore().ip+'/private', {
 							method: 'GET',
 							headers: {
 								"Authorization": `Bearer ${sessionStorage.getItem("token")}`
@@ -221,7 +221,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			//-------------------funcion para crear usuario------------------------------
 			crearUsuario: (name, second_name, last_name, second_last_name, email, rut, password, role_id, history) => {
-				fetch('http://127.0.0.1:3100/register', {
+				fetch(getStore().ip+'/register', {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
@@ -262,7 +262,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			usuario: () => {
 				useEffect(() => {
 
-					fetch('http://127.0.0.1:3100/user', {
+					fetch(getStore().ip+'/user', {
 						method: 'GET',
 						headers: {
 							// "Authorization": `Bearer ${getStore().token}`,
@@ -292,7 +292,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//------------------------ lista de tecnicos ----------------------------------------------------------------
 			listaTecnicosAsignacion: () => {
 				useEffect(() => {
-					fetch('http://127.0.0.1:3100/asignacionUsers', {
+					fetch(getStore().ip+'/asignacionUsers', {
 						method: 'GET',
 						headers: {
 							"Authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -344,7 +344,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					}
 					if(duplicado==false){
-					fetch('http://127.0.0.1:3100/serieAsignacion', {
+					fetch(getStore().ip+'/serieAsignacion', {
 						method: 'POST',
 						headers: {
 							"Authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -404,7 +404,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const { listaAsignacion } = getStore()
 				setStore({ listaAsignacionFinal: [...listaAsignacion] })
 				setStore({ listaAsignacion: [], asignado: false })
-				fetch('http://127.0.0.1:3100/asignacionGuardar',{
+				fetch(getStore().ip+'/asignacionGuardar',{
 					method:'POST',
 					headers:{
 						"Authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -422,7 +422,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// ----------------------------------- listado de arobacion --------------------------------------
 			registrosAprobacion:()=>{
 				useEffect(()=>{
-					fetch('http://127.0.0.1:3100/listaAprobacion',{
+					fetch(getStore().ip+'/listaAprobacion',{
 						method:'POST',
 						headers:{
 							'Authorization': `Bearer ${sessionStorage.getItem("token")}`,
@@ -481,7 +481,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				setStore({ listaAsignacionFinal: [...lista] })
 				// console.log("lista aprobada: ",listaUpdate)
-				fetch('http://127.0.0.1:3100/aprobarAsignacion',{
+				fetch(getStore().ip+'/aprobarAsignacion',{
 					method:'PUT',
 					headers:{
 						"Authorization":`Bearer ${sessionStorage.getItem("token")}`,
