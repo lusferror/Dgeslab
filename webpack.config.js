@@ -74,24 +74,6 @@ module.exports = {
         client: {
             webSocketURL: publicUrl
         },
-        stats: 'errors-only',
-        https: true,
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        },
-        port: 9092,
-        host: 'broker-gateway-webpack.firstbanco.dev'
     },
-    module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-              loader: "babel-loader"
-            }
-          }
-        ]
-      }
 
 };
