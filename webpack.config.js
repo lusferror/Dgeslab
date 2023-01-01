@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const  {SourceMapDevToolPlugin}  = require("webpack");
+const { SourceMapDevToolPlugin } = require("webpack");
 
 const port = 3000;
 let publicUrl = `ws://localhost:${port}/ws`;
@@ -26,50 +26,42 @@ module.exports = {
                     options: {
                         presets: ['@babel/preset-env', '@babel/preset-react']
                     }
-                },"source-map-loader"]
+                }, "source-map-loader"]
             },
             {
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"],
-              },
+            },
             {
-              test: /\.png/,
-              type: 'asset/resource'
+                test: /\.png/,
+                type: 'asset/resource'
             },
             {
                 test: /\.(xls|xlsx|XLS|XLSX)$/i,
                 use: [
-                  {
-                    loader: 'file-loader',
-                  },
+                    {
+                        loader: 'file-loader',
+                    },
                 ],
-              },
-              
-            ]
-        },
-        output: {
-          filename: 'bundle.js',
-          filename: '[name].bundle.js',
-           path: path.resolve(__dirname, 'dist'),
-         },
-    // module: {
-    //     rules: [
-    //       {
-    //         test: /\.js$/,
-    //         enforce: "pre",
-    //         use: ["source-map-loader"],
-    //       },
-    //     ],
-    //   },
+            },
+
+        ]
+    },
+    output: {
+        filename: 'bundle.js',
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, './src/index.html'),
-            
+
 
         }),
         new SourceMapDevToolPlugin({
             filename: "[file].map"
-          }),
+        }),
     ],
     devServer: {
         port,
@@ -82,5 +74,26 @@ module.exports = {
         client: {
             webSocketURL: publicUrl
         },
+        stats: 'errors-only',
+        https: true,
+        key: './path_to_pemfile.pem',
+        cert: './path_to_pemfile.pem',
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
+        port: 9092,
+        host: 'broker-gateway-webpack.firstbanco.dev'
     },
+    module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader"
+            }
+          }
+        ]
+      }
+
 };
