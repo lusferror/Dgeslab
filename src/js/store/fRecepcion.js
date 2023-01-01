@@ -65,7 +65,7 @@ export const modalRecepcionEstado=(set,get,len,lista,setSeries)=>{
     set({spinnerRecepcion:true})
     if (len>0){
         set({modalRecepcion:true})
-        fetch(getStore().ip+'/recepcion',{
+        fetch(get().ip+'/recepcion',{
             method:'POST',
             headers:{
                 "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -106,7 +106,7 @@ export const modalRecepcionEstado=(set,get,len,lista,setSeries)=>{
 }
 
 export const registrosRecepcion = (set,get) =>{
-    fetch(getStore().ip+'/registrosRecepcion',
+    fetch(get().ip+'/registrosRecepcion',
     {
         method:'GET',
         headers:{
@@ -134,7 +134,7 @@ export const  borrarRegistroRecepcion=(set,get,id)=>{
     console.log("este es el id: ",registros[id].id)
     let lista = registros.filter((item,index)=>index!=id)
     set({registrosRecepcion:[...lista]})
-    fetch(getStore().ip+'/borrarRegistroRecepcion',{
+    fetch(get().ip+'/borrarRegistroRecepcion',{
         method:'DELETE',
         headers:{
             "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -156,7 +156,7 @@ export const  borrarRegistroRecepcion=(set,get,id)=>{
 }
 
 export const registrosRevisionMovil = (set,get) =>{
-    fetch(getStore().ip+'/revision_movil',
+    fetch(get().ip+'/revision_movil',
     {
         method:'GET',
         headers:{

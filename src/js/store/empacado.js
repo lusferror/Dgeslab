@@ -47,7 +47,7 @@ export const obtenerDatosSerieEmpacado = (set,get,key,empaque,empacadov) => {
             
         }
         if (duplicado==false){
-        fetch(getStore().ip+'/datos_movil_basico', {
+        fetch(get().ip+'/datos_movil_basico', {
         method: 'POST',
         headers: {
             // "Authorization": `Bearer ${get().token}`
@@ -88,7 +88,7 @@ export const guardarEmpacados=(set,get,setEmpaque)=>{
     set({modalCargando:"cargando"})
     const {empacadoLista} = get()
     console.log(empacadoLista)
-    fetch(getStore().ip+'/ingresarEmpacados',{
+    fetch(get().ip+'/ingresarEmpacados',{
         method:'POST',
         headers:{
             'Authorization':`Bearer ${sessionStorage.getItem("token")}`,
@@ -112,7 +112,7 @@ export const guardarEmpacados=(set,get,setEmpaque)=>{
 
 export const cargarTablaEmpacados=(set)=>{
     useEffect(()=>{
-        fetch(getStore().ip+'/tablaEmpacados',{
+        fetch(get().ip+'/tablaEmpacados',{
             method:'GET',
             headers:{
                 'Authorization':`Bearer ${sessionStorage.getItem("token")}`,
