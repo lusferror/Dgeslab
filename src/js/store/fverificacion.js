@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export function nroCajaVerificacion(set, get) {
     useEffect(() => {
-        fetch('http://127.0.0.1:3100/nroCajaVerificacion', {
+        fetch(getStore().ip+'/nroCajaVerificacion', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${sessionStorage.getItem("token")}`,
@@ -25,7 +25,7 @@ export function nroCajaVerificacion(set, get) {
 
 export function registrarDocumentoVerificacion(set, get, e) {
     e.preventDefault()
-    fetch('http://127.0.0.1:3100/nroDocumento', {
+    fetch(getStore().ip+'/nroDocumento', {
         method: 'POST',
         headers: {
             "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -118,7 +118,7 @@ export function agregarRegistroVerificacion(setStore,getStore,imei, tecnico, doc
 }
 
 export const verificacionGuardar=(set,get)=>{
-    fetch('http://127.0.0.1:3100/guardarVerficacionRecepcion',{
+    fetch(getStore().ip+'/guardarVerficacionRecepcion',{
         method:'PUT',
         headers:{
             'Authorization':`Bearer ${sessionStorage.getItem("token")}`,

@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { SourceMapDevToolPlugin } = require("webpack");
 
 const port = 3000;
-let publicUrl = `ws://localhost:${port}/ws`;
+let publicUrl = `http://localhost:${port}`;
 if (process.env.GITPOD_WORKSPACE_URL) {
     const [schema, host] = process.env.GITPOD_WORKSPACE_URL.split('://');
     publicUrl = `wss://${port}-${host}/ws`;
