@@ -1,5 +1,3 @@
-import { ErrorResponse } from "@remix-run/router"
-
 export let revisionMovil = {
     // id: 1, 
     encendido: "true", 

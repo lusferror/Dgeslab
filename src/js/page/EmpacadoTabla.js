@@ -4,7 +4,7 @@ import ScatterChart from "../components/graphs.jsx";
 import { useContext } from "react";
 import { Context } from "../store/appContext.js";
 import ReactInputMask from "react-input-mask";
-import { cambioSerie } from "../store/empacado.js";
+import { cambioSerie } from "../store/functionsEmpacado";
 
 const EmpacadoTabla = () => {
   const {store, actions} = useContext(Context)

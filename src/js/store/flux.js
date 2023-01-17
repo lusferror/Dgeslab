@@ -1,16 +1,15 @@
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
-// import { agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
-import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion, registrosRevisionMovil, revisionMovil, obtenerDatosSerieRevisionMovil, agregarSerieRevisionMovil } from './fRecepcion';
-// import { nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion} from './fverificacion'
-import { cargarTablaEmpacados, guardarEmpacados,limpiarPantallEmpacado, agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './empacado';
-// import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion } from './fRecepcion';
-import { verificacionGuardar, agregarRegistroVerificacion, onChangeverificacionObservaciones,onChangeVerificacionImei,nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion, limpiarregistrarDocumentoVerificacion} from './fverificacion'
+import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion, registrosRevisionMovil, revisionMovil, obtenerDatosSerieRevisionMovil, agregarSerieRevisionMovil } from './functionsRecepcion';
+import { cargarTablaEmpacados, guardarEmpacados,limpiarPantallEmpacado, agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './functionsEmpacado';
+import { verificacionGuardar, agregarRegistroVerificacion, onChangeverificacionObservaciones,onChangeVerificacionImei,nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion, limpiarregistrarDocumentoVerificacion} from './functionsVerificacion'
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			// direccion ip
-			ip:'http://34.136.77.203:3100',
+			// ip:'http://34.136.77.203:3100',
+			ip:'http://127.0.0.1:3100',
 			// en esta seccion se colocan todos los estados
 			navbar: true,
 			modal: false,
