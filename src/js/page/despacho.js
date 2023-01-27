@@ -4,14 +4,13 @@ import InputMask from "react-input-mask";
 import { Modal } from "../components/modal.jsx";
 import { Context } from "../store/appContext.js";
 
-const HomeSupervisor = () => {
+const Despacho = () => {
   const {actions,store} = useContext(Context)
   // -------------------------validacion de sesion--------------------------------------
   actions.inicio()
   // -----------------------------------------------------------------------------------
   const [series, setSeries] = useState([]);
   const [filtrados, setFiltrados] = useState([]);
-  const [query, setQuery] = useState([]);
   const [guia_desp, setGuia_desp] = useState('');
   const [fec_desp, setFec_desp] = useState('');
 
@@ -114,7 +113,6 @@ const HomeSupervisor = () => {
           {series && (
             <input id="busqueda" type="search" className="form-control border border-primary border-2 me-0" placeholder="Busqueda" aria-label="Username" aria-describedby="addon-wrapping" name="term" maxLength="8"
               onChange={handleBuscador}
-            //  {e => setQuery(e.target.value)}
             />
           )}
         </div>
@@ -149,4 +147,4 @@ const HomeSupervisor = () => {
   )
 }
 
-export default HomeSupervisor;
+export default Despacho;

@@ -1,20 +1,21 @@
-import React ,{useContext}from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import injectContext from '../src/js/store/appContext';
 //----------------------------------- COMPONENTES--------------------------------
 import { Navbar } from "./js/components/navbar.jsx";
+
 //-----------------------------------PAGINAS-------------------------------------
 import Home from "../src/js/page/home";
 import HomeTecnico from "./js/page/HomeTecnico";
-import Verificacion from "./js/page/Verificacion"
+import Aprobacion from "./js/page/aprobacion"
 import Procesamiento from "./js/page/Procesamiento"
-import HomeSupervisor from "./js/page/HomeSupervisor"
+import Despacho from "./js/page/despacho"
 import Inicio from "./js/page/inicio"
 import Recupera from "./js/page/recupera"
 import Registrar from "./js/page/registrar"
 import Usuarios from "./js/page/usuarios"
 import Recepcion from "./js/page/recepcion"
-import Asignar from "./js/page/asignar"
+import Asignar from "./js/page/asignacion"
 import Empacado from "./js/page/Empacado";
 import Embalaje from "./js/page/Embalaje";
 import EmpacadoTabla from "./js/page/EmpacadoTabla";
@@ -36,9 +37,9 @@ const Layout = () => {
                     <Route element={<Inicio />} path="/login" />
                     <Route element={<HomeTecnico />} path="/HomeTecnico" />
                     <Route element={<Home/>} path="/" />
-                    <Route element={<Verificacion />} path="/aprobacion" />
+                    <Route element={<Aprobacion />} path="/aprobacion" />
                     <Route element={<Procesamiento />} path="/Procesamiento" />
-                    <Route element={<HomeSupervisor />} path="/HomeSupervisor" />
+                    <Route element={<Despacho />} path="/HomeSupervisor" />
                     <Route element={<Recupera />} path="/recupera" />
                     <Route element={<Registrar />} path="/registrar" />
                     <Route element={<Usuarios />} path="/usuarios" />

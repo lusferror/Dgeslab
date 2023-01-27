@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 
-const Verificacion = () => {
+const Aprobacion = () => {
   const { store, actions } = useContext(Context)
   //-----------------------funcion de autenticacion-----------------------------------
   actions.inicio()
@@ -64,4 +64,4 @@ const Verificacion = () => {
   )
 }
 
-export default Verificacion;
+export default Aprobacion;
