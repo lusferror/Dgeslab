@@ -2,7 +2,7 @@ import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion, regi
 import { cargarTablaEmpacados, guardarEmpacados,limpiarPantallEmpacado, agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './functionsEmpacado';
 import { verificacionGuardar, agregarRegistroVerificacion, onChangeverificacionObservaciones,onChangeVerificacionImei,nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion, limpiarregistrarDocumentoVerificacion} from './functionsVerificacion'
 import { salida } from './functionsSalida';
-import { ingreso } from './functionsIngreso';
+import { ingreso , Login} from './functionsLogin';
 import { crearUsuario, usuario } from './functionsUsuarios';
 import { asignar, itemAsignacion, listaTecnicosAsignacion } from './functionsAsignacion';
 import { fecha, inicio, inicioLogin } from './functionsSistema';
@@ -61,7 +61,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {// En esta seccion se colocan todas las acciones o funciones
 
+			// Functions Login page 
+			ingreso:(objeto)=>new Login(objeto,setStore,getStore),
+
 			// ---------------------------------------------- funcion de salida del sistema -------------------------
+			// setStore:()=>setStore
 			salida: () =>salida(setStore),
 			barraLateral: () => document.body.classList.toggle('sb-sidenav-toggled'),
 			inicio: ()=>inicio(setStore,getStore,getActions),//this function validate the session
@@ -69,9 +73,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			reiniciarModal:()=>setStore({modalCargando:"cargando"}),
 			cambiarEstadoModalCargado:(cargando)=>setStore({modalCargando:cargando}),
 			fecha: () => fecha(),
-
-			// ------------------------------------------ Functions Inicio page ------------------------------------------------
-			ingreso: (email, password, history) => ingreso(email, password, history,setStore,getStore),
+			
+			// ingreso: (email, password, history) => ingreso(email, password, history,setStore,getStore),
 			
 			// ---------------------------------------------- Functions Despacho -----------------------------------------------------------------------------
 			grabarDatos: (series, fec_desp, guia_desp,setSeries,setFiltrados) =>  grabarDatos(series, fec_desp, guia_desp,setSeries,setFiltrados, setStore,getso),

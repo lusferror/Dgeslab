@@ -1,28 +1,41 @@
+// IMPORTED RESOURCES
+import dgeslab from "../../img/dgeslab.png";
+
+// IMPORTED METHODS
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import dgeslab from "../../img/dgeslab.png";
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
+
+// IMPORT COMPONENTS
 import { Spinner } from "../components/sppiner.jsx";
 
-const Inicio = () => {
+const Login = () => {
+    // GLOBAL VARIABLES
     const {store, actions} = useContext(Context)
+
+    // LOCAL VARIABLES
     const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-    // const [spinner,setSpinner] = useState(false)
     const history = useNavigate()
-    // -------------------------- validacion de sesión-------------------------------------------
+
+    // SESION VALIDATION
     actions.inicioLogin()
-    //------------------------------------------------------------------------------------------ 
+
+    //LOCAL FUNCTIONS
     const haddleClick=(e)=>{
         e.preventDefault();
-        actions.ingreso(email, password,history);        
+        let objeto = {
+            email: email,
+            password: password,
+            history: history
+        }
+        actions.ingreso(objeto).ingreso();
     }
 
 
     return (
         <div className="d-flex h-100  col-xxl-4 col-md-6 col-sm-10 p-0 container-fluid">
-        {/* <div className="d-flex h-100 p-0 col-4 container"> */}
             <div className="row  d-flex w-100 align-items-center">
                 <div className="col-md ">
                     <div className="text-center w-100 mb-5">
@@ -68,4 +81,4 @@ const Inicio = () => {
     )
 }
 
-export default Inicio;
+export default Login;

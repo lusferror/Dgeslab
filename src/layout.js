@@ -10,7 +10,7 @@ import HomeTecnico from "./js/page/HomeTecnico";
 import Aprobacion from "./js/page/aprobacion"
 import Procesamiento from "./js/page/Procesamiento"
 import Despacho from "./js/page/despacho"
-import Inicio from "./js/page/inicio"
+import Login from "./js/page/login"
 import Recupera from "./js/page/recupera"
 import Registrar from "./js/page/registrar"
 import Usuarios from "./js/page/usuarios"
@@ -34,7 +34,7 @@ const Layout = () => {
 
             <Navbar contenido={
                 <Routes>
-                    <Route element={<Inicio />} path="/login" />
+                    <Route element={<Login />} path="/login" />
                     <Route element={<HomeTecnico />} path="/HomeTecnico" />
                     <Route element={<Home/>} path="/" />
                     <Route element={<Aprobacion />} path="/aprobacion" />
