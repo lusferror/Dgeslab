@@ -17,6 +17,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// ip:'http://127.0.0.1:3100',
 			ip:'http://192.168.0.6:3100',
 			// en esta seccion se colocan todos los estados
+			//GENEARL VARIABLES
+			load:false,
+			login:false,
+			alerta:false,
+			error:false,
+
+			//SPECIFIC VARIABLES
+			showTopNavBar:'',//Show or not top navbar
 			navbar: true,
 			modal: false,
 			modalCargando:"cargando",
@@ -62,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {// En esta seccion se colocan todas las acciones o funciones
 
 			// Functions Login page 
-			ingreso:(objeto)=>new Login(objeto,setStore,getStore),
+			login:(objeto)=>new Login(objeto,setStore,getStore),
 
 			// ---------------------------------------------- funcion de salida del sistema -------------------------
 			// setStore:()=>setStore
@@ -74,7 +82,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cambiarEstadoModalCargado:(cargando)=>setStore({modalCargando:cargando}),
 			fecha: () => fecha(),
 			
-			// ingreso: (email, password, history) => ingreso(email, password, history,setStore,getStore),
 			
 			// ---------------------------------------------- Functions Despacho -----------------------------------------------------------------------------
 			grabarDatos: (series, fec_desp, guia_desp,setSeries,setFiltrados) =>  grabarDatos(series, fec_desp, guia_desp,setSeries,setFiltrados, setStore,getso),

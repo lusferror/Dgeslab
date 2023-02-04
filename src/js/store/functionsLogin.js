@@ -1,3 +1,7 @@
+// IMPORTED METHODS
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 export class Login{
 
 	constructor (objeto,setStore,getStore){
@@ -5,26 +9,43 @@ export class Login{
 		this.setStore = setStore;
 		this.getStore = getStore;
 	}
+
+	/**
+	 * Function that redirect to home, if session is started
+	 */
+	inicioLogin = () => {
+		const history = useNavigate()
+		useEffect(() => {
+			document.body.classList.add('bg-dark');
+			this.setStore({showTopNavBar:'d-none'})
+			const session = sessionStorage.getItem("session");
+			if (session == "true") {
+				history("/");
+			}
+		}, [])
+	}
+
+	ingreso(user=this.objeto.user, password=this.objeto.password, history=this.objeto.history){
 	
-	ingreso(email=this.objeto.email, password=this.objeto.password, history=this.objeto.history){
-	
-				this.setStore({ spinnerLogin: true })
-				this.setStore({ alertLogin: false })
+				this.setStore({ load: true })
+				this.setStore({ login: false })
+				this.setStore({ error: false})
+				this.setStore({ alerta: false})
+
 				fetch(this.getStore().ip+'/login', {
 					method: 'POST',
 					headers: {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({
-						email: email,
+						user: user,
 						password: password
 					}),
-					redirect: "follow"
 				})
 					.then(response => response.json())
 					.then(result => {
 						if (result.status == "ok") {
-							this.setStore({ token: result.token, role_id: result.rol, alertLogin: false })
+							this.setStore({ token: result.token, role_id: result.rol, alerta: false })
 							sessionStorage.setItem("token", result.token)
 							if (result.token != undefined && result.token != null) {
 								sessionStorage.setItem("session", true)
@@ -33,19 +54,23 @@ export class Login{
 								sessionStorage.setItem("id",result.id_user)
 								sessionStorage.setItem("rol_name",result.rol_name)
 								this.setStore({ sesion: true })
+								this.setStore({showTopNavBar:''})
+								document.body.classList.remove('bg-dark')
 								history("/")
 	
 							}
 						}
 						else {
-							this.setStore({ alertLogin: true })
+							this.setStore({ alerta: true })
+
 						}
-						this.setStore({ spinnerLogin: false })
+						this.setStore({ load: false })
 	
 					})
 					.catch(err => {
-						this.setStore({ spinnerLogin: false })
-						this.setStore({ alertLogin: true })
+						this.setStore({ load: false })
+						this.setStore({ alerta: true })
+						this.setStore({ error : true})
 						console.log(err)});
 	}
 

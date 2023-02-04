@@ -1,15 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
-export const inicioLogin = (setStore,getStore,getActions) => {//function that redirect to home, if session is started
-    const history = useNavigate()
-    useEffect(() => {
-        const session = sessionStorage.getItem("session")
-        if (session == "true") {
-            history("/")
-        }
-    }, [])
-}
 
 export const inicio = (setStore,getStore,getActions) => {// function that validate the session
     const history = useNavigate()

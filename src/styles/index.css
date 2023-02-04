@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
 /* Estilos Generales*/
 .contenedor::-webkit-scrollbar{
     width: 6px;
@@ -9,10 +10,6 @@
     background-color: rgb(46, 155, 3);
     border-radius: 5px;
     height: 5px;
-}
-
-body {
-    background-color: #F3F9FF;    
 }
 
 .col1 {
@@ -42,4 +39,8 @@ body {
 }
 .maxTabla{
     max-height: 70vh;
+}
+
+.font-slogan{
+    font-family: 'Caveat', cursive;
 }

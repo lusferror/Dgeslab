@@ -16,9 +16,12 @@ export const Navbar = ({contenido}) => {
     }
     return (
         <div className="sb-nav-fixed">
-            <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark w-100">
+            <nav className={"sb-topnav navbar navbar-expand navbar-dark bg-dark w-100 "+store.showTopNavBar}>
                 <div className="col-1 me-5 pt-2">
-                    <Link to={session=="true"?"/":"/login"} className="navbar-brand ps-3 fs-3 "><img className="rounded-circle w-25 mb-1 me-3" src={logo}></img>Dgeslab</Link>
+                    <Link to={session=="true"?"/":"/login"} className="navbar-brand ps-3 fs-3 ">
+                        <img className="rounded-circle w-25 mb-1 me-3" src={logo}/>
+                        <span className="fst-italic">Dgeslab</span>
+                    </Link>
                 </div>
                 {session=="true"?
                 <div className="col ms-4">
@@ -97,7 +100,7 @@ export const Navbar = ({contenido}) => {
                                         </a>
                                         <div className="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                             <nav className="sb-sidenav-menu-nested nav">
-                                                <Link to='/registrar' className="nav-link" >Registro</Link>
+                                                <Link to='/registrar' className="nav-link" >Registrar</Link>
                                                 <Link to='/usuarios' className="nav-link" onClick={usuario} >Tabla de Usuarios</Link>
                                                 <a className="nav-link" >Restablecer Contraseña</a>
                                             </nav>
@@ -109,6 +112,20 @@ export const Navbar = ({contenido}) => {
                                 </div>
                                 
                                 <div className="sb-sidenav-menu-heading text-warning fst-italic">Utilidad</div>
+                                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#Registros" aria-expanded="true" aria-controls="collapseLayouts">
+                                    <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
+                                    Registros
+                                    <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                                </a>
+                                <div className="collapse" id="Registros" aria-labelledby="headingOne" >
+                                    <nav className="sb-sidenav-menu-nested nav">
+                                        <Link to="/tablaRecepcion" className="nav-link">Recepcion</Link>
+                                        <Link to='/tablaAsignacion' className="nav-link" >Asignaciones</Link>
+                                        <Link to='/tablaMoviles' className="nav-link" >Móviles</Link>
+                                        <Link to="/tablaEmpacado" className="nav-link" >Salida</Link>
+                                    </nav>
+                                </div>
+                                <div className="sb-sidenav-menu-heading text-warning fst-italic">Administracion de Sistema</div>
                                 <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#Registros" aria-expanded="true" aria-controls="collapseLayouts">
                                     <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
                                     Registros

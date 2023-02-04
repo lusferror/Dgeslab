@@ -1,8 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client';
 import '../src/styles/index.css'
 import '../src/styles/styles.css'
 import Layout from '../src/layout'
 
-
-ReactDOM.render(<Layout/>,document.getElementById('root'))
+const container = document.getElementById('root');
+const root = createRoot(container); 
+root.render(<Layout/>);

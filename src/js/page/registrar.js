@@ -47,7 +47,7 @@ const Registrar = () => {
                                     </div>
                                     <div className="m-1 col">
                                         <label for="exampleInputEmail1" className="form-label">Segundo Nombre</label>
-                                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Segundo Nombre" onChange={(e) => setSecond_Name(e.target.value)} value={second_name} required/>
+                                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Segundo Nombre" onChange={(e) => setSecond_Name(e.target.value)} value={second_name} />
                                     </div>
                                 </div>
                                 <div className="mb-3 d-flex">

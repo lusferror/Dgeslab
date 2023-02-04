@@ -1,6 +1,3 @@
-// IMPORTED RESOURCES
-import dgeslab from "../../img/dgeslab.png";
-
 // IMPORTED METHODS
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,76 +5,72 @@ import { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 
 // IMPORT COMPONENTS
-import { Spinner } from "../components/sppiner.jsx";
+import { Spinner } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
+import LoginPanel from "../components/loginPanel.jsx";
 
 const Login = () => {
     // GLOBAL VARIABLES
-    const {store, actions} = useContext(Context)
+    const { store, actions } = useContext(Context)
 
     // LOCAL VARIABLES
-    const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+    const [user, setUser] = useState("");
+    const [password, setPassword] = useState("");
     const history = useNavigate()
 
     // SESION VALIDATION
-    actions.inicioLogin()
+    actions.login().inicioLogin();
 
     //LOCAL FUNCTIONS
-    const haddleClick=(e)=>{
+    const haddleClick = (e) => {
         e.preventDefault();
         let objeto = {
-            email: email,
+            user: user,
             password: password,
             history: history
         }
-        actions.ingreso(objeto).ingreso();
+        actions.login(objeto).ingreso();
     }
 
 
     return (
-        <div className="d-flex h-100  col-xxl-4 col-md-6 col-sm-10 p-0 container-fluid">
-            <div className="row  d-flex w-100 align-items-center">
-                <div className="col-md ">
-                    <div className="text-center w-100 mb-5">
-                        <img src={dgeslab} className="border  border-warning border-1 rounded-circle shadow" style={{width:"40%"}}></img>
-                    </div>
-                    <p className="text-center text-uppercase fw-bold fs-3 fst-italic">BIENVENIDOS</p>
-                    <div className="d-flex justify-content-center">
-                        <div className="form bg-white p-5 border border-1 border-warning shadow w-100" style={{borderRadius:"20px"}}>
-                            <form onSubmit={(e) => haddleClick(e)}>
-                                <div className="mb-3">
-                                    <label htmlFor="exampleInputEmail1" className="form-label">Usuario</label>
-                                    <div className="d-flex border rounded-3 bg-light">
-                                        <i className="bi bi-people-fill mx-2 mt-1 fs-5"></i>
-                                        <input type="email" className="form-control border-end-0 border-top-0 border-bottom-0 h-100 m-0 p-2" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuario" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                                    </div>
-                                </div>
-                                <div className="mb-4">
-                                    <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
-                                    <div className="d-flex border rounded-3 bg-light">
-                                        <i className="bi bi-lock-fill mx-2 mt-1 fs-5"></i>
-                                        <input type="password" className="form-control border-end-0 border-top-0 border-bottom-0 h-100 m-0 p-2" id="exampleInputPassword1" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-                                    </div>
-                                    <Link to="/recupera" className="text-primary float-end m-1" style={{ fontSize: "60%" }} >Recuperar Contraseña?</Link>
-                                </div>
-                                <div className="text-center mb-3 mt-5">
-                                    <button type="submit" className="btn btn-primary w-100 mb-4" >Ingresar</button>
-                                    {store.alertLogin?
-                                    <div className="alert alert-danger " role="alert">
-                                        Usuario o Contraseña incorrectos
-                                    </div>:
-                                    <></>}
-                                    {store.spinnerLogin?
-                                    <Spinner/>:
-                                    <></>
-                                    }
-                                </div>
-                            </form>
+        <div className="col-xxl-4 col-xl-5 col-lg-6 col-md-8 col-sm-10 p-0 container-fluid">
+            <LoginPanel
+
+                body={
+                    <form onSubmit={(e) => haddleClick(e)}>
+                        <div className="text-center font-slogan">
+                            BIENVENIDOS
                         </div>
-                    </div>
-                </div>
-            </div>
+                        <div className="mb-3">
+                            <label htmlFor="userInput" className="form-label">Usuario</label>
+                            <div className="d-flex border rounded-3 bg-light">
+                                <i className="bi bi-people-fill mx-2 mt-1 fs-5"></i>
+                                <input className="form-control border-end-0 border-top-0 border-bottom-0 h-100 m-0 p-2" id="userInput" placeholder="Usuario" 
+                                value={user} onChange={(e) => setUser(e.target.value)} required />
+                            </div>
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="password" className="form-label">Contraseña</label>
+                            <div className="d-flex border rounded-3 bg-light">
+                                <i className="bi bi-lock-fill mx-2 mt-1 fs-5"></i>
+                                <input type="password" className="form-control border-end-0 border-top-0 border-bottom-0 h-100 m-0 p-2" id="password" 
+                                placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                            </div>
+                        </div>
+                        <div className="text-center mb-3 mt-5">
+                            <button type="submit" className="btn btn-primary w-100 mb-4" >Ingresar</button>
+
+                            {store.alerta && !store.error ? <Alert variant="danger"> Usuario o Contraseña incorrectos </Alert> :
+                                store.alerta && store.error ? <Alert variant="danger"> Ha ocurrido un Error al inciar sesion </Alert> : <></>}
+
+                            {store.load ? <Spinner animation='border' variant='warning' /> : <></>}
+                        </div>
+                    </form>
+                }
+            />
         </div>
+
     )
 }
 
