@@ -11,11 +11,6 @@ if (process.env.GITPOD_WORKSPACE_URL) {
 }
 
 module.exports = {
-    entry: './src/index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
-    },
     devtool: "source-map",
     module: {
         rules: [

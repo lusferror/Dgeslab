@@ -12,7 +12,8 @@ const injectContext = PassedComponent => {
 				setStore: updatedStore =>
 					setState({
 						store: Object.assign(state.store, updatedStore),
-						actions: { ...state.actions }
+						actions: { ...state.actions },
+						components: { ...state.components },
 					})
 			})
 		);
@@ -24,9 +25,6 @@ const injectContext = PassedComponent => {
 
 				sessionStorage.setItem("session",false)
 			}
-			// if(state.store.sesion){
-			// 	document.body.classList.toggle('sb-sidenav-toggled');
-			// }
 		}, []);
 		
 

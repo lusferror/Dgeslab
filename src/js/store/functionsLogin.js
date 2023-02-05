@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-export class Login{
+export default class Login{
 
 	constructor (objeto,setStore,getStore){
 		this.objeto = objeto;

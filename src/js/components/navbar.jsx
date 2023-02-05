@@ -126,17 +126,16 @@ export const Navbar = ({contenido}) => {
                                     </nav>
                                 </div>
                                 <div className="sb-sidenav-menu-heading text-warning fst-italic">Administracion de Sistema</div>
-                                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#Registros" aria-expanded="true" aria-controls="collapseLayouts">
-                                    <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
-                                    Registros
+                                <a className="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#usuarios" aria-expanded="true" aria-controls="collapseLayouts">
+                                    <div className="sb-nav-link-icon"><i class="bi bi-person-gear fs-5"></i></div>
+                                    <div>Usuarios</div>
                                     <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                                 </a>
-                                <div className="collapse" id="Registros" aria-labelledby="headingOne" >
+                                <div className="collapse" id="usuarios" aria-labelledby="headingOne" >
                                     <nav className="sb-sidenav-menu-nested nav">
-                                        <Link to="/tablaRecepcion" className="nav-link">Recepcion</Link>
-                                        <Link to='/tablaAsignacion' className="nav-link" >Asignaciones</Link>
-                                        <Link to='/tablaMoviles' className="nav-link" >Móviles</Link>
-                                        <Link to="/tablaEmpacado" className="nav-link" >Salida</Link>
+                                        <Link to='/registrar_usuario' className="nav-link" >Registrar</Link>
+                                        <Link to='/usuarios' className="nav-link" onClick={usuario} >Tabla de Usuarios</Link>
+                                        <a className="nav-link" >Restablecer Contraseña</a>
                                     </nav>
                                 </div>
                                 </>:

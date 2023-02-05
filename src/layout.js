@@ -12,7 +12,7 @@ import Procesamiento from "./js/page/Procesamiento"
 import Despacho from "./js/page/despacho"
 import Login from "./js/page/login"
 import RecuperarContrasena from "./js/page/recuperarContrasena"
-import Registrar from "./js/page/registrar"
+import RegistrarUsuario from "./js/page/registrar_usuario"
 import Usuarios from "./js/page/usuarios"
 import Recepcion from "./js/page/recepcion"
 import Asignar from "./js/page/asignacion"
@@ -41,7 +41,7 @@ const Layout = () => {
                     <Route element={<Procesamiento />} path="/Procesamiento" />
                     <Route element={<Despacho />} path="/HomeSupervisor" />
                     <Route element={<RecuperarContrasena />} path="/recuperar_contrasena" />
-                    <Route element={<Registrar />} path="/registrar" />
+                    <Route element={<RegistrarUsuario />} path="/registrar_usuario" />
                     <Route element={<Usuarios />} path="/usuarios" />
                     <Route element={<Recepcion />} path="/recepcion" />
                     <Route element={<Asignar/>} path="/asignar" />

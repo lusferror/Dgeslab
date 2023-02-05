@@ -2,12 +2,15 @@ import { modalRecepcionEstado, registrosRecepcion, borrarRegistroRecepcion, regi
 import { cargarTablaEmpacados, guardarEmpacados,limpiarPantallEmpacado, agregarSerieEmpacado, empacado, agregarEmpacadoEmpacado, obtenerDatosSerieEmpacado, empacadoLista } from './functionsEmpacado';
 import { verificacionGuardar, agregarRegistroVerificacion, onChangeverificacionObservaciones,onChangeVerificacionImei,nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion, limpiarregistrarDocumentoVerificacion} from './functionsVerificacion'
 import { salida } from './functionsSalida';
-import { ingreso , Login} from './functionsLogin';
+import Login from './functionsLogin';
 import { crearUsuario, usuario } from './functionsUsuarios';
 import { asignar, itemAsignacion, listaTecnicosAsignacion } from './functionsAsignacion';
-import { fecha, inicio, inicioLogin } from './functionsSistema';
+import { fecha, inicio } from './functionsSistema';
 import { aprobarAsignacion, check, checkAll, uncheckAll, registrosAprobacion} from './functionsAprobacion';
 import { datosFinancieros } from './functionsApiExternal';
+import Page from '../templates/page.jsx';
+import BadgeForm from '../components/badgedForm.jsx';
+import React from 'react';
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -82,7 +85,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cambiarEstadoModalCargado:(cargando)=>setStore({modalCargando:cargando}),
 			fecha: () => fecha(),
 			
-			
+			Page:()=>Page(),
 			// ---------------------------------------------- Functions Despacho -----------------------------------------------------------------------------
 			grabarDatos: (series, fec_desp, guia_desp,setSeries,setFiltrados) =>  grabarDatos(series, fec_desp, guia_desp,setSeries,setFiltrados, setStore,getso),
 			
@@ -140,6 +143,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			agregarRegistroVerificacion:(imei, tecnico, documento, nro_caja,observaciones, tecla)=>agregarRegistroVerificacion(setStore,getStore,imei, tecnico, documento, nro_caja, observaciones,tecla),
 			verificacionGuardar:()=>verificacionGuardar(setStore,getStore)
 
+		},
+		components:{
+			Page: (props) => Page(props),
+			BadgeForm: (props) => <BadgeForm props={props}/>
 		}
 	};
 };

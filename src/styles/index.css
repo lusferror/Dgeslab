@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Solitreo&display=swap');
 /* Estilos Generales*/
 .contenedor::-webkit-scrollbar{
     width: 6px;
@@ -31,16 +32,23 @@
 .mColumnaG{
     min-width: 300px;
 }
+
 .mColumnaM{
     min-width: 200px;
 }
+
 .mColumnaP{
     min-width: 100px;
 }
+
 .maxTabla{
     max-height: 70vh;
 }
 
 .font-slogan{
     font-family: 'Caveat', cursive;
+}
+
+.font-header-page{
+    font-family: 'Solitreo', cursive;
 }

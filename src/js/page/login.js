@@ -18,7 +18,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const history = useNavigate()
 
-    // SESION VALIDATION
+    // SESSION VALIDATION
     actions.login().inicioLogin();
 
     //LOCAL FUNCTIONS
