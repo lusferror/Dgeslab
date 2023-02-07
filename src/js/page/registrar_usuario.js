@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
 //IMPORTED COMPONENTS
+import PanelFormulario from "../components/formulario/PanelFormulario.jsx";
 // import BadgeForm from "../components/badgedForm.jsx";
 
 const RegistrarUsuario = () => {
@@ -35,12 +36,17 @@ const RegistrarUsuario = () => {
                 'REGISTRO DE USUARIOS'
             }
             body={
-                
-                    <div className="container d-flex justify-content-center bg-white p-5  shadow-lg">
-                            <form id="myForm" className="row g-3 needs-validation" onSubmit={(e) => handleClick(e)} novalidate>
 
-                                <components.BadgeForm text="DATOS BÁSICOS" textColor='info'/>
+                <div className="container d-flex justify-content-center bg-white py-5 shadow-lg">
+                    <form id="myForm" className="w-100 needs-validation" onSubmit={(e) => handleClick(e)} novalidate>
 
+                        <PanelFormulario
+
+                            icon={<i class="bi bi-person-vcard"></i>}
+
+                            header='datos básicos'
+
+                            body={
                                 <div className="mb-3">
 
                                     <div className="mb-3 d-flex">
@@ -79,47 +85,65 @@ const RegistrarUsuario = () => {
                                         </div>
                                     </div>
                                 </div>
+                            }
 
-                                <components.BadgeForm textColor = 'info' text='DATOS DE SISTEMA'/>
-                                
-                                <div className="p-4 rounded-4">
-                                    <div className="mb-3">
-                                        <label for="exampleInputPassword1" className="form-label">Password</label>
-                                        <input size={10} maxLength={10} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
-                                        <div class="valid-feedback">
-                                            Looks good!
+                        /> 
+                        {/* FIN DE PANEL FORMUALRIO */}
+
+                        <PanelFormulario
+
+                            icon={<i class="bi bi-person-lines-fill"></i>}
+
+                            header="datos de sistema" colorIcon="success"
+
+                            body={
+                                <div>
+                                    <div className="p-4 rounded-4">
+                                        <div className="mb-3">
+                                            <label for="exampleInputPassword1" className="form-label">Password</label>
+                                            <input size={10} maxLength={10} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} required />
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        <div className="mb-3">
+                                            <label for="exampleInputPassword1" className="form-label">Role</label>
+                                            <select class="form-select" aria-label="Default select example" onChange={(e) => setRole_Id(e.target.value)} required>
+                                                <option selected>Selecciona el Rol</option>
+                                                <option value={1} >Supervisor</option>
+                                                <option value={2}>Tecnico</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div className="mb-3">
-                                        <label for="exampleInputPassword1" className="form-label">Role</label>
-                                        <select class="form-select" aria-label="Default select example" onChange={(e) => setRole_Id(e.target.value)} required>
-                                            <option selected>Selecciona el Rol</option>
-                                            <option value={1} >Supervisor</option>
-                                            <option value={2}>Tecnico</option>
-                                        </select>
-                                    </div>
                                 </div>
-                                <div className="text-center ">
-                                    <button type="submit" className="btn btn-primary col-5" >Registrar</button>
-                                </div>
-                                {usuarioCreado ?
-                                    <div class="alert alert-success" role="alert">
-                                        Usuario creado de manera exitosa
-                                    </div> : usuarioCreado == false ?
-                                        <div class="alert alert-danger" role="alert">
-                                            No se pudo crear el usuario, por favor revise los datos
-                                        </div> :
-                                        <></>
-                                }
-                            </form>
-                    </div>
+                            }
+                        />
+                        {/* FIN DE PANEL FORMUALRIO */}
+                        
+                        <div>
+                            <div className="text-center ">
+                                <button type="submit" className="btn btn-primary col-5" >Registrar</button>
+                            </div>
+                            {usuarioCreado ?
+                                <div class="alert alert-success" role="alert">
+                                    Usuario creado de manera exitosa
+                                </div> :
+                                usuarioCreado == false ?
+                                    <div class="alert alert-danger" role="alert">
+                                        No se pudo crear el usuario, por favor revise los datos
+                                    </div> :
+                                    <></>
+                            }
+                        </div>
+                    </form>
+                </div>
             }
 
             footer={
-                ""
+                ''
             }
 
-        />
+        /> //FIN DE PAGINA
     )
 }
 

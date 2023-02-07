@@ -74,4 +74,45 @@ export default class Login{
 						console.log(err)});
 	}
 
+	/**
+	 * This function validate the user's session
+	 * @param {*} setStore 
+	 * @param {*} getStore 
+	 * @param {*} getActions 
+	 */
+	session (){// function that validate the session
+		const history = useNavigate()
+		const session = sessionStorage.getItem("session")
+		useEffect(() => {
+			if (session !== "true") {
+				history('/login')
+			}
+			else {
+				fetch(this.getStore().ip+'/private', {
+					method: 'GET',
+					headers: {
+						"Authorization": `Bearer ${sessionStorage.getItem("token")}`
+					},
+					redirect: "follow"
+				})
+					.then(response => response.json())
+					.then(result => {
+						if (result.role_id != undefined && result.role_id != null) {
+							this.setStore({
+								usuario: {
+									sesion: true,
+									role_id: result.role_id,
+									user_name: result.user_name
+								}
+							})
+							sessionStorage.setItem("session", true)
+						}
+						this.getActions().datosFinancieros()
+					})
+					.catch(err => console.log(err));
+			}
+		},
+			[])
+	}
+
 }

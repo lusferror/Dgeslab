@@ -24,6 +24,7 @@ import TablaRecepcion from "./js/page/tablaRecepcion";
 import TablaAsignacion from "./js/page/tablaAsignacion";
 import { TablaEmpacado } from "./js/page/tablaEmpacado";
 import TablaMoviles from "./js/page/tablaMoviles";
+import Prueba from "./js/page/prueba";
 
 // ---------------------------------- contexto ------------------------------------
 
@@ -55,6 +56,7 @@ const Layout = () => {
                     <Route element={<TablaAsignacion></TablaAsignacion>} path="/tablaAsignacion"></Route>
                     <Route element={<TablaEmpacado/>} path="/tablaEmpacado"/>
                     <Route element={<TablaMoviles/>} path="/tablaMoviles" />
+                    <Route element={<Prueba/>} path="/prueba" />
                 </Routes>
             }>
             </Navbar>

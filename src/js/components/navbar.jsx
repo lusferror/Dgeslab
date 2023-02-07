@@ -127,7 +127,7 @@ export const Navbar = ({contenido}) => {
                                 </div>
                                 <div className="sb-sidenav-menu-heading text-warning fst-italic">Administracion de Sistema</div>
                                 <a className="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#usuarios" aria-expanded="true" aria-controls="collapseLayouts">
-                                    <div className="sb-nav-link-icon"><i class="bi bi-person-gear fs-5"></i></div>
+                                    <div className="sb-nav-link-icon"><i className="bi bi-person-gear fs-5"></i></div>
                                     <div>Usuarios</div>
                                     <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                                 </a>
