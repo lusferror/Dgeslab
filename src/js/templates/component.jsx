@@ -6,7 +6,7 @@ import PropTypes from   "prop-types"
 // IMPORT COMPONENTS
 
 
-export default function Component(){// REMEMBER CHANGE COMPONENT'S NAME
+export default function Component(props){// REMEMBER CHANGE COMPONENT'S NAME
     // GLOBAL VARIABLES
     const { store, actions, components } = useContext(Context)
 

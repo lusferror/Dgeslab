@@ -6,7 +6,7 @@ import PropTypes from "prop-types"
 // IMPORT COMPONENTS
 
 
-export default function PanelFormulario(props) {// REMEMBER CHANGE COMPONENT'S NAME
+export default function PanelForm(props) {// REMEMBER CHANGE COMPONENT'S NAME
     // GLOBAL VARIABLES
     const { store, actions, components } = useContext(Context)
 
@@ -17,7 +17,7 @@ export default function PanelFormulario(props) {// REMEMBER CHANGE COMPONENT'S N
 
     return (
         <div className="mb-5">
-            <div className="col d-flex border-bottom border-1 rounded-pill bg-dark">
+            <div className="col d-flex border-bottom border-1 rounded-pill bg-dark border-bottom border-start border-warning border-2">
                 <div className= {`col-3 fs-3 text-center text-${props.colorIcon}`}>
                     {props.icon}
                 </div>
@@ -28,7 +28,7 @@ export default function PanelFormulario(props) {// REMEMBER CHANGE COMPONENT'S N
             <div>
                 {props.body}
             </div>
-            <div className={`border-3 border-bottom border-${props.colorIcon}`}>
+            <div className={`border-1 border-bottom border-${props.colorIcon}`}>
                 {props.footer}
             </div>
         </div>
@@ -36,11 +36,11 @@ export default function PanelFormulario(props) {// REMEMBER CHANGE COMPONENT'S N
     )
 }
 
-PanelFormulario.PropTypes = {
+PanelForm.propTypes = {
     //CODE
 }
 
-PanelFormulario.defaultProps = {
+PanelForm.defaultProps = {
     //CODE
     icon: '',
     header: 'CABEZERA',

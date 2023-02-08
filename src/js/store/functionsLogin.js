@@ -76,11 +76,8 @@ export default class Login{
 
 	/**
 	 * This function validate the user's session
-	 * @param {*} setStore 
-	 * @param {*} getStore 
-	 * @param {*} getActions 
 	 */
-	session (){// function that validate the session
+	session (){
 		const history = useNavigate()
 		const session = sessionStorage.getItem("session")
 		useEffect(() => {
