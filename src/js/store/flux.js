@@ -73,7 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {// En esta seccion se colocan todas las acciones o funciones
 
 			// Functions Login page 
-			login:(objeto)=>new Login(objeto,setStore,getStore),
+			login:(objeto)=>new Login(objeto,setStore,getStore,getActions),
 
 			// ---------------------------------------------- funcion de salida del sistema -------------------------
 			// setStore:()=>setStore

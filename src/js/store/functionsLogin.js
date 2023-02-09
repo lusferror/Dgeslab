@@ -4,10 +4,11 @@ import { useEffect } from "react";
 
 export default class Login{
 
-	constructor (objeto,setStore,getStore){
+	constructor (objeto,setStore,getStore,getActions){
 		this.objeto = objeto;
 		this.setStore = setStore;
 		this.getStore = getStore;
+		this.getActions = getActions;
 	}
 
 	/**
