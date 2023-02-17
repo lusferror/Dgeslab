@@ -2,14 +2,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
-import * as yup from 'yup';
 
 //IMPORTED COMPONENTS
 import PanelForm from "../components/formulario/PanelForm.jsx";
 import { Form } from "react-bootstrap";
-import { Formik } from "formik";
-import { FormikHandlers } from "formik";
-
+import InputForm from "../components/formulario/InputForm.jsx";
 
 const RegistrarUsuario = () => {
     //GLOBAL VARIABLES
@@ -27,20 +24,13 @@ const RegistrarUsuario = () => {
         email: '',
         rut:'',
         password: '',
+        passwordCofirm:'',
         role_id: '',
         confirmPassword: '',
         user_name: '',
     };
     const [formRegistrarUsuario, setFormRegistrarUsuario] = useState({...formularioInit });
     const [validated, setValidated] = useState(false);
-    const [name, setName] = useState("")
-    const [second_name, setSecond_Name] = useState("")
-    const [last_name, setLast_Name] = useState("")
-    const [second_last_name, setSecond_Last_Name] = useState("")
-    const [email, setEmail] = useState("")
-    const [rut, setRut] = useState("")
-    const [password, setPassword] = useState("")
-    const [role_id, setRole_Id] = useState("")
     const { usuarioCreado } = store
     const history = useNavigate()
 
@@ -57,30 +47,13 @@ const RegistrarUsuario = () => {
 
     }
 
-    /**
-     * Form validation scheme
-     */
-    const schema = yup.object().shape({
-        name: yup.string().required(),
-        second_name: yup.string().required(),
-        last_name: yup.string().required(),
-        second_last_name: yup.string().required(),
-        email: yup.string().required(),
-        rut:yup.string().required(),
-        password: yup.string().required(),
-        role_id: yup.number().required(),
-        confirmPassword: yup.string().required(),
-        user_name: yup.string().required(),
-    });
-
     function handleChange(e){
         e.preventDefault();
         setFormRegistrarUsuario({name:e.target.value})
-        console.log(formRegistrarUsuario.name)
     }
 
-
-    return (
+    // console.log(formRegistrarUsuario)
+    return (    
         <components.Page
 
             header={
@@ -89,9 +62,6 @@ const RegistrarUsuario = () => {
             body={
 
                 <div className="container  justify-content-center bg-white py-5 shadow-lg col-xxl-12 col-xl-10 ">
-                    {/* <Formik validationSchema={schema} initialValues={formularioInit} >
-                        {
-                            ({handleSubmit, values, touched, isValid, errors,}) => ( */}
                                 
                                 <Form id="myForm" className="w-100 needs-validation" onSubmit={(e)=>{handleClick(e)}} noValidate validated={validated}>
                                     <PanelForm
@@ -104,52 +74,31 @@ const RegistrarUsuario = () => {
                                             <div className="mb-3">
 
                                                 <div className="mb-3 px-2 d-flex">
+
+                                                    <components.InputForm  id="text" label="Primer Nombre" placeholder="Primer Nombre..." value={formRegistrarUsuario.name} 
+                                                        onChange={{setState: setFormRegistrarUsuario, state: formRegistrarUsuario, prop:'name'}} required/>
                                                     
-                                                    <Form.Group className="position-relative col m-1">
-                                                        <Form.Label className="fw-bold">Primer Nombre</Form.Label>
-                                                        <Form.Control type="text" placeholder="Primer Nombre" value={formRegistrarUsuario.name} name="name"
-                                                            onChange={e=>{setFormRegistrarUsuario({...formRegistrarUsuario, name:e.target.value})}} 
-                                                            required />
-                                                        <Form.Control.Feedback type="invalid" tooltip>
-                                                            "El campo es requerido"
-                                                        </Form.Control.Feedback>
-                                                        <Form.Control.Feedback tooltip>
-                                                            "Correcto!"
-                                                        </Form.Control.Feedback>
-                                                    </Form.Group>
-                                                    <Form.Group className="position-relative col m-1">
-                                                        <Form.Label className="fw-bold">Segundo Nombre</Form.Label>
-                                                        <Form.Control type="text" placeholder="Segundo Nombre" value={formRegistrarUsuario.second_name} name="second_name"
-                                                            onChange={e=>{setFormRegistrarUsuario({...formRegistrarUsuario, second_name:e.target.value})}} 
-                                                              required/>
-                                                        <Form.Control.Feedback type="invalid" tooltip>
-                                                            "El campo es requerido"
-                                                        </Form.Control.Feedback>
-                                                        <Form.Control.Feedback tooltip>
-                                                            "Correcto!"
-                                                        </Form.Control.Feedback>
-                                                    </Form.Group>
+                                                    <components.InputForm  id="segundoNombre" label="Segundo Nombre" placeholder="Segundo Nombre..." value={formRegistrarUsuario.second_name} 
+                                                        onChange={{setState: setFormRegistrarUsuario, state: formRegistrarUsuario, prop:'second_name'}} />
+                                                    
                                                 </div>
-                                                <div className="mb-3 d-flex">
-                                                    <div className="col m-1">
-                                                        <label  htmlFor="exampleInputPassword1" className="form-label">Primer Apellido</label>
-                                                        <input type="text" className="form-control" id="exampleInputPassword1" placeholder="Primer Apellido" onChange={(e) => setLast_Name(e.target.value)} value={last_name}   />
-                                                    </div>
-                                                    <div className="col m-1">
-                                                        <label  htmlFor="exampleInputPassword1" className="form-label">Segundo Apellido</label>
-                                                        <input type="text" className="form-control" id="exampleInputPassword1" placeholder="Segundo Apellido" onChange={(e) => setSecond_Last_Name(e.target.value)} value={second_last_name} />
-                                                    </div>
+                                                <div className="mb-3 px-2 d-flex">
+
+                                                    <components.InputForm  id="firstLastName" label="Primer Apellido" placeholder="Primer Apellido..." value={formRegistrarUsuario.last_name} 
+                                                        onChange={{setState: setFormRegistrarUsuario, state: formRegistrarUsuario, prop:'last_name'}} required/>
+                                                    
+                                                    <components.InputForm  id="secondLastName" label="Segundo Apellido" placeholder="Segundo Apellido..." value={formRegistrarUsuario.second_last_name} 
+                                                        onChange={{setState: setFormRegistrarUsuario, state: formRegistrarUsuario, prop:'second_last_name'}} />
+
                                                 </div>
-                                                <div className="mb-3 d-flex">
-                                                    <div className="mb-3 col m-1">
-                                                        <label  htmlFor="exampleInputPassword1" className="form-label">Email</label>
-                                                        <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email}   />
-                                                    </div>
-                                                    <div className="mb-3 col m-1">
-                                                        <label  htmlFor="exampleInputPassword1" className="form-label">RUT</label>
-                                                        <input type="text" className="form-control" id="exampleInputPassword1" placeholder="RUT" onChange={(e) => setRut(e.target.value)} value={rut} size={10} maxLength={10}   />
-                                                    </div>
+                                                <div className="mb-3 px-2 d-flex">
+                                                    <components.InputForm  id="email" type="email" label="Email" placeholder="Email..." value={formRegistrarUsuario.email} 
+                                                        onChange={{setState: setFormRegistrarUsuario, state: formRegistrarUsuario, prop:'email'}} required/>
+
+                                                    <components.InputForm  id="rut" type="rut" label="Rut" placeholder="Rut..." value={formRegistrarUsuario.rut}  
+                                                        onChange={{setState: setFormRegistrarUsuario, state: formRegistrarUsuario, prop:'rut'}} required/>   
                                                 </div>
+                                                
                                             </div>
                                         }
 
@@ -163,38 +112,17 @@ const RegistrarUsuario = () => {
                                         header="datos de sistema" colorIcon="success"
 
                                         body={
-                                            <div>
-                                                <div className="">
-                                                    <div className="d-flex mb-3">
-                                                        <div className="mx-1 col">
-                                                            <label  htmlFor="password" className="form-label">Password</label>
-                                                            <input size={10} maxLength={10} type="password" className="form-control" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}   />
-                                                            <div  className="valid-feedback">
-                                                                Looks good!
-                                                            </div>
-                                                        </div>
-                                                        <div className="mx-1 col">
-                                                            <Form.Group className="position-relative">
-                                                                <Form.Label className="fw-bold">Confirmar Password</Form.Label>
-                                                                <Form.Control type="password" placeholder="Confirme password" value={formRegistrarUsuario.confirmPassword} name="confirmPassword"
-                                                                    onChange={(e) => setFormRegistrarUsuario({ confirmPassword: e.target.value })} 
-                                                                    size={10} maxLength={10} required/>
-                                                                <Form.Control.Feedback type="invalid" tooltip>
-                                                                    {"El campo es requerido"}
-                                                                </Form.Control.Feedback>
-                                                            </Form.Group>
-                                                        </div>
-                                                    </div>
-                                                    <div className="mb-3">
-                                                        <label  htmlFor="exampleInputPassword1" className="form-label">Role</label>
-                                                        <select  className="form-select" aria-label="Default select example" onChange={(e) => setRole_Id(e.target.value)}  value={0}>
-                                                            <option value={0}>Selecciona el Rol</option>
-                                                            <option value={1} >Supervisor</option>
-                                                            <option value={2}>Tecnico</option>
-                                                        </select>
-                                                    </div>
+                                            <div className="mb-3">
+
+                                                <div className="mb-3 px-2 d-flex">
+                                                    <components.InputForm  id="password" type="password" label="Password" placeholder="Pasword..." value={formRegistrarUsuario.password}  
+                                                            onChange={{setState: setFormRegistrarUsuario, state: formRegistrarUsuario, prop:'password'}} required/>
+                                                    <components.InputForm  id="passwordConfirm" type="confirmPassword" label="Confirme Password" placeholder="Confirme Password..." value={formRegistrarUsuario.passwordCofirm}  
+                                                            onChange={{setState: setFormRegistrarUsuario, state: formRegistrarUsuario, prop:'passwordCofirm'}} password={formRegistrarUsuario.password} required/>    
                                                 </div>
+
                                             </div>
+                                            
                                         }
                                     />
                                     {/* FIN DE PANEL FORMUALRIO */}
@@ -215,10 +143,6 @@ const RegistrarUsuario = () => {
                                         }
                                     </div>
                                 </Form>
-                            {/* )
-                        } */}
-
-                    {/* </Formik> */}
                 </div>
             }
 

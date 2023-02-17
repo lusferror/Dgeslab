@@ -11,14 +11,21 @@ import { datosFinancieros } from './functionsApiExternal';
 import Page from '../templates/page.jsx';
 import BadgeForm from '../components/badgedForm.jsx';
 import React from 'react';
+import InputForm from '../components/formulario/InputForm.jsx';
+import functionsForm from './funtionsForm';
 
-const getState = ({ getStore, getActions, setStore }) => {
+const getState = ({ getStore, getActions, setStore }) => { 
+
+	const formsActions = functionsForm(getStore, getActions,setStore).actions;
+	const formsStore = functionsForm(getStore, getActions,setStore).store;
+
 	return {
 		store: {
+
 			// direccion ip
 			// ip:'http://34.136.77.203:3100',
 			// ip:'http://127.0.0.1:3100',
-			ip:'http://192.168.0.6:3100',
+			ip:'http://192.168.0.7:3100',
 			// en esta seccion se colocan todos los estados
 			//GENEARL VARIABLES
 			load:false,
@@ -68,10 +75,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			varificacionLista:[],
 			verificacionSerieValida:true,
 			verificacionListaSeries:[],
+			propsInput:null,
+			...formsStore
 
 		},
 		actions: {// En esta seccion se colocan todas las acciones o funciones
-
+			...formsActions,
 			// Functions Login page 
 			login:(objeto)=>new Login(objeto,setStore,getStore,getActions),
 
@@ -146,7 +155,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		components:{
 			Page: (props) => Page(props),
-			BadgeForm: (props) => <BadgeForm props={props}/>
+			BadgeForm: (props) => <BadgeForm props={props}/>,
+			InputForm: (props) => <InputForm props={props}/>,
 		}
 	};
 };

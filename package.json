@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/lusferror/Degeslab#readme",
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
     "chart.js": "^4.1.1",
     "echarts": "^5.4.1",
