@@ -8,43 +8,68 @@ import PropTypes from "prop-types"
 
 export default function PanelForm(props) {// REMEMBER CHANGE COMPONENT'S NAME
     // GLOBAL VARIABLES
-    const { store, actions, components } = useContext(Context)
-
+    const { store, actions } = useContext(Context)
+    
     // LOCAL VARIABLES
-
+    
     //LOCAL FUNCTIONS
-
-
+    
+    
     return (
         <div className="mb-5">
-            <div className="col d-flex border-bottom border-1 rounded-pill bg-dark border-bottom border-start border-warning border-2">
-                <div className= {`col-3 fs-3 text-center text-${props.colorIcon}`}>
-                    {props.icon}
-                </div>
-                <div className="col d-flex align-items-center fs-3 fst-italic text-white text-capitalize ">
-                    {props.header}
-                </div>
-            </div>
-            <div>
-                {props.body}
-            </div>
-            <div className={`border-1 border-bottom border-${props.colorIcon}`}>
-                {props.footer}
-            </div>
+            {props.children}
         </div>
 
-    )
+)
 }
 
 PanelForm.propTypes = {
-    //CODE
+    // icon: PropTypes.string,
+    colorIcon: PropTypes.string,
 }
 
 PanelForm.defaultProps = {
     //CODE
     icon: '',
-    header: 'CABEZERA',
-    body: 'CUERPO',
-    footer: '',
     colorIcon: 'info'
+}
+
+//COMPOSITE COMPONENTS
+PanelForm.Header = Header;
+PanelForm.Body = Body;
+PanelForm.Footer = Footer;
+
+function Header(props){
+    return(
+        <div className="col d-flex border-bottom border-1 rounded-pill bg-dark border-bottom border-start border-warning border-2"> 
+            <div className= {`col-3 fs-3 text-center text-${props.colorIcon}`}>
+                {props.icon}
+            </div>
+            <div className="col d-flex align-items-center fs-3 fst-italic text-white text-capitalize ">
+                {props.children}
+            </div>
+        </div>
+    )
+}
+Header.propTypes = {
+    colorIcon: PropTypes.string,
+}
+Header.defaultProps = {
+    colorIcon: 'info'
+}
+
+function Body(props){
+    return(
+        <div>
+            {props.children}
+        </div>
+    )
+}
+
+function Footer(props){
+    return(
+        <div className={`border-1 border-bottom border-${props.colorIcon}`}>
+            {props.children}
+        </div>
+    )
 }

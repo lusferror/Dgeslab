@@ -14,7 +14,7 @@ export default function Tooltip({children,show}){
         borderRadius: 3,
         color: "#fff",
         fontSize: "0.875rem",
-        bottom: "60%",
+        bottom: "110%",
         right: "0%"
         }}>
         {children}

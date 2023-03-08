@@ -4,7 +4,7 @@ const functionsForm = function (getStore,getActions,setStore) {
 
         store:{ //Remember to put the prefix "form" for the variables
             formTecla:null,
-            formShowToolip:false,
+            // formShowToolip:false,
         },
 
         actions:{ // Remembser to put the suffix "form" for the functions
@@ -56,17 +56,25 @@ const functionsForm = function (getStore,getActions,setStore) {
             },
     
             setValueForm: function (value,props) {
+                    let store = getStore();
                     if (typeof (props.onChange.state) === "object") {
                         props.onChange.state[props.onChange.prop] = value;
-                        props.onChange.setState({ ...props.onChange.state })
+                        store[props.onChange.setState] = props.onChange.state
+                        // props.onChange.setState({ ...props.onChange.state })
+                        setStore({store});
+
                     }
         
                     else if (Array.isArray(props.onChange.state)) {
-                        props.onChange.setState([...props.onChange.state, value])
+                        store[props.onChange.setState] = [...props.onChange.state, value]
+                        setStore(store)
+                        // props.onChange.setState([...props.onChange.state, value])
                     }
         
                     else {
-                        props.onChange.setState(value)
+                        store[props.onChange.setState] = value;
+                        setStore(store);
+                        // props.onChange.setState(value)
                     }
                 
             },
@@ -76,7 +84,7 @@ const functionsForm = function (getStore,getActions,setStore) {
              */
             setTeclaForm: function (e){
                 setStore({formTecla: e.key})
-            }
+            },
         }
     }
 }   

@@ -1,19 +1,27 @@
 import React from "react";
 
+Page.Header = function Header(props){
+    return(
+        <div className="font-header-page px-5 py-3">
+            <h1>
+                <strong>{props.children}</strong>
+            </h1>
+        </div>
+    )
+}
+
+Page.Body = function Body(props){
+    return(
+        <div className="">
+            {props.children}
+        </div>
+    )
+}
+
 export default function Page(props){
     return(
-        <div>
-            <div className="font-header-page px-5 py-3">
-                <h1>
-                    <strong>{props.header}</strong>
-                </h1>
-            </div>
-            <div className="">
-                {props.body}
-            </div>
-            <div>
-                {props.footer}
-            </div> 
-        </div>
+            <>
+                {props.children}
+            </>
     )
 }

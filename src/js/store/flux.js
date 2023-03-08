@@ -3,7 +3,6 @@ import { cargarTablaEmpacados, guardarEmpacados,limpiarPantallEmpacado, agregarS
 import { verificacionGuardar, agregarRegistroVerificacion, onChangeverificacionObservaciones,onChangeVerificacionImei,nroCajaVerificacion, onChangeDocumentoVerificacion , registrarDocumentoVerificacion, limpiarregistrarDocumentoVerificacion} from './functionsVerificacion'
 import { salida } from './functionsSalida';
 import Login from './functionsLogin';
-import { crearUsuario, usuario } from './functionsUsuarios';
 import { asignar, itemAsignacion, listaTecnicosAsignacion } from './functionsAsignacion';
 import { fecha, inicio } from './functionsSistema';
 import { aprobarAsignacion, check, checkAll, uncheckAll, registrosAprobacion} from './functionsAprobacion';
@@ -13,11 +12,16 @@ import BadgeForm from '../components/badgedForm.jsx';
 import React from 'react';
 import InputForm from '../components/formulario/InputForm.jsx';
 import functionsForm from './funtionsForm';
+import functionsResgistrarUsuario from './functionsResgistrarUsuario';
 
 const getState = ({ getStore, getActions, setStore }) => { 
 
 	const formsActions = functionsForm(getStore, getActions,setStore).actions;
 	const formsStore = functionsForm(getStore, getActions,setStore).store;
+
+	const registarUsuarioActions = functionsResgistrarUsuario(getStore, getActions,setStore).actions;
+	const registarUsuarioStore = functionsResgistrarUsuario(getStore, getActions,setStore).store;
+
 
 	return {
 		store: {
@@ -25,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// direccion ip
 			// ip:'http://34.136.77.203:3100',
 			// ip:'http://127.0.0.1:3100',
-			ip:'http://192.168.0.7:3100',
+			ip:'http://127.0.0.1:3100',
 			// en esta seccion se colocan todos los estados
 			//GENEARL VARIABLES
 			load:false,
@@ -76,11 +80,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			verificacionSerieValida:true,
 			verificacionListaSeries:[],
 			propsInput:null,
-			...formsStore
+			validated:false,
+			showToolip: false,
+			...formsStore,
+			...registarUsuarioStore,
 
 		},
 		actions: {// En esta seccion se colocan todas las acciones o funciones
+
 			...formsActions,
+
+			...registarUsuarioActions,
 			// Functions Login page 
 			login:(objeto)=>new Login(objeto,setStore,getStore,getActions),
 
@@ -154,7 +164,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		},
 		components:{
-			Page: (props) => Page(props),
+			Page: (props) => <Page props={props}/>,
 			BadgeForm: (props) => <BadgeForm props={props}/>,
 			InputForm: (props) => <InputForm props={props}/>,
 		}

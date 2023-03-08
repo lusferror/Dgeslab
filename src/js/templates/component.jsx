@@ -8,7 +8,7 @@ import PropTypes from   "prop-types"
 
 export default function Component(props){// REMEMBER CHANGE COMPONENT'S NAME
     // GLOBAL VARIABLES
-    const { store, actions, components } = useContext(Context)
+    const { store, actions } = useContext(Context)
 
     // LOCAL VARIABLES
 
